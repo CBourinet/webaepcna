@@ -5,7 +5,7 @@ const path = require('path');
 const { groupe: g, para: p, bouton: b, boutons: bs } = require('./blocs');
 
 const BASE = process.argv[2] ?? '/site';
-const VERSION = '1.7.1';
+const VERSION = '1.7.2';
 const RACINE = path.join(__dirname, '..');
 const THEME = path.join(RACINE, 'aepcna');
 const U = chemin => `${BASE}${chemin}`;
@@ -181,7 +181,6 @@ ecrire('parts/footer.html', [
       ])]),
       g('', [p('pied__titre', 'Contact'), g('pied__liens', [
         p('pied__ligne pied-lieu', '51-53 boulevard du Président Wilson<br>33000 Bordeaux'),
-        p('pied__ligne pied-courriel', lien('contact@aepcna.fr', 'mailto:contact@aepcna.fr')),
         p('pied__ligne pied-telephone', lien('06 10 50 10 77', 'tel:+33610501077')),
         p('pied__lien-fort', lien('Formulaire de contact →', U('/contact/'))),
       ])]),
