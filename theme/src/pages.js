@@ -14,7 +14,7 @@ module.exports = function pages(BASE) {
         p('rgpd__titre', 'Protection de vos données personnelles'),
         p('', "Les informations recueillies via ce formulaire sont enregistrées par l'AEPC Nouvelle-Aquitaine, association loi 1901, 51-53 boulevard du Président Wilson, 33000 Bordeaux, responsable du traitement, dans le seul but de répondre à votre demande. Base légale : votre consentement."),
         p('', "Destinataires : l'équipe de coordination de l'AEPC NA et, si nécessaire, les consultants mobilisés pour votre demande. Vos données ne sont ni cédées ni vendues à des tiers. Durée de conservation : 3 ans à compter du dernier contact."),
-        p('', "Vous disposez d'un droit d'accès, de rectification, d'effacement, d'opposition et de limitation du traitement, ainsi que du droit de retirer votre consentement, en écrivant à <a href=\"mailto:contact@aepcna.fr\">contact@aepcna.fr</a>. Vous pouvez également adresser une réclamation à la CNIL (www.cnil.fr)."),
+        p('', "Vous disposez d'un droit d'accès, de rectification, d'effacement, d'opposition et de limitation du traitement, ainsi que du droit de retirer votre consentement, en écrivant à <a href=\"mailto:rgpd@aepcna.fr\">rgpd@aepcna.fr</a>. Vous pouvez également adresser une réclamation à la CNIL (www.cnil.fr)."),
         p('', `Pour en savoir plus : <a href="${U('/declaration-de-confidentialite-ue/')}">Déclaration de confidentialité (UE)</a> · <a href="${U('/mentions-legales/')}">Mentions légales</a> · <a href="${U('/politique-de-cookies-ue-2/')}">Politique de cookies (UE)</a>`),
       ]),
     ]),
@@ -420,7 +420,52 @@ module.exports = function pages(BASE) {
     ]), { tag: 'section' }),
   ].join('\n\n');
 
+  // ---------- Pages légales ----------
+  const pageLegale = (titre_, chapeau, corps) => [
+    g('bandeau-page', g('enveloppe', [
+      p('fil-ariane', `<a href="${U('/')}">Accueil</a> › ${titre_}`),
+      p('surtitre', 'Informations légales'),
+      t(1, 'bandeau-page__titre', titre_),
+      ...(chapeau ? [p('chapeau', chapeau)] : []),
+    ]), { tag: 'section' }),
+    g('section page-legale', g('enveloppe', g('document-legal', corps)), { tag: 'section' }),
+  ].join('\n\n');
+  const rubrique = (titre_, paras) => [t(2, '', titre_), ...paras.map(x => p('', x))];
+
+  const mentionsLegales = pageLegale('Mentions légales', "Informations relatives à l'éditeur et à l'hébergeur du site aepcna.fr, conformément à la loi pour la confiance dans l'économie numérique (LCEN).", [
+    ...rubrique('Éditeur du site', [
+      "Le présent site est la propriété de l'<strong>Association Économique des Professionnels du Conseil de Nouvelle-Aquitaine (AEPC NA)</strong>, association régie par la loi du 1er juillet 1901.",
+      '<strong>Siège</strong> : 51-53 boulevard du Président Wilson, 33000 Bordeaux',
+      '<strong>SIRET</strong> : 924 343 379 00021<br><strong>Code APE</strong> : 9499Z<br><strong>N° TVA intracommunautaire</strong> : FR66 924 343 379',
+      '<strong>Téléphone</strong> : <a href="tel:+33610501077">06 10 50 10 77</a><br><strong>E-mail</strong> : <a href="mailto:contact@aepcna.fr">contact@aepcna.fr</a>',
+    ]),
+    ...rubrique('Directeur de la publication', ["Charles Bourinet, président de l'AEPC Nouvelle-Aquitaine."]),
+    ...rubrique('Hébergement', [
+      '<strong>OVH SAS</strong><br>2 rue Kellermann, 59100 Roubaix, France<br><a href="https://www.ovhcloud.com/fr/">www.ovhcloud.com</a>',
+    ]),
+    ...rubrique('Propriété intellectuelle', [
+      "L'ensemble des contenus de ce site (textes, visuels, logos, mise en page) est protégé par le droit de la propriété intellectuelle. Toute reproduction ou représentation, totale ou partielle, sans autorisation écrite préalable de l'AEPC NA est interdite. Les logos des partenaires et clients restent la propriété de leurs titulaires respectifs.",
+    ]),
+    ...rubrique('Données personnelles', [
+      `Les modalités de traitement de vos données personnelles sont décrites dans notre <a href="${U('/declaration-de-confidentialite-ue/')}">Déclaration de confidentialité (UE)</a>. Pour toute question ou pour exercer vos droits : <a href="mailto:rgpd@aepcna.fr">rgpd@aepcna.fr</a>.`,
+    ]),
+    ...rubrique('Cookies', [
+      `L'utilisation des cookies sur ce site est détaillée dans notre <a href="${U('/politique-de-cookies-ue-2/')}">Politique de cookies (UE)</a>. Vous pouvez modifier vos choix à tout moment depuis cette page.`,
+    ]),
+  ]);
+
+  const confidentialite = pageLegale('Déclaration de confidentialité (UE)', "Comment l'AEPC Nouvelle-Aquitaine collecte, utilise et protège vos données personnelles.",
+    [shortcode('[cmplz-document type="privacy-statement" region="eu"]')]);
+  const cookies = pageLegale('Politique de cookies (UE)', 'Les cookies utilisés sur ce site et la gestion de votre consentement.',
+    [shortcode('[cmplz-document type="cookie-statement" region="eu"]')]);
+
   return [
+    { slug: 'mentions-legales', title: 'Mentions légales', content: mentionsLegales,
+      description: "Mentions légales du site de l'AEPC Nouvelle-Aquitaine : éditeur, directeur de la publication, hébergeur." },
+    { slug: 'declaration-de-confidentialite-ue', title: 'Déclaration de confidentialité (UE)', content: confidentialite,
+      description: "Déclaration de confidentialité de l'AEPC Nouvelle-Aquitaine : traitement et protection de vos données personnelles." },
+    { slug: 'politique-de-cookies-ue-2', title: 'Politique de cookies (UE)', content: cookies,
+      description: "Politique de cookies du site de l'AEPC Nouvelle-Aquitaine et gestion de votre consentement." },
     { slug: 'qui-sommes-nous', title: 'Qui sommes-nous ?', content: quiSommesNous,
       description: "L'AEPC Nouvelle-Aquitaine, association loi 1901 émanation de la CPC NA, fédère des consultants experts régionaux pour accompagner la transformation des entreprises du territoire." },
     { slug: 'nos-consultants', title: 'Nos consultants', content: nosConsultants,

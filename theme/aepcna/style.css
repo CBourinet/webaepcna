@@ -3,7 +3,7 @@ Theme Name: AEPC Nouvelle-Aquitaine
 Theme URI: https://aepcna.fr
 Author: AEPC Nouvelle-Aquitaine
 Description: Thème bloc sur mesure de l'Association Économique des Professionnels du Conseil de Nouvelle-Aquitaine (charte UDF4). Contenu 100 % éditable dans l'éditeur de blocs.
-Version: 1.1.0
+Version: 1.2.0
 Requires at least: 6.6
 Requires PHP: 8.0
 License: GPL-2.0-or-later
@@ -520,6 +520,34 @@ footer.wp-block-template-part { margin: 0; }
 .pied__legal-liens a { color: var(--blanc); text-decoration: none; }
 .pied__mentions { font-size: 13px; color: #A9BCCF; text-align: right; }
 
+/* ---------- Pages légales (texte libre et documents Complianz) ---------- */
+.page-legale { padding-top: 72px; }
+.document-legal {
+  max-width: 860px;
+  background: var(--blanc);
+  border: 1px solid var(--ligne);
+  border-radius: 16px;
+  padding: 48px 56px;
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--texte);
+}
+.document-legal h2, .document-legal .cmplz-document h2 { font-size: 24px; line-height: 1.3; color: var(--encre); margin: 36px 0 12px; }
+.document-legal h3, .document-legal .cmplz-document h3 { font-size: 19px; line-height: 1.35; color: var(--encre); margin: 28px 0 10px; }
+.document-legal h4, .document-legal .cmplz-document h4 { font-size: 16px; color: var(--encre); margin: 20px 0 8px; }
+.document-legal > :first-child, .document-legal .cmplz-document > :first-child, .document-legal .wpcf7 + * { margin-top: 0; }
+.document-legal p { margin: 0 0 12px; }
+.document-legal strong { color: var(--encre); }
+.document-legal a { color: var(--marine); font-weight: 600; overflow-wrap: anywhere; }
+.document-legal ul, .document-legal ol { margin: 0 0 16px; padding-left: 22px; }
+.document-legal li { margin-bottom: 6px; }
+.document-legal table { width: 100%; border-collapse: collapse; margin: 12px 0 20px; font-size: 14px; }
+.document-legal th, .document-legal td { border: 1px solid var(--ligne); padding: 10px 12px; text-align: left; vertical-align: top; }
+.document-legal th { background: var(--fond-carte); color: var(--encre); }
+.document-legal details { border: 1px solid var(--ligne); border-radius: 10px; padding: 14px 18px; margin: 0 0 12px; background: var(--fond); }
+.document-legal summary { cursor: pointer; font-weight: 700; color: var(--encre); }
+.document-legal .cmplz-document { max-width: none; font-size: inherit; }
+
 /* ---------- Pages existantes (Elementor, textes légaux) ---------- */
 .page-contenu { padding-top: 72px; padding-bottom: 104px; }
 
@@ -579,6 +607,7 @@ footer.wp-block-template-part { margin: 0; }
   .formulaire { padding: 28px 22px; }
   .coordonnees__corps { padding: 28px 24px; }
   .appel { flex-direction: column; align-items: flex-start; padding: 28px 24px; }
+  .document-legal { padding: 28px 22px; }
   .encart-sombre--large { flex-direction: column; align-items: flex-start; padding: 28px 24px; }
   .encart-sombre--large .encart-sombre__titre { font-size: 22px; }
   .pied__colonnes { grid-template-columns: 1fr; gap: 36px; }
