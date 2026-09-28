@@ -50,7 +50,7 @@ module.exports = function pages(BASE) {
   const atout = (icone, titre_, texte) => g(`atout a-icone a-icone--petite ${icone}`, [t(3, 'atout__titre', titre_), p('atout__texte', texte)]);
   const etape = (num, titre_, texte, active) => g(`etape${active ? ' etape--active' : ''}`, [p('etape__num', num), t(3, 'etape__titre', titre_), p('etape__texte', texte)]);
   const miniCarte = (titre_, texte) => g('mini-carte', [p('mini-carte__titre', titre_), p('mini-carte__texte', texte)]);
-  const offre = (icone, titre_, texte, ancre) => g(`offre ${icone}`, [t(3, 'offre__titre', titre_), p('offre__texte', texte), p('offre__lien', `<a href="${U('/solutions/#' + ancre)}">Voir la solution →</a>`)]);
+  const offre = (icone, public_, titre_, texte, ancre, pme) => g(`offre ${icone}`, [p(`offre__public${pme ? ' offre__public--pme' : ''}`, public_), t(3, 'offre__titre', titre_), p('offre__texte', texte), p('offre__lien', `<a href="${U('/solutions/#' + ancre)}">${pme ? 'Voir le parcours' : 'Voir un exemple'} →</a>`)]);
   const pilier = (icone, titre_, texte) => g(`atout atout--bord a-icone a-icone--petite ${icone}`, [t(3, 'atout__titre', titre_), p('atout__texte', texte)]);
   const realisation = (photo, alt, etiquette, variante, titre_, texte) => g('realisation', [
     img(photo, alt, 'realisation__photo', 'large'),
@@ -110,7 +110,7 @@ module.exports = function pages(BASE) {
         g('hero__corps grille-2', [
           g('hero__texte', [
             p('hero__accroche', "La rigueur d'un cabinet, l'agilité des indépendants, l'ancrage du territoire."),
-            p('hero__intro', "Nous constituons et pilotons l'équipe de consultants adaptée à votre projet : plus de 50 experts indépendants de la région, une cellule de coordination dédiée et un interlocuteur unique. Pour les PME, ETI, collectivités, filières et OPCO de Nouvelle-Aquitaine."),
+            p('hero__intro', "Nous constituons et pilotons l'équipe de consultants adaptée à votre projet : plus de 50 experts indépendants de la région, une cellule de coordination dédiée et un interlocuteur unique. Pour les ETI, les grands groupes, les filières et les acteurs publics de Nouvelle-Aquitaine, avec un parcours RSE dédié aux PME."),
             bs('hero__actions', [b('Échanger sur mon projet', CONTACT, 'bouton--sarcelle'), b('Découvrir notre modèle', '#modele', 'bouton--contour-blanc')]),
           ]),
           g('carte-equipe', [
@@ -198,12 +198,12 @@ module.exports = function pages(BASE) {
 
     // SOLUTIONS (point 7) — synthèse, le détail est sur la page Solutions
     g('section section--blanc', g('enveloppe pile offres', [
-      g('entete-section entete-section--etroite', [p('surtitre', 'Nos solutions'), t(2, 'titre-section', 'Quatre domaines, une même exigence de pilotage.')]),
+      g('entete-section', [p('surtitre', 'Nos solutions'), t(2, 'titre-section', 'Quatre domaines, une même exigence de pilotage.'), p('chapeau', 'Des exemples de projets menés pour des ETI, des grands groupes, des filières et des acteurs publics, et un parcours RSE dédié aux PME.')]),
       g('grille-4', [
-        offre('icone-usine', 'Performance industrielle &amp; Usine du Futur', 'Diagnostic terrain, Lean, organisation de production, plan d’investissement et financement de la modernisation.', 'performance-industrielle'),
-        offre('icone-pousse', 'Trajectoire RSE — Actionnable', 'Diagnostic de maturité, feuille de route et indicateurs : un parcours référencé par la Région (Néo Terra).', 'trajectoire-rse'),
-        offre('icone-strategie', 'Stratégie &amp; transformation', 'Organisation, gouvernance, nouveaux modèles économiques et accompagnement du changement.', 'strategie-transformation'),
-        offre('icone-formation', 'Formation professionnelle', 'Négociation commerciale, management, intelligence artificielle : des parcours conçus par des formateurs praticiens.', 'formation'),
+        offre('icone-usine', 'Programmes et filières', 'Performance industrielle &amp; Usine du Futur', 'Programmes régionaux et de filière : diagnostics, Lean, modernisation, jusqu’à 30 experts coordonnés.', 'performance-industrielle'),
+        offre('icone-formation', 'ETI, groupes, OPCO', 'Programmes de formation', 'Des formations d’envergure mobilisant plus de cinq formateurs praticiens, coordonnés par une équipe unique.', 'formation'),
+        offre('icone-strategie', 'ETI, groupes, filières', 'Stratégie &amp; transformation', 'Des transformations menées par une équipe pluridisciplinaire, sur plusieurs entités ou sites.', 'strategie-transformation'),
+        offre('icone-pousse', 'Parcours PME', 'Trajectoire RSE — Actionnable', 'Le parcours RSE directement accessible aux PME, référencé par la Région (Néo Terra).', 'trajectoire-rse', true),
       ]),
       bs('', [b('Voir toutes nos solutions', U('/solutions/'), 'bouton--contour')]),
     ]), { tag: 'section', ancre: 'offres' }),
@@ -467,42 +467,60 @@ module.exports = function pages(BASE) {
     [shortcode('[cmplz-document type="cookie-statement" region="eu"]')]);
 
   // ---------- Solutions (point 7 : offres « productisées ») ----------
-  const solution = (ancre, icone, titre_, cible, livrables, reference) => g(`solution ${icone}`, [
+  const solution = (ancre, icone, public_, titre_, besoin, rubrique, dispositif, reference, lien, variante = '') => g(`solution ${icone}${variante ? ' solution--' + variante : ''}`, [
+    p(`solution__public${variante ? ' solution__public--' + variante : ''}`, public_),
     t(2, 'solution__titre', titre_),
-    p('solution__cible', cible),
-    p('solution__rubrique', 'Ce que nous livrons'),
-    liste('liste-coches', livrables),
+    p('solution__cible', besoin),
+    p('solution__rubrique', rubrique),
+    liste('liste-coches', dispositif),
     p('solution__reference', reference),
-    p('solution__lien', `<a href="${CONTACT}">Échanger sur ce besoin →</a>`),
+    p('solution__lien', `<a href="${CONTACT}">${lien} →</a>`),
   ], { ancre });
 
   const solutions = [
     g('bandeau-page', g('enveloppe', [
       p('fil-ariane', `<a href="${U('/')}">Accueil</a> › Solutions`),
       p('surtitre', 'Nos solutions'),
-      t(1, 'bandeau-page__titre', 'Des solutions pour conduire vos transformations.'),
-      p('chapeau', "Quatre domaines d'intervention, une même exigence de pilotage : pour chacun, l'AEPC constitue l'équipe d'experts adaptée à votre enjeu et en assure la coordination, avec un interlocuteur unique."),
+      t(1, 'bandeau-page__titre', 'Des projets d’envergure, portés par un collectif.'),
+      p('chapeau', "Des exemples de projets menés pour des ETI, des grands groupes, des filières et des acteurs publics, et un parcours dédié aux PME. Pour chacun, l'AEPC constitue l'équipe d'experts adaptée et en assure la coordination, avec un interlocuteur unique."),
     ]), { tag: 'section' }),
 
     g('section page-legale', g('enveloppe pile solutions', [
-      g('solutions-grille', [
-        solution('performance-industrielle', 'icone-usine', 'Performance industrielle &amp; Usine du Futur',
-          '<strong>Pour</strong> les PME et ETI industrielles qui veulent gagner en productivité et moderniser leur outil de production.',
-          ['Diagnostic terrain : flux, organisation de la production, pratiques Lean', 'Plan d’action priorisé et chiffré', 'Plan d’investissement et appui au financement de la modernisation', 'Accompagnement de la mise en œuvre et indicateurs de pilotage'],
-          '<strong>Référence</strong> : Usine du Futur 4, Région Nouvelle-Aquitaine — plus de 150 entreprises industrielles accompagnées par 30 experts coordonnés.'),
-        solution('trajectoire-rse', 'icone-pousse', 'Trajectoire RSE — Actionnable',
-          '<strong>Pour</strong> les entreprises qui veulent structurer leur démarche RSE et en faire un levier de performance durable.',
-          ['Diagnostic de maturité RSE', 'Priorités et feuille de route', 'Indicateurs de suivi', 'Conduite du changement auprès des équipes'],
-          '<strong>Référence</strong> : parcours « Actionnable », retenu par la Région à l’AMI RSE et référencé Néo Terra, porté avec Cinov Nouvelle-Aquitaine.'),
-        solution('strategie-transformation', 'icone-strategie', 'Stratégie &amp; transformation des organisations',
-          '<strong>Pour</strong> les dirigeants qui doivent adapter leur modèle économique, leur organisation ou leur gouvernance.',
-          ['Diagnostic stratégique et organisationnel', 'Gouvernance, pilotage et fonctionnement du comité de direction', 'Nouveaux modèles économiques : économie de la fonctionnalité, écologie industrielle', 'Accompagnement des managers et conduite du changement'],
-          '<strong>Expérience</strong> : les membres de l’AEPC sont intervenus dans les dispositifs régionaux Appui Stratégique PME, Usine du Futur 3 et POIM.'),
-        solution('formation', 'icone-formation', 'Formation professionnelle',
-          '<strong>Pour</strong> les entreprises, les branches et les OPCO qui veulent développer les compétences de leurs équipes.',
-          ['Parcours conçus selon vos objectifs : négociation commerciale, management, intelligence artificielle…', 'Des formateurs praticiens, consultants en activité', 'Une coordination unique, du cahier des charges au bilan de la formation', 'Démarche de certification Qualiopi engagée'],
-          '<strong>Référence</strong> : marchés de formation triennaux 2024-2026 remportés pour la CMA et pour OCAPIAT–IFRIA.'),
+      g('entete-section', [
+        p('surtitre', 'Exemples de projets'),
+        t(2, 'titre-section', 'Des besoins qui dépassent ce qu’un consultant peut porter seul.'),
+        p('chapeau', "Programmes régionaux, projets de filière, formations mobilisant plus de cinq consultants ou formateurs : l'AEPC compose l'équipe, la coordonne et rend compte au donneur d'ordre."),
       ]),
+      g('grille-3', [
+        solution('performance-industrielle', 'icone-usine', 'Programmes régionaux et filières', 'Performance industrielle &amp; Usine du Futur',
+          '<strong>Le besoin</strong> : déployer un programme d’accompagnement auprès de nombreuses entreprises industrielles, sur tout un territoire, avec une qualité homogène et un reporting consolidé.',
+          'Le dispositif mobilisé',
+          ['Une cellule de coordination dédiée : chef de projet, PMO, spécialistes', 'Jusqu’à 30 experts mobilisés au plus près des sites', 'Diagnostics terrain, Lean, organisation de production, plans d’investissement', 'Un reporting consolidé au donneur d’ordre : avancement, livrables, indicateurs'],
+          '<strong>Référence</strong> : Usine du Futur 4, Région Nouvelle-Aquitaine — plus de 150 entreprises industrielles accompagnées par 30 experts coordonnés.',
+          'Échanger sur ce besoin'),
+        solution('formation', 'icone-formation', 'ETI, grands groupes, branches et OPCO', 'Programmes de formation',
+          '<strong>Le besoin</strong> : former de nombreux collaborateurs, sur plusieurs sites ou territoires, avec un programme qui mobilise plus de cinq consultants ou formateurs.',
+          'Le dispositif mobilisé',
+          ['Une ingénierie de formation conçue avec le donneur d’ordre', 'Plus de cinq formateurs praticiens mobilisés et coordonnés', 'Négociation commerciale, management, intelligence artificielle…', 'Un interlocuteur unique, du cahier des charges au bilan'],
+          '<strong>Référence</strong> : marchés de formation triennaux 2024-2026 remportés pour la CMA et pour OCAPIAT–IFRIA. Démarche de certification Qualiopi engagée.',
+          'Échanger sur ce besoin'),
+        solution('strategie-transformation', 'icone-strategie', 'ETI, grands groupes et filières', 'Stratégie &amp; transformation des organisations',
+          '<strong>Le besoin</strong> : conduire une transformation qui mobilise plusieurs expertises — stratégie, organisation, RH, finance, numérique — sur plusieurs entités ou sites.',
+          'Le dispositif mobilisé',
+          ['Une équipe pluridisciplinaire composée pour votre projet', 'Diagnostic et feuille de route partagés avec la direction', 'Nouveaux modèles économiques : économie de la fonctionnalité, écologie industrielle', 'Pilotage centralisé et accompagnement du changement'],
+          '<strong>Expérience</strong> : les membres de l’AEPC sont intervenus dans les dispositifs régionaux Appui Stratégique PME, Usine du Futur 3 et POIM.',
+          'Échanger sur ce besoin'),
+      ]),
+      g('entete-section solutions__pme', [
+        p('surtitre', 'Vous êtes une PME ?'),
+        t(2, 'titre-section', 'Un parcours RSE directement accessible.'),
+      ]),
+      solution('trajectoire-rse', 'icone-pousse', 'Parcours PME', 'Trajectoire RSE — Actionnable',
+        '<strong>Pour les PME</strong> qui veulent structurer leur démarche RSE et en faire un levier de performance : un parcours directement accessible, sans programme à monter.',
+        'Le parcours',
+        ['Diagnostic de maturité RSE', 'Priorités et feuille de route', 'Indicateurs de suivi', 'Conduite du changement auprès des équipes'],
+        '<strong>Référence</strong> : parcours « Actionnable », retenu par la Région à l’AMI RSE et référencé Néo Terra, porté avec Cinov Nouvelle-Aquitaine.',
+        'Échanger sur ce parcours', 'pme'),
     ]), { tag: 'section' }),
 
     g('section section--blanc', g('enveloppe pile methode', [
@@ -519,7 +537,7 @@ module.exports = function pages(BASE) {
       g('encart-sombre encart-sombre--large', [
         g('', [
           p('surtitre', 'Votre projet'),
-          t(3, 'encart-sombre__titre', 'Votre enjeu ne correspond pas exactement à ces solutions ? Parlons-en : nous composons l’équipe adaptée.'),
+          t(3, 'encart-sombre__titre', 'Votre projet ne correspond pas exactement à ces exemples ? Parlons-en : nous composons l’équipe adaptée.'),
         ]),
         bs('', [b('Échanger sur mon projet', CONTACT, 'bouton--blanc')]),
       ]),
@@ -571,7 +589,7 @@ module.exports = function pages(BASE) {
 
   return [
     { slug: 'solutions', title: 'Nos solutions', content: solutions,
-      description: "Performance industrielle, trajectoire RSE, stratégie et transformation, formation : les solutions de l'AEPC Nouvelle-Aquitaine, pilotées par une équipe de coordination dédiée." },
+      description: "Exemples de projets menés par l'AEPC Nouvelle-Aquitaine pour des ETI, grands groupes, filières et acteurs publics, et parcours RSE Actionnable pour les PME." },
     { slug: 'adherer', title: "Rejoindre l'AEPC", content: adherer,
       description: "Consultant indépendant en Nouvelle-Aquitaine ? Rejoignez l'AEPC pour répondre ensemble aux appels d'offres dans un cadre juridique, technique et outillé." },
     { slug: 'mentions-legales', title: 'Mentions légales', content: mentionsLegales,

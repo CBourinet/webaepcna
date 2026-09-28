@@ -379,6 +379,8 @@ header.wp-block-template-part { position: sticky; top: 0; z-index: 50; margin: 0
 .offre__titre { font-size: 22px; line-height: 1.25; }
 .offre__texte { font-size: 15px; line-height: 1.6; color: var(--texte); }
 
+.offre__public, .solution__public { font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--sarcelle); }
+.offre__public--pme, .solution__public--pme { color: var(--vert); }
 .offre__lien { margin-top: auto; font-size: 15px; font-weight: 600; }
 .offre__lien a { color: var(--sarcelle); text-decoration: none; }
 .offre__lien a:hover { color: var(--marine); }
@@ -399,6 +401,10 @@ header.wp-block-template-part { position: sticky; top: 0; z-index: 50; margin: 0
 .solution__lien a { color: var(--marine); font-weight: 700; text-decoration: none; }
 .solution__lien a:hover { color: var(--sarcelle); }
 .etapes--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.solutions__pme { margin-top: 24px; }
+.solution--pme { background: #F2F7F4; border-color: #C6D8CF; }
+.solution--pme .liste-coches { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 32px; }
+.solution--pme .solution__reference { background: var(--blanc); border-left-color: var(--vert); }
 
 /* ---------- Réalisations ---------- */
 .realisations { gap: 48px; }
@@ -587,6 +593,10 @@ footer.wp-block-template-part { margin: 0; }
   .logos__partenaires { grid-column: span 2; }
   .pied__colonnes { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .etapes.etapes--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.solutions__pme { margin-top: 24px; }
+.solution--pme { background: #F2F7F4; border-color: #C6D8CF; }
+.solution--pme .liste-coches { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 32px; }
+.solution--pme .solution__reference { background: var(--blanc); border-left-color: var(--vert); }
   .etapes--3 .etape { border-left-width: 0; border-radius: 0; }
   .etapes--3 .etape:first-child { border-left-width: 1px; border-radius: 10px 0 0 10px; }
   .etapes--3 .etape:last-child { border-radius: 0 10px 10px 0; }
@@ -602,6 +612,7 @@ footer.wp-block-template-part { margin: 0; }
   .consultants__droite { align-items: flex-start; }
   .grille-3 { grid-template-columns: 1fr; }
   .solutions-grille { grid-template-columns: 1fr; }
+  .solution--pme .liste-coches { grid-template-columns: 1fr; }
   .encart-sombre--large { flex-direction: column; align-items: flex-start; }
   .pied__appels .enveloppe { grid-template-columns: 1fr; }
 }
