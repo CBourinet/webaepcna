@@ -5,7 +5,7 @@ const path = require('path');
 const { groupe: g, para: p, bouton: b, boutons: bs } = require('./blocs');
 
 const BASE = process.argv[2] ?? '/site';
-const VERSION = '1.3.0';
+const VERSION = '1.4.0';
 const RACINE = path.join(__dirname, '..');
 const THEME = path.join(RACINE, 'aepcna');
 const U = chemin => `${BASE}${chemin}`;
@@ -42,6 +42,8 @@ const icones = [
     .map(n => `.icone-${n}::before { background-image: ${svgUrl(n, '#0E7A87', 1.8)}; }`),
   ...['usine', 'formation', 'strategie'].map(n => `.icone-${n}::before { background-image: ${svgUrl(n, '#0F3D66', 1.6)}; }`),
   `.icone-pousse::before { background-image: ${svgUrl('pousse', '#2F5D50', 1.6)}; }`,
+  `.icone-usine-s::before { background-image: ${svgUrl('usine', '#0E7A87', 1.8)}; }`,
+  `.liste-coches li::before { background-image: ${svgUrl('valide', '#0E7A87', 1.8)}; }`,
   `.carte-equipe__pied::before { background-image: ${svgUrl('equipe', '#0F3D66', 1.7)}; }`,
   ...['lieu', 'courriel', 'telephone'].map(n => `.pied__ligne.pied-${n}::before { background-image: ${svgUrl(n, '#9FDDE2', 1.8)}; }`),
 ].join('\n');
@@ -130,15 +132,14 @@ const lienNav = (label, url) => `<!-- wp:navigation-link ${JSON.stringify({ labe
 ecrire('parts/header.html', g('site-entete', g('enveloppe', [
   `<!-- wp:site-logo {"width":141,"shouldSyncIcon":false} /-->`,
   `<!-- wp:navigation {"className":"nav-principale","overlayMenu":"mobile","layout":{"type":"flex","justifyContent":"right"}} -->\n` + [
-    lienNav('Notre méthode', U('/#methode')),
-    lienNav('Territoire', U('/#territoire')),
-    lienNav('Nos consultants', U('/#consultants')),
-    lienNav('Nos offres', U('/#offres')),
+    lienNav('Notre modèle', U('/#modele')),
+    lienNav('Solutions', U('/solutions/')),
     lienNav('Réalisations', U('/#realisations')),
+    lienNav('Consultants', U('/nos-consultants/')),
     lienNav("L'association", U('/qui-sommes-nous/')),
-    `<!-- wp:navigation-link ${JSON.stringify({ label: 'Parlons de votre projet', url: U('/contact/'), kind: 'custom', isTopLevelLink: true, className: 'nav-contact' })} /-->`,
+    `<!-- wp:navigation-link ${JSON.stringify({ label: 'Échanger sur mon projet', url: U('/contact/'), kind: 'custom', isTopLevelLink: true, className: 'nav-contact' })} /-->`,
   ].join('\n') + '\n<!-- /wp:navigation -->',
-  bs('entete-cta', [b('Parlons de votre projet', U('/contact/'), '')]),
+  bs('entete-cta', [b('Échanger sur mon projet', U('/contact/'), '')]),
 ])) + '\n');
 
 // ---------- parts/footer.html ----------
@@ -154,10 +155,10 @@ ecrire('parts/footer.html', [
     ]),
     g('appel', [
       g('', [
-        `<!-- wp:heading {"level":3,"className":"appel__titre"} -->\n<h3 class="wp-block-heading appel__titre">Rejoignez-nous !</h3>\n<!-- /wp:heading -->`,
-        p('appel__texte', "Consultant, vous souhaitez travailler de manière collective ? Découvrez notre parcours d'admission."),
+        `<!-- wp:heading {"level":3,"className":"appel__titre"} -->\n<h3 class="wp-block-heading appel__titre">Vous êtes consultant ?</h3>\n<!-- /wp:heading -->`,
+        p('appel__texte', "Rejoignez un collectif qui répond ensemble aux appels d'offres. Découvrez notre parcours d'adhésion."),
       ]),
-      bs('', [b('Candidater', U('/contact/'), 'bouton--sarcelle-fonce')]),
+      bs('', [b("Rejoindre l'AEPC", U('/adherer/'), 'bouton--sarcelle-fonce')]),
     ]),
   ])),
   g('pied', g('enveloppe', [
@@ -169,8 +170,10 @@ ecrire('parts/footer.html', [
       ]),
       g('', [p('pied__titre', 'Navigation'), g('pied__liens', [
         p('', lien("À propos de l'AEPC NA", U('/qui-sommes-nous/'))),
+        p('', lien('Nos solutions', U('/solutions/'))),
         p('', lien('Nos consultants', U('/nos-consultants/'))),
         p('', lien('Réalisations', U('/#realisations'))),
+        p('', lien("Rejoindre l'AEPC", U('/adherer/'))),
         p('', lien('Contact', U('/contact/'))),
         p('', lien('Espace adhérents', U('/espace-adherents/'))),
       ])]),

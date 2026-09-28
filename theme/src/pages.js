@@ -1,9 +1,11 @@
 // Contenu des pages en blocs natifs, repris de la maquette validée.
-const { groupe: g, para: p, titre: t, image: img, bouton: b, boutons: bs, shortcode } = require('./blocs');
+const { groupe: g, para: p, titre: t, image: img, bouton: b, boutons: bs, liste, shortcode } = require('./blocs');
 
 module.exports = function pages(BASE) {
   const U = chemin => `${BASE}${chemin}`;
   const CONTACT = U('/contact/');
+  const ADHERER = U('/adherer/');
+  const CHAPEAU_CONTACT = "Entreprise, collectivité, filière ou financeur : décrivez-nous votre enjeu. L'équipe de coordination vous répond et constitue l'équipe d'experts adaptée à votre projet.";
 
   // ---------- Bloc contact partagé (accueil + page Contact) ----------
   const blocContact = g('contact__grille', [
@@ -31,7 +33,7 @@ module.exports = function pages(BASE) {
       g('encart-sombre', [
         p('surtitre', 'Vous êtes consultant ?'),
         t(3, 'encart-sombre__titre', "Rejoignez un collectif qui répond ensemble aux appels d'offres."),
-        bs('', [b("Découvrir le parcours d'admission", CONTACT, 'bouton--blanc bouton--petit')]),
+        bs('', [b("Rejoindre l'AEPC", ADHERER, 'bouton--blanc bouton--petit')]),
       ]),
     ]),
   ]);
@@ -48,7 +50,8 @@ module.exports = function pages(BASE) {
   const atout = (icone, titre_, texte) => g(`atout a-icone a-icone--petite ${icone}`, [t(3, 'atout__titre', titre_), p('atout__texte', texte)]);
   const etape = (num, titre_, texte, active) => g(`etape${active ? ' etape--active' : ''}`, [p('etape__num', num), t(3, 'etape__titre', titre_), p('etape__texte', texte)]);
   const miniCarte = (titre_, texte) => g('mini-carte', [p('mini-carte__titre', titre_), p('mini-carte__texte', texte)]);
-  const offre = (icone, titre_, texte) => g(`offre ${icone}`, [t(3, 'offre__titre', titre_), p('offre__texte', texte)]);
+  const offre = (icone, titre_, texte, ancre) => g(`offre ${icone}`, [t(3, 'offre__titre', titre_), p('offre__texte', texte), p('offre__lien', `<a href="${U('/solutions/#' + ancre)}">Voir la solution →</a>`)]);
+  const pilier = (icone, titre_, texte) => g(`atout atout--bord a-icone a-icone--petite ${icone}`, [t(3, 'atout__titre', titre_), p('atout__texte', texte)]);
   const realisation = (photo, alt, etiquette, variante, titre_, texte) => g('realisation', [
     img(photo, alt, 'realisation__photo', 'large'),
     g('realisation__corps', [p(`realisation__etiquette${variante ? ' realisation__etiquette--' + variante : ''}`, etiquette), t(3, 'realisation__titre', titre_), p('realisation__texte', texte)]),
@@ -98,7 +101,7 @@ module.exports = function pages(BASE) {
     ]), { tag: 'section' });
 
   const accueil = [
-    // HERO
+    // HERO — que faisons-nous, pour qui (point 3) ; promesse (point 1)
     g('hero', [
       img('photo-plateforme-logistique', '', 'hero__photo', 'full'),
       g('enveloppe', [
@@ -106,9 +109,9 @@ module.exports = function pages(BASE) {
         t(1, 'hero__titre', 'Réussir votre programme de transformation en Nouvelle-Aquitaine'),
         g('hero__corps grille-2', [
           g('hero__texte', [
-            p('hero__accroche', 'Les experts du conseil du territoire, une équipe de coordination dédiée à chaque mission.'),
-            p('hero__intro', "L'AEPC Nouvelle-Aquitaine réunit plus de 50 consultants experts régionaux et place chaque projet sous la conduite d'une cellule de coordination : chef de projet, PMO et interlocuteur spécialiste. Un seul point de contact pour vous, des délais et une qualité tenus."),
-            bs('hero__actions', [b('Confier un projet', CONTACT, 'bouton--sarcelle'), b('Découvrir notre méthode', '#methode', 'bouton--contour-blanc')]),
+            p('hero__accroche', "La rigueur d'un cabinet, l'agilité des indépendants, l'ancrage du territoire."),
+            p('hero__intro', "Nous constituons et pilotons l'équipe de consultants adaptée à votre projet : plus de 50 experts indépendants de la région, une cellule de coordination dédiée et un interlocuteur unique. Pour les PME, ETI, collectivités, filières et OPCO de Nouvelle-Aquitaine."),
+            bs('hero__actions', [b('Échanger sur mon projet', CONTACT, 'bouton--sarcelle'), b('Découvrir notre modèle', '#modele', 'bouton--contour-blanc')]),
           ]),
           g('carte-equipe', [
             p('carte-equipe__titre', 'Votre équipe projet AEPC'),
@@ -121,64 +124,48 @@ module.exports = function pages(BASE) {
       ]),
     ], { tag: 'section' }),
 
-    // CHIFFRES
+    // CHIFFRES — la preuve d'emblée (points 3 et 4)
     g('chiffres', g('enveloppe grille-4', [
-      chiffre('icone-equipe', '50+', 'consultants experts régionaux'),
-      chiffre('icone-valide', '1', 'équipe de coordination dédiée par projet', true),
+      chiffre('icone-equipe', '50+', 'consultants experts indépendants'),
+      chiffre('icone-usine-s', '150+', 'entreprises industrielles accompagnées (Usine du Futur 4)', true),
       chiffre('icone-filieres', '15', 'filières couvertes'),
-      chiffre('icone-lieu', '30 ans', "d'ancrage régional de la CPC NA", true),
+      chiffre('icone-valide', '1', 'équipe de coordination dédiée par mission', true),
     ]), { tag: 'section' }),
 
-    // QUI SOMMES-NOUS
-    g('section qui-section', g('enveloppe pile qui', [
+    // POURQUOI L'AEPC — la différence (points 1 et 2)
+    g('section', g('enveloppe pile pourquoi', [
       g('entete-section entete-section--large', [
-        p('surtitre', 'Qui sommes-nous'),
-        t(2, 'titre-section', "Notre raison d'être : aider les entreprises régionales à se transformer et à durer."),
-        p('chapeau', "Transformation, performance, pérennité : nous mettons l'expertise d'un collectif régional au service des entreprises et des organisations qui font vivre la Nouvelle-Aquitaine."),
-      ]),
-      g('grille-4', [
-        carte('Notre origine', 'Née de la volonté des consultants de la CPC NA', "Créée en 2023 pour que les consultants de la région puissent répondre ensemble aux appels d'offres, sans passer par de grands cabinets nationaux. Une émanation de la Chambre Professionnelle du Conseil, active depuis plus de 30 ans."),
-        carte('Notre statut', 'Une association, pas un cabinet', "Association loi 1901 à but non lucratif : pas d'actionnaire à rémunérer, une seule finalité, la réussite de vos projets et du territoire."),
-        carte('Notre ancrage', 'Des experts qui vivent ici', 'Plus de 50 consultants experts régionaux qui connaissent les filières, les cultures locales et les entreprises de chaque bassin.'),
-        carte('Notre différence', 'Un collectif piloté', 'Une équipe de coordination dédiée à chaque projet, des experts choisis pour vos enjeux et une charte de déontologie commune.'),
-      ]),
-      g('competences', [
-        g('competences__entete', [t(3, 'competences__titre', 'Des compétences à 360°'), p('competences__sous-titre', 'mobilisables seules ou en équipe pluridisciplinaire')]),
-        g('puces', [
-          ...['Stratégie', "Pilotage d'entreprise", 'Modèles économiques', 'Ressources humaines', 'Management', 'Performance industrielle', 'Lean', 'Transformation', 'IT &amp; numérique', 'RSE', 'Formation'].map(x => p('puce', x)),
-          p('puce puce--ouverte', "et bien d'autres…"),
-        ]),
-      ]),
-    ]), { tag: 'section', ancre: 'qui' }),
-
-    // CONSULTANTS
-    g('section--sombre', g('enveloppe pile consultants', [
-      g('consultants__entete', [
-        g('entete-section', [
-          p('surtitre', 'Nos consultants'),
-          t(2, 'titre-section', 'Pourquoi choisir nos consultants ?'),
-          p('chapeau', 'Plus de 50 experts régionaux, indépendants et engagés, réunis dans un collectif qui garantit leur sérieux.'),
-        ]),
-        g('consultants__droite', [
-          g('portraits', [
-            img('portrait-1', "Portrait d'Angélique", '', 'thumbnail'),
-            img('portrait-2', 'Portrait de Pascal', '', 'thumbnail'),
-            img('portrait-3', "Portrait d'Estelle", '', 'thumbnail'),
-            img('portrait-4', "Portrait d'Éric", '', 'thumbnail'),
-            img('portrait-5', "Portrait d'Audrey", '', 'thumbnail'),
-            img('portrait-6', 'Portrait de Jérôme', '', 'thumbnail'),
-            p('portraits__plus', '+50'),
-          ]),
-          bs('', [b('Découvrir nos consultants', U('/nos-consultants/'), 'bouton--blanc')]),
-        ]),
+        p('surtitre', "Pourquoi l'AEPC"),
+        t(2, 'titre-section', "On ne choisit pas l'AEPC pour un expert, mais pour la qualité d'un collectif."),
+        p('chapeau', "Vous accédez à plus de 50 spécialistes indépendants de la région sans avoir à les chercher, les sélectionner ni les coordonner : l'AEPC constitue l'équipe, pilote la mission et s'engage sur les délais et la qualité."),
       ]),
       g('grille-3', [
-        atout('icone-etoile', 'Compétences spécifiques', 'Chaque consultant apporte une expertise unique, pour des conseils et des solutions adaptés à vos problématiques.'),
-        atout('icone-bouclier', 'Expérience et fiabilité', 'Nos membres possèdent une expérience solide et une réputation de fiabilité reconnue dans leurs secteurs respectifs.'),
-        atout('icone-cible', 'Approche personnalisée', "Nous mettons un point d'honneur à comprendre vos besoins spécifiques pour vous proposer des solutions sur mesure."),
+        pilier('icone-bouclier', "La rigueur d'un cabinet", 'Une cellule de coordination dédiée — chef de projet, PMO, interlocuteur spécialiste —, un reporting régulier, un contrat et une facturation uniques.'),
+        pilier('icone-equipe', "L'agilité des indépendants", 'Des experts choisis pour votre problématique, mobilisés seuls ou en équipe pluridisciplinaire, sans la lourdeur d’une grande structure.'),
+        pilier('icone-lieu', "L'ancrage du territoire", 'Des consultants qui vivent et travaillent en Nouvelle-Aquitaine, au plus près de vos sites, de vos filières et de vos interlocuteurs.'),
       ]),
-      p('note-sombre', "Portraits publiés avec l'accord des consultants — la page « Nos consultants » présente chaque profil (expertises, filières, zone d'intervention)"),
-    ]), { tag: 'section', ancre: 'consultants' }),
+      g('equation', [
+        t(3, 'equation__titre', 'Un modèle différent du cabinet traditionnel'),
+        g('equation__ligne', [
+          p('equation__terme', '50+ experts indépendants'),
+          p('equation__plus', '+'),
+          p('equation__terme', 'une gouvernance de mission unique'),
+          p('equation__plus', '+'),
+          p('equation__terme', 'un interlocuteur unique'),
+        ]),
+        p('equation__note', "Une association loi 1901 à but non lucratif, émanation de la CPC Nouvelle-Aquitaine : pas d'actionnaire à rémunérer, une seule finalité, la réussite de votre projet."),
+      ]),
+    ]), { tag: 'section', ancre: 'modele' }),
+
+    // RÉALISATIONS — ce que nous avons déjà réussi (points 3 et 4)
+    g('section section--blanc', g('enveloppe pile realisations', [
+      g('entete-section entete-section--etroite', [p('surtitre', 'Réalisations'), t(2, 'titre-section', 'Des programmes régionaux confiés à notre collectif.')]),
+      g('grille-3', [
+        realisation('photo-robots-industriels', 'Robots industriels sur une ligne de production', 'Région Nouvelle-Aquitaine · depuis 2024', '', 'Usine du Futur 4', "<strong>Plus de 150 entreprises industrielles accompagnées</strong> par 30 experts coordonnés sur l'ensemble de la région, avec une cellule dédiée : chef de projet, PMO, spécialistes Éco-Finance et AeroExcellence."),
+        realisation('photo-reunion-travail', "Atelier de travail autour d'un ordinateur", 'AMI RSE Région · 2026', 'vert', 'Actionnable', 'Parcours RSE retenu par la Région et référencé Néo Terra pour trois ans, avec le syndicat Cinov Nouvelle-Aquitaine.'),
+        realisation('photo-ligne-agroalimentaire', "Ligne de conditionnement dans l'agroalimentaire", 'CMA · OCAPIAT–IFRIA', 'sarcelle', 'Négociation commerciale', "Marchés de formation triennaux remportés collectivement pour les artisans et l'agroalimentaire."),
+      ]),
+    ]), { tag: 'section', ancre: 'realisations' }),
 
     // MÉTHODE
     g('section', g('enveloppe pile methode', [
@@ -195,7 +182,7 @@ module.exports = function pages(BASE) {
       ]),
       g('exemple', [
         g('exemple__bandeau', [
-          g('', [p('surtitre', 'Exemple concret · Région Nouvelle-Aquitaine'), t(3, 'exemple__titre', 'Usine du Futur 4 : 30 experts coordonnés sur toute la région')]),
+          g('', [p('surtitre', 'Exemple concret · Région Nouvelle-Aquitaine'), t(3, 'exemple__titre', 'Usine du Futur 4 : plus de 150 entreprises industrielles accompagnées')]),
           img('logo-usine-du-futur', 'Usine du Futur Nouvelle-Aquitaine', 'exemple__logo'),
         ]),
         g('exemple__corps grille-2', [
@@ -204,10 +191,51 @@ module.exports = function pages(BASE) {
             miniCarte('PMO', 'Missions, livrables, échéances'),
             miniCarte('Spécialistes', 'Éco-Finance et AeroExcellence'),
           ])]),
-          g('', [p('exemple__rubrique', 'Le programme'), p('exemple__texte', "Programme de la Région Nouvelle-Aquitaine pour accompagner les PME et ETI industrielles vers l'usine de demain. L'AEPC NA, lauréate en 2024 et reconduite en 2026, coordonne 30 experts intervenant sur l'ensemble de la région.")]),
+          g('', [p('exemple__rubrique', 'Le programme'), p('exemple__texte', "Programme de la Région Nouvelle-Aquitaine pour accompagner les PME et ETI industrielles vers l'usine de demain. L'AEPC NA, lauréate en 2024 et reconduite en 2026, coordonne 30 experts intervenant sur l'ensemble de la région : plus de 150 entreprises industrielles accompagnées.")]),
         ]),
       ]),
     ]), { tag: 'section', ancre: 'methode' }),
+
+    // SOLUTIONS (point 7) — synthèse, le détail est sur la page Solutions
+    g('section section--blanc', g('enveloppe pile offres', [
+      g('entete-section entete-section--etroite', [p('surtitre', 'Nos solutions'), t(2, 'titre-section', 'Quatre domaines, une même exigence de pilotage.')]),
+      g('grille-4', [
+        offre('icone-usine', 'Performance industrielle &amp; Usine du Futur', 'Diagnostic terrain, Lean, organisation de production, plan d’investissement et financement de la modernisation.', 'performance-industrielle'),
+        offre('icone-pousse', 'Trajectoire RSE — Actionnable', 'Diagnostic de maturité, feuille de route et indicateurs : un parcours référencé par la Région (Néo Terra).', 'trajectoire-rse'),
+        offre('icone-strategie', 'Stratégie &amp; transformation', 'Organisation, gouvernance, nouveaux modèles économiques et accompagnement du changement.', 'strategie-transformation'),
+        offre('icone-formation', 'Formation professionnelle', 'Négociation commerciale, management, intelligence artificielle : des parcours conçus par des formateurs praticiens.', 'formation'),
+      ]),
+      bs('', [b('Voir toutes nos solutions', U('/solutions/'), 'bouton--contour')]),
+    ]), { tag: 'section', ancre: 'offres' }),
+
+    // LE COLLECTIF
+    g('section--sombre', g('enveloppe pile consultants', [
+      g('consultants__entete', [
+        g('entete-section', [
+          p('surtitre', 'Le collectif'),
+          t(2, 'titre-section', 'Des experts indépendants, un même niveau d’exigence.'),
+          p('chapeau', 'Plus de 50 consultants régionaux, issus de la CPC Nouvelle-Aquitaine, liés par une charte de déontologie commune et formés en continu.'),
+        ]),
+        g('consultants__droite', [
+          g('portraits', [
+            img('portrait-1', "Portrait d'Angélique", '', 'thumbnail'),
+            img('portrait-2', 'Portrait de Pascal', '', 'thumbnail'),
+            img('portrait-3', "Portrait d'Estelle", '', 'thumbnail'),
+            img('portrait-4', "Portrait d'Éric", '', 'thumbnail'),
+            img('portrait-5', "Portrait d'Audrey", '', 'thumbnail'),
+            img('portrait-6', 'Portrait de Jérôme', '', 'thumbnail'),
+            p('portraits__plus', '+50'),
+          ]),
+          bs('', [b('Découvrir le collectif', U('/nos-consultants/'), 'bouton--blanc')]),
+        ]),
+      ]),
+      g('grille-3', [
+        atout('icone-etoile', 'Compétences spécifiques', 'Chaque consultant apporte une expertise unique, pour des conseils et des solutions adaptés à vos problématiques.'),
+        atout('icone-bouclier', 'Expérience et fiabilité', 'Nos membres possèdent une expérience solide et une réputation de fiabilité reconnue dans leurs secteurs respectifs.'),
+        atout('icone-cible', 'Approche personnalisée', "Nous mettons un point d'honneur à comprendre vos besoins spécifiques pour vous proposer des solutions sur mesure."),
+      ]),
+      p('note-sombre', "Portraits publiés avec l'accord des consultants."),
+    ]), { tag: 'section', ancre: 'consultants' }),
 
     // TERRITOIRE
     g('section section--blanc territoire', g('enveloppe grille-2', [
@@ -224,35 +252,14 @@ module.exports = function pages(BASE) {
 
     sectionEcosysteme,
 
-    // OFFRES
-    g('section section--blanc', g('enveloppe pile offres', [
-      g('entete-section entete-section--etroite', [p('surtitre', 'Nos offres'), t(2, 'titre-section', 'Quatre domaines, une même exigence de pilotage.')]),
-      g('grille-4', [
-        offre('icone-usine', 'Performance industrielle &amp; Usine du Futur', 'Diagnostic, Lean, organisation de production, financement de la modernisation.'),
-        offre('icone-pousse', 'Transition RSE — Actionnable', 'Parcours référencé par la Région (Néo Terra), en partenariat avec le syndicat Cinov Nouvelle-Aquitaine.'),
-        offre('icone-formation', 'Formation professionnelle', 'Négociation commerciale, management, intelligence artificielle : des formateurs praticiens.'),
-        offre('icone-strategie', 'Stratégie &amp; nouveaux modèles économiques', 'Transformation des organisations, économie de la fonctionnalité, écologie industrielle.'),
-      ]),
-    ]), { tag: 'section', ancre: 'offres' }),
-
-    // RÉALISATIONS
-    g('section', g('enveloppe pile realisations', [
-      g('entete-section entete-section--etroite', [p('surtitre', 'Réalisations'), t(2, 'titre-section', 'Des programmes régionaux confiés à notre collectif.')]),
-      g('grille-3', [
-        realisation('photo-robots-industriels', 'Robots industriels sur une ligne de production', 'Région Nouvelle-Aquitaine · depuis 2024', '', 'Usine du Futur 4', "Coordination de 30 experts sur l'ensemble de la région, par une cellule dédiée : chef de projet, PMO, spécialistes Éco-Finance et AeroExcellence."),
-        realisation('photo-reunion-travail', "Atelier de travail autour d'un ordinateur", 'AMI RSE Région · 2026', 'vert', 'Actionnable', 'Parcours RSE retenu par la Région et référencé Néo Terra pour trois ans, avec le syndicat Cinov Nouvelle-Aquitaine.'),
-        realisation('photo-ligne-agroalimentaire', "Ligne de conditionnement dans l'agroalimentaire", 'CMA · OCAPIAT–IFRIA', 'sarcelle', 'Négociation commerciale', "Marchés de formation triennaux remportés collectivement pour les artisans et l'agroalimentaire."),
-      ]),
-    ]), { tag: 'section', ancre: 'realisations' }),
-
     sectionGaranties,
 
     // CONTACT
     g('section', g('enveloppe pile contact', [
       g('entete-section', [
         p('surtitre', 'Nous contacter'),
-        t(2, 'titre-section', 'Parlons de votre projet.'),
-        p('chapeau', "Entreprise, collectivité, financeur ou consultant : décrivez-nous votre besoin, l'équipe de coordination vous répond et vous oriente vers les bons experts."),
+        t(2, 'titre-section', 'Échangeons sur votre projet.'),
+        p('chapeau', CHAPEAU_CONTACT),
       ]),
       blocContact,
     ]), { tag: 'section', ancre: 'contact' }),
@@ -262,8 +269,8 @@ module.exports = function pages(BASE) {
     g('bandeau-page', g('enveloppe', [
       p('fil-ariane', `<a href="${U('/')}">Accueil</a> › Contact`),
       p('surtitre', 'Nous contacter'),
-      t(1, 'bandeau-page__titre', 'Parlons de votre projet.'),
-      p('chapeau', "Entreprise, collectivité, financeur ou consultant : décrivez-nous votre besoin, l'équipe de coordination vous répond et vous oriente vers les bons experts."),
+      t(1, 'bandeau-page__titre', 'Échangeons sur votre projet.'),
+      p('chapeau', CHAPEAU_CONTACT),
     ]), { tag: 'section' }),
     g('section contact-page', g('enveloppe', blocContact), { tag: 'section' }),
   ].join('\n\n');
@@ -273,7 +280,7 @@ module.exports = function pages(BASE) {
     g('bandeau-page', g('enveloppe', [
       p('fil-ariane', `<a href="${U('/')}">Accueil</a> › Nos consultants`),
       p('surtitre', 'Nos consultants'),
-      t(1, 'bandeau-page__titre', 'Des experts à votre service.'),
+      t(1, 'bandeau-page__titre', 'Un collectif d’experts à votre service.'),
       p('chapeau', "L'AEPC NA regroupe des consultants hautement qualifiés et expérimentés dans divers domaines. Chaque membre est sélectionné pour son expertise spécifique et son engagement à fournir des solutions de qualité."),
     ]), { tag: 'section' }),
 
@@ -336,10 +343,10 @@ module.exports = function pages(BASE) {
       ]),
       g('encart-sombre encart-sombre--large', [
         g('', [
-          p('surtitre', 'Vous cherchez un expert ?'),
-          t(3, 'encart-sombre__titre', "Décrivez votre besoin : l'équipe de coordination identifie les consultants adaptés à votre projet."),
+          p('surtitre', 'Votre projet'),
+          t(3, 'encart-sombre__titre', "Décrivez votre enjeu : l'équipe de coordination compose le collectif adapté à votre projet."),
         ]),
-        bs('', [b('Parlons de votre projet', CONTACT, 'bouton--blanc')]),
+        bs('', [b('Échanger sur mon projet', CONTACT, 'bouton--blanc')]),
       ]),
     ]), { tag: 'section' }),
   ].join('\n\n');
@@ -369,7 +376,7 @@ module.exports = function pages(BASE) {
       ]),
       g('grille-3', [
         carte('Notre origine', 'La CPC Nouvelle-Aquitaine', "Depuis plus de 30 ans, la Chambre Professionnelle du Conseil est la première instance représentative des consultants indépendants de la région, membre de la FNCPC."),
-        carte('Notre statut', 'Une association, pas un cabinet', "Pas d'actionnaire à rémunérer : une seule finalité, la réussite de vos projets et la pérennité des entreprises du territoire."),
+        carte('Notre modèle', 'Un modèle différent du cabinet traditionnel', "Des experts indépendants, une gouvernance de mission unique et un interlocuteur unique, portés par une association à but non lucratif : pas d'actionnaire à rémunérer."),
         carte('Notre équipe', 'Une coordination salariée', "Une équipe salariée assure la coordination des programmes : chef de projet, PMO et interlocuteur spécialiste pour chaque mission."),
       ]),
     ]), { tag: 'section' }),
@@ -415,7 +422,7 @@ module.exports = function pages(BASE) {
           p('surtitre', 'Notre ambition'),
           t(3, 'encart-sombre__titre', "Devenir le champion de l'écologie industrielle sur le territoire, et accompagner les transitions vers des modèles économiques et organisationnels plus pérennes."),
         ]),
-        bs('', [b('Parlons de votre projet', CONTACT, 'bouton--blanc')]),
+        bs('', [b('Échanger sur mon projet', CONTACT, 'bouton--blanc')]),
       ]),
     ]), { tag: 'section' }),
   ].join('\n\n');
@@ -459,7 +466,114 @@ module.exports = function pages(BASE) {
   const cookies = pageLegale('Politique de cookies (UE)', 'Les cookies utilisés sur ce site et la gestion de votre consentement.',
     [shortcode('[cmplz-document type="cookie-statement" region="eu"]')]);
 
+  // ---------- Solutions (point 7 : offres « productisées ») ----------
+  const solution = (ancre, icone, titre_, cible, livrables, reference) => g(`solution ${icone}`, [
+    t(2, 'solution__titre', titre_),
+    p('solution__cible', cible),
+    p('solution__rubrique', 'Ce que nous livrons'),
+    liste('liste-coches', livrables),
+    p('solution__reference', reference),
+    p('solution__lien', `<a href="${CONTACT}">Échanger sur ce besoin →</a>`),
+  ], { ancre });
+
+  const solutions = [
+    g('bandeau-page', g('enveloppe', [
+      p('fil-ariane', `<a href="${U('/')}">Accueil</a> › Solutions`),
+      p('surtitre', 'Nos solutions'),
+      t(1, 'bandeau-page__titre', 'Des solutions pour conduire vos transformations.'),
+      p('chapeau', "Quatre domaines d'intervention, une même exigence de pilotage : pour chacun, l'AEPC constitue l'équipe d'experts adaptée à votre enjeu et en assure la coordination, avec un interlocuteur unique."),
+    ]), { tag: 'section' }),
+
+    g('section page-legale', g('enveloppe pile solutions', [
+      g('solutions-grille', [
+        solution('performance-industrielle', 'icone-usine', 'Performance industrielle &amp; Usine du Futur',
+          '<strong>Pour</strong> les PME et ETI industrielles qui veulent gagner en productivité et moderniser leur outil de production.',
+          ['Diagnostic terrain : flux, organisation de la production, pratiques Lean', 'Plan d’action priorisé et chiffré', 'Plan d’investissement et appui au financement de la modernisation', 'Accompagnement de la mise en œuvre et indicateurs de pilotage'],
+          '<strong>Référence</strong> : Usine du Futur 4, Région Nouvelle-Aquitaine — plus de 150 entreprises industrielles accompagnées par 30 experts coordonnés.'),
+        solution('trajectoire-rse', 'icone-pousse', 'Trajectoire RSE — Actionnable',
+          '<strong>Pour</strong> les entreprises qui veulent structurer leur démarche RSE et en faire un levier de performance durable.',
+          ['Diagnostic de maturité RSE', 'Priorités et feuille de route', 'Indicateurs de suivi', 'Conduite du changement auprès des équipes'],
+          '<strong>Référence</strong> : parcours « Actionnable », retenu par la Région à l’AMI RSE et référencé Néo Terra, porté avec Cinov Nouvelle-Aquitaine.'),
+        solution('strategie-transformation', 'icone-strategie', 'Stratégie &amp; transformation des organisations',
+          '<strong>Pour</strong> les dirigeants qui doivent adapter leur modèle économique, leur organisation ou leur gouvernance.',
+          ['Diagnostic stratégique et organisationnel', 'Gouvernance, pilotage et fonctionnement du comité de direction', 'Nouveaux modèles économiques : économie de la fonctionnalité, écologie industrielle', 'Accompagnement des managers et conduite du changement'],
+          '<strong>Expérience</strong> : les membres de l’AEPC sont intervenus dans les dispositifs régionaux Appui Stratégique PME, Usine du Futur 3 et POIM.'),
+        solution('formation', 'icone-formation', 'Formation professionnelle',
+          '<strong>Pour</strong> les entreprises, les branches et les OPCO qui veulent développer les compétences de leurs équipes.',
+          ['Parcours conçus selon vos objectifs : négociation commerciale, management, intelligence artificielle…', 'Des formateurs praticiens, consultants en activité', 'Une coordination unique, du cahier des charges au bilan de la formation', 'Démarche de certification Qualiopi engagée'],
+          '<strong>Référence</strong> : marchés de formation triennaux 2024-2026 remportés pour la CMA et pour OCAPIAT–IFRIA.'),
+      ]),
+    ]), { tag: 'section' }),
+
+    g('section section--blanc', g('enveloppe pile methode', [
+      g('entete-section', [
+        p('surtitre', 'Comment ça marche'),
+        t(2, 'titre-section', 'De votre enjeu aux résultats, une seule équipe à piloter : la nôtre.'),
+      ]),
+      g('etapes', [
+        etape('01 · Votre enjeu', 'Nous échangeons', 'Vous décrivez votre besoin, vos objectifs et vos contraintes à l’équipe de coordination.'),
+        etape('02 · L’équipe', 'Nous la constituons', 'La cellule de coordination compose l’équipe d’experts adaptée à votre filière et à votre territoire.', true),
+        etape('03 · Le pilotage', 'Nous en répondons', 'Chef de projet et PMO suivent l’avancement, les livrables, la qualité et vous rendent compte.'),
+        etape('04 · Les résultats', 'Nous les mesurons', 'Interventions sur site, résultats mesurés et bilan partagé avec vous.'),
+      ]),
+      g('encart-sombre encart-sombre--large', [
+        g('', [
+          p('surtitre', 'Votre projet'),
+          t(3, 'encart-sombre__titre', 'Votre enjeu ne correspond pas exactement à ces solutions ? Parlons-en : nous composons l’équipe adaptée.'),
+        ]),
+        bs('', [b('Échanger sur mon projet', CONTACT, 'bouton--blanc')]),
+      ]),
+    ]), { tag: 'section' }),
+  ].join('\n\n');
+
+  // ---------- Rejoindre l'AEPC (point 10 : entrée secondaire des consultants) ----------
+  const adherer = [
+    g('bandeau-page', g('enveloppe', [
+      p('fil-ariane', `<a href="${U('/')}">Accueil</a> › Rejoindre l’AEPC`),
+      p('surtitre', 'Vous êtes consultant'),
+      t(1, 'bandeau-page__titre', 'Rejoindre l’AEPC Nouvelle-Aquitaine'),
+      p('chapeau', "Répondez ensemble à des appels d'offres hors de portée d'un indépendant, sans passer par un grand cabinet national, dans un cadre juridique, technique et outillé."),
+    ]), { tag: 'section' }),
+
+    g('section page-legale', g('enveloppe pile qui', [
+      g('entete-section', [
+        p('surtitre', 'Ce que l’AEPC vous apporte'),
+        t(2, 'titre-section', 'La force d’un collectif, en restant indépendant.'),
+      ]),
+      g('grille-3', [
+        pilier('icone-cible', 'Des marchés collectifs', "Accédez à des programmes et des appels d'offres régionaux que l'on ne peut pas porter seul, aux côtés d'autres experts."),
+        pilier('icone-bouclier', 'Un cadre sécurisé', "L'association porte le contrat, la facturation et la coordination : vous vous concentrez sur votre expertise."),
+        pilier('icone-equipe', 'Une communauté active', 'Entraide, partage de connaissances, formations et visibilité auprès des acteurs économiques de la région.'),
+      ]),
+    ]), { tag: 'section' }),
+
+    g('section section--blanc', g('enveloppe pile methode', [
+      g('entete-section', [
+        p('surtitre', 'Comment adhérer'),
+        t(2, 'titre-section', 'Un parcours d’adhésion en trois étapes.'),
+        p('chapeau', 'Les membres de l’AEPC sont des consultants indépendants issus de la CPC Nouvelle-Aquitaine, engagés à respecter sa charte de déontologie et à se former en continu.'),
+      ]),
+      g('etapes etapes--3', [
+        etape('01 · Candidature', 'Présentez-vous', 'Écrivez-nous via le formulaire de contact (objet « Rejoindre l’AEPC NA ») : parcours, expertises, filières, territoire.'),
+        etape('02 · Entretien', 'Faisons connaissance', 'Un entretien de validation pour échanger sur vos attentes et sur votre contribution au collectif.', true),
+        etape('03 · Validation', 'Bienvenue', 'Une fois votre profil validé, vous accédez aux ressources et aux activités de l’association.'),
+      ]),
+      g('encart-sombre encart-sombre--large', [
+        g('', [
+          p('surtitre', 'Prêt à nous rejoindre ?'),
+          t(3, 'encart-sombre__titre', 'Présentez votre candidature : l’équipe de l’AEPC vous recontacte pour organiser l’entretien.'),
+        ]),
+        bs('', [b('Présenter ma candidature', CONTACT, 'bouton--blanc')]),
+      ]),
+      p('legende', `Pas encore membre de la Chambre Professionnelle du Conseil ? <a href="https://www.cpcna.org/" target="_blank" rel="noreferrer noopener">Découvrir la CPC Nouvelle-Aquitaine</a>`),
+    ]), { tag: 'section' }),
+  ].join('\n\n');
+
   return [
+    { slug: 'solutions', title: 'Nos solutions', content: solutions,
+      description: "Performance industrielle, trajectoire RSE, stratégie et transformation, formation : les solutions de l'AEPC Nouvelle-Aquitaine, pilotées par une équipe de coordination dédiée." },
+    { slug: 'adherer', title: "Rejoindre l'AEPC", content: adherer,
+      description: "Consultant indépendant en Nouvelle-Aquitaine ? Rejoignez l'AEPC pour répondre ensemble aux appels d'offres dans un cadre juridique, technique et outillé." },
     { slug: 'mentions-legales', title: 'Mentions légales', content: mentionsLegales,
       description: "Mentions légales du site de l'AEPC Nouvelle-Aquitaine : éditeur, directeur de la publication, hébergeur." },
     { slug: 'declaration-de-confidentialite-ue', title: 'Déclaration de confidentialité (UE)', content: confidentialite,

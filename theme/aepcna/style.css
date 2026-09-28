@@ -3,7 +3,7 @@ Theme Name: AEPC Nouvelle-Aquitaine
 Theme URI: https://aepcna.fr
 Author: AEPC Nouvelle-Aquitaine
 Description: Thème bloc sur mesure de l'Association Économique des Professionnels du Conseil de Nouvelle-Aquitaine (charte UDF4). Contenu 100 % éditable dans l'éditeur de blocs.
-Version: 1.3.0
+Version: 1.4.0
 Requires at least: 6.6
 Requires PHP: 8.0
 License: GPL-2.0-or-later
@@ -321,6 +321,16 @@ header.wp-block-template-part { position: sticky; top: 0; z-index: 50; margin: 0
 .atout__texte { font-size: 15px; line-height: 1.65; color: var(--texte); }
 .note-sombre { font-size: 12px; color: #B8C9DA; }
 
+/* ---------- Pourquoi l'AEPC ---------- */
+.pourquoi { gap: 48px; }
+.atout--bord { border: 1px solid var(--ligne); }
+.equation { background: var(--fond-carte); border-radius: 12px; padding: 36px 40px; display: flex; flex-direction: column; gap: 20px; }
+.equation__titre { font-size: 26px; }
+.equation__ligne { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 16px; }
+.equation__terme { background: var(--blanc); border: 1px solid #C9D3E0; border-radius: 999px; padding: 12px 22px; font-size: 17px; font-weight: 700; color: var(--encre); }
+.equation__plus { font-size: 28px; font-weight: 800; line-height: 1; color: var(--sarcelle); }
+.equation__note { font-size: 15px; line-height: 1.6; color: var(--texte); }
+
 /* ---------- Méthode ---------- */
 .methode { gap: 52px; }
 .etapes { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
@@ -382,6 +392,27 @@ header.wp-block-template-part { position: sticky; top: 0; z-index: 50; margin: 0
 .offre::before { content: ''; width: 32px; height: 32px; background: center / contain no-repeat; }
 .offre__titre { font-size: 22px; line-height: 1.25; }
 .offre__texte { font-size: 15px; line-height: 1.6; color: var(--texte); }
+
+.offre__lien { margin-top: auto; font-size: 15px; font-weight: 600; }
+.offre__lien a { color: var(--sarcelle); text-decoration: none; }
+.offre__lien a:hover { color: var(--marine); }
+
+/* ---------- Page Solutions ---------- */
+.solutions { gap: 48px; }
+.solutions-grille { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+.solution { background: var(--blanc); border: 1px solid var(--ligne); border-radius: 14px; padding: 40px; display: flex; flex-direction: column; gap: 16px; scroll-margin-top: 112px; }
+.solution::before { content: ''; width: 40px; height: 40px; background: center / contain no-repeat; }
+.solution__titre { font-size: 26px; line-height: 1.2; }
+.solution__cible { font-size: 16px; line-height: 1.6; color: var(--texte); }
+.solution__cible strong, .solution__reference strong { color: var(--encre); }
+.solution__rubrique { font-size: 13px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--sarcelle); margin-top: 8px; }
+.liste-coches { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.liste-coches li { position: relative; padding-left: 30px; font-size: 15px; line-height: 1.6; color: var(--texte); }
+.liste-coches li::before { content: ''; position: absolute; left: 0; top: 2px; width: 20px; height: 20px; background: center / contain no-repeat; }
+.solution__reference { margin-top: auto; padding: 14px 16px; border-left: 3px solid var(--sarcelle); background: var(--fond); border-radius: 0 8px 8px 0; font-size: 14px; line-height: 1.6; color: var(--texte); }
+.solution__lien a { color: var(--marine); font-weight: 700; text-decoration: none; }
+.solution__lien a:hover { color: var(--sarcelle); }
+.etapes--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 
 /* ---------- Réalisations ---------- */
 .realisations { gap: 48px; }
@@ -569,6 +600,10 @@ footer.wp-block-template-part { margin: 0; }
   .etape:last-child { border-radius: 0 0 10px 0; }
   .logos__partenaires { grid-column: span 2; }
   .pied__colonnes { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .etapes.etapes--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .etapes--3 .etape { border-left-width: 0; border-radius: 0; }
+  .etapes--3 .etape:first-child { border-left-width: 1px; border-radius: 10px 0 0 10px; }
+  .etapes--3 .etape:last-child { border-radius: 0 10px 10px 0; }
 }
 @media (max-width: 1024px) {
   /* Le menu passe en panneau dès 1024 px (le bloc ne le fait qu'à 600 px). */
@@ -580,6 +615,7 @@ footer.wp-block-template-part { margin: 0; }
   .consultants__entete { flex-direction: column; align-items: flex-start; }
   .consultants__droite { align-items: flex-start; }
   .grille-3 { grid-template-columns: 1fr; }
+  .solutions-grille { grid-template-columns: 1fr; }
   .encart-sombre--large { flex-direction: column; align-items: flex-start; }
   .pied__appels .enveloppe { grid-template-columns: 1fr; }
 }
@@ -612,6 +648,13 @@ footer.wp-block-template-part { margin: 0; }
   .coordonnees__corps { padding: 28px 24px; }
   .appel { flex-direction: column; align-items: flex-start; padding: 28px 24px; }
   .document-legal { padding: 28px 22px; }
+  .solution { padding: 28px 22px; }
+  .equation { padding: 28px 22px; }
+  .equation__terme { font-size: 15px; padding: 10px 16px; }
+  .etapes.etapes--3 { grid-template-columns: 1fr; }
+  .etapes--3 .etape, .etapes--3 .etape:first-child, .etapes--3 .etape:last-child { border-width: 1px; border-top-width: 0; border-radius: 0; }
+  .etapes--3 .etape:first-child { border-top-width: 1px; border-radius: 10px 10px 0 0; }
+  .etapes--3 .etape:last-child { border-radius: 0 0 10px 10px; }
   .encart-sombre--large { flex-direction: column; align-items: flex-start; padding: 28px 24px; }
   .encart-sombre--large .encart-sombre__titre { font-size: 22px; }
   .pied__colonnes { grid-template-columns: 1fr; gap: 36px; }
@@ -634,6 +677,8 @@ footer.wp-block-template-part { margin: 0; }
 .icone-formation::before { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230F3D66' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2 8l10-5 10 5-10 5z'/%3E%3Cpath d='M6 10v5c3 2 9 2 12 0v-5'/%3E%3C/svg%3E"); }
 .icone-strategie::before { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230F3D66' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='6' cy='6' r='3'/%3E%3Ccircle cx='18' cy='18' r='3'/%3E%3Cpath d='M9 6h4a4 4 0 014 4v5'/%3E%3C/svg%3E"); }
 .icone-pousse::before { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232F5D50' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 22V11'/%3E%3Cpath d='M12 11c0-4 3-7 8-7 0 5-3 8-8 7z'/%3E%3Cpath d='M12 14c0-3-2-5-7-5 0 4 2 6 7 5z'/%3E%3C/svg%3E"); }
+.icone-usine-s::before { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230E7A87' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 21h18'/%3E%3Cpath d='M5 21V10l5 3V10l5 3V6l4 2v13'/%3E%3C/svg%3E"); }
+.liste-coches li::before { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230E7A87' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='M8 12l3 3 5-6'/%3E%3C/svg%3E"); }
 .carte-equipe__pied::before { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230F3D66' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='9' cy='8' r='3'/%3E%3Ccircle cx='17' cy='9' r='2.5'/%3E%3Cpath d='M3 20c0-3.5 2.7-6 6-6s6 2.5 6 6'/%3E%3Cpath d='M15 14.5c3 0 6 2 6 5.5'/%3E%3C/svg%3E"); }
 .pied__ligne.pied-lieu::before { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239FDDE2' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 22s7-6.2 7-12a7 7 0 10-14 0c0 5.8 7 12 7 12z'/%3E%3Ccircle cx='12' cy='10' r='2.5'/%3E%3C/svg%3E"); }
 .pied__ligne.pied-courriel::before { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239FDDE2' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='5' width='18' height='14' rx='2'/%3E%3Cpath d='M3 7l9 6 9-6'/%3E%3C/svg%3E"); }

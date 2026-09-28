@@ -51,8 +51,15 @@ function boutons(className, liste) {
   return `<!-- wp:buttons${attrs(a)} -->\n<div class="${classes('wp-block-buttons', className)}">${liste.join('\n')}</div>\n<!-- /wp:buttons -->`;
 }
 
+// core/list + core/list-item
+function liste(className, items) {
+  const a = className ? { className } : {};
+  const lis = items.map(x => `<!-- wp:list-item -->\n<li>${x}</li>\n<!-- /wp:list-item -->`).join('\n\n');
+  return `<!-- wp:list${attrs(a)} -->\n<ul class="${classes('wp-block-list', className)}">${lis}</ul>\n<!-- /wp:list -->`;
+}
+
 function shortcode(code) {
   return `<!-- wp:shortcode -->\n${code}\n<!-- /wp:shortcode -->`;
 }
 
-module.exports = { groupe, para, titre, image, bouton, boutons, shortcode };
+module.exports = { groupe, para, titre, image, bouton, boutons, liste, shortcode };
