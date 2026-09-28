@@ -238,7 +238,11 @@ function aepcna_deploy( $source, $etapes = array( 'sauvegarde', 'theme', 'medias
 		}
 		wp_cache_flush();
 		do_action( 'litespeed_purge_all' );
-		do_action( 'xspeed_cache_purge_all' );
+		// xSpeed Cache : seule la méthode de l'extension vide réellement ses deux
+		// niveaux de cache (pages statiques et rendu PHP).
+		if ( class_exists( '\\XSpeed\\Cache' ) && is_callable( array( '\\XSpeed\\Cache', 'purge_all' ) ) ) {
+			@\XSpeed\Cache::purge_all();
+		}
 		$rapport['purge'] = 'ok';
 	}
 
