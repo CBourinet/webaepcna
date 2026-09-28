@@ -264,7 +264,85 @@ module.exports = function pages(BASE) {
     g('section contact-page', g('enveloppe', blocContact), { tag: 'section' }),
   ].join('\n\n');
 
+  // ---------- Nos consultants ----------
+  const nosConsultants = [
+    g('bandeau-page', g('enveloppe', [
+      p('fil-ariane', `<a href="${U('/')}">Accueil</a> › Nos consultants`),
+      p('surtitre', 'Nos consultants'),
+      t(1, 'bandeau-page__titre', 'Des experts à votre service.'),
+      p('chapeau', "L'AEPC NA regroupe des consultants hautement qualifiés et expérimentés dans divers domaines. Chaque membre est sélectionné pour son expertise spécifique et son engagement à fournir des solutions de qualité."),
+    ]), { tag: 'section' }),
+
+    g('chiffres', g('enveloppe grille-4', [
+      chiffre('icone-equipe', '50+', 'consultants experts régionaux'),
+      chiffre('icone-lieu', '30 ans', "d'ancrage régional de la CPC NA", true),
+      chiffre('icone-filieres', '15', 'filières couvertes'),
+      chiffre('icone-bouclier', '1', 'charte de déontologie commune', true),
+    ]), { tag: 'section' }),
+
+    g('section--sombre', g('enveloppe pile consultants', [
+      g('consultants__entete', [
+        g('entete-section', [
+          p('surtitre', 'Pourquoi nous choisir'),
+          t(2, 'titre-section', 'Pourquoi choisir nos consultants ?'),
+          p('chapeau', 'Des experts régionaux, indépendants et engagés, réunis dans un collectif qui garantit leur sérieux.'),
+        ]),
+        g('consultants__droite', [
+          g('portraits', [
+            img('portrait-1', "Portrait d'Angélique", '', 'thumbnail'),
+            img('portrait-2', 'Portrait de Pascal', '', 'thumbnail'),
+            img('portrait-3', "Portrait d'Estelle", '', 'thumbnail'),
+            img('portrait-4', "Portrait d'Éric", '', 'thumbnail'),
+            img('portrait-5', "Portrait d'Audrey", '', 'thumbnail'),
+            img('portrait-6', 'Portrait de Jérôme', '', 'thumbnail'),
+            p('portraits__plus', '+50'),
+          ]),
+        ]),
+      ]),
+      g('grille-3', [
+        atout('icone-etoile', 'Compétences spécifiques', 'Chaque consultant apporte une expertise unique, pour des conseils et des solutions adaptés à vos problématiques.'),
+        atout('icone-bouclier', 'Expérience et fiabilité', 'Nos membres possèdent une expérience solide et une réputation de fiabilité reconnue dans leurs secteurs respectifs.'),
+        atout('icone-cible', 'Approche personnalisée', "Nous mettons un point d'honneur à comprendre vos besoins spécifiques pour vous proposer des solutions sur mesure."),
+      ]),
+    ]), { tag: 'section' }),
+
+    g('section section--blanc', g('enveloppe pile qui', [
+      g('entete-section', [
+        p('surtitre', "Domaines d'intervention"),
+        t(2, 'titre-section', 'Une large gamme de compétences, mobilisables seules ou en équipe.'),
+        p('chapeau', "Nos consultants couvrent l'ensemble des besoins des entreprises et des organisations, de la stratégie à la mise en œuvre."),
+      ]),
+      g('competences', [
+        g('competences__entete', [t(3, 'competences__titre', 'Des compétences à 360°'), p('competences__sous-titre', 'et bien d\'autres expertises au sein du collectif')]),
+        g('puces', [
+          ...["Stratégie d'entreprise", "Pilotage d'entreprise", 'Modèles économiques', 'Marketing et communication', 'Ressources humaines', 'Management', 'Finance et comptabilité', 'Performance industrielle', 'Lean', 'Transformation', 'IT &amp; numérique', 'RSE et développement durable', 'Formation'].map(x => p('puce', x)),
+        ]),
+      ]),
+    ]), { tag: 'section' }),
+
+    g('section', g('enveloppe pile qui', [
+      g('entete-section', [
+        p('surtitre', 'Un collectif encadré'),
+        t(2, 'titre-section', 'Des indépendants, un cadre commun.'),
+      ]),
+      g('grille-3', [
+        carte('Notre origine', 'Tous issus de la CPC NA', "Nos consultants sont membres de la Chambre Professionnelle du Conseil de Nouvelle-Aquitaine, première instance représentative des consultants indépendants de la région depuis plus de 30 ans."),
+        carte('Notre exigence', 'Une charte de déontologie', 'Partagée par tous nos membres et partenaires, avec formation continue obligatoire. Démarches Qualiopi et labellisation RSE LUCIE engagées.'),
+        carte('Notre méthode', 'Une coordination dédiée', "Pour chaque mission, une cellule de coordination compose l'équipe d'experts selon la filière et la proximité géographique, suit l'avancement et contrôle les livrables."),
+      ]),
+      g('encart-sombre encart-sombre--large', [
+        g('', [
+          p('surtitre', 'Vous cherchez un expert ?'),
+          t(3, 'encart-sombre__titre', "Décrivez votre besoin : l'équipe de coordination identifie les consultants adaptés à votre projet."),
+        ]),
+        bs('', [b('Parlons de votre projet', CONTACT, 'bouton--blanc')]),
+      ]),
+    ]), { tag: 'section' }),
+  ].join('\n\n');
+
   return [
+    { slug: 'nos-consultants', title: 'Nos consultants', content: nosConsultants,
+      description: "Plus de 50 consultants experts régionaux, indépendants et engagés, réunis dans le collectif de l'AEPC Nouvelle-Aquitaine." },
     { slug: 'accueil', title: 'Accueil', content: accueil,
       description: "L'AEPC Nouvelle-Aquitaine réunit plus de 50 consultants experts régionaux et place chaque projet sous la conduite d'une équipe de coordination dédiée." },
     { slug: 'contact', title: 'Contact', content: contact,

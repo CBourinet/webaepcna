@@ -7,7 +7,7 @@
  * $source contient theme/aepcna/ et deploy/. Chaque étape est idempotente.
  */
 
-function aepcna_deploy( $source, $etapes = array( 'sauvegarde', 'theme', 'medias', 'formulaire', 'pages', 'accueil', 'purge' ) ) {
+function aepcna_deploy( $source, $etapes = array( 'sauvegarde', 'theme', 'medias', 'formulaire', 'pages', 'accueil', 'purge' ), $seulement = array() ) {
 	require_once ABSPATH . 'wp-admin/includes/file.php';
 	require_once ABSPATH . 'wp-admin/includes/media.php';
 	require_once ABSPATH . 'wp-admin/includes/image.php';
@@ -155,6 +155,9 @@ function aepcna_deploy( $source, $etapes = array( 'sauvegarde', 'theme', 'medias
 	if ( in_array( 'pages', $etapes, true ) ) {
 		$pages = json_decode( file_get_contents( $source . '/deploy/content.json' ), true );
 		foreach ( $pages as $pg ) {
+			if ( $seulement && ! in_array( $pg['slug'], $seulement, true ) ) {
+				continue; // ne pas écraser les pages non concernées
+			}
 			$contenu = str_replace( '{{FORMULAIRE}}', $formulaire, $pg['content'] );
 			$contenu = preg_replace_callback(
 				'/\{\{(ID|SRC):([a-z0-9-]+)(?::([a-z_]+))?\}\}/',

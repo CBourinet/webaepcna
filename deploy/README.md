@@ -16,7 +16,8 @@
 
 Attention : l'étape `pages` réécrit le contenu des pages Accueil et Contact. Si des modifications ont été
 faites dans l'éditeur WordPress entre-temps, lancer `aepcna_deploy($src, ['theme', 'purge'])` pour ne mettre
-à jour que le thème.
+à jour que le thème, ou `aepcna_deploy($src, ['theme', 'medias', 'pages', 'purge'], ['nos-consultants'])`
+pour ne (re)déployer qu'une page.
 
 ## Revenir en arrière
 - Thème : `switch_theme('oceanwp-child-theme-master');` (l'ancien thème est toujours installé).

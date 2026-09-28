@@ -3,7 +3,7 @@ Theme Name: AEPC Nouvelle-Aquitaine
 Theme URI: https://aepcna.fr
 Author: AEPC Nouvelle-Aquitaine
 Description: Thème bloc sur mesure de l'Association Économique des Professionnels du Conseil de Nouvelle-Aquitaine (charte UDF4). Contenu 100 % éditable dans l'éditeur de blocs.
-Version: 1.0.0
+Version: 1.1.0
 Requires at least: 6.6
 Requires PHP: 8.0
 License: GPL-2.0-or-later
@@ -476,6 +476,10 @@ header.wp-block-template-part { position: sticky; top: 0; z-index: 50; margin: 0
 .encart-sombre .surtitre { font-size: 12px; letter-spacing: .22em; color: var(--cyan-pale); }
 .encart-sombre__titre { font-size: 22px; line-height: 1.3; color: var(--blanc); }
 .encart-sombre .wp-block-buttons { margin-top: 6px; }
+.encart-sombre--large { flex-direction: row; justify-content: space-between; align-items: center; gap: 32px; padding: 40px 48px; }
+.encart-sombre--large > .wp-block-group { display: flex; flex-direction: column; gap: 12px; max-width: 760px; }
+.encart-sombre--large .encart-sombre__titre { font-size: 26px; }
+.encart-sombre--large .wp-block-buttons { margin-top: 0; flex: none; }
 
 /* ---------- Page intérieure : bandeau ---------- */
 .bandeau-page { background: var(--degrade); color: var(--blanc); }
@@ -544,6 +548,7 @@ footer.wp-block-template-part { margin: 0; }
   .consultants__entete { flex-direction: column; align-items: flex-start; }
   .consultants__droite { align-items: flex-start; }
   .grille-3 { grid-template-columns: 1fr; }
+  .encart-sombre--large { flex-direction: column; align-items: flex-start; }
   .pied__appels .enveloppe { grid-template-columns: 1fr; }
 }
 @media (max-width: 640px) {
@@ -574,6 +579,8 @@ footer.wp-block-template-part { margin: 0; }
   .formulaire { padding: 28px 22px; }
   .coordonnees__corps { padding: 28px 24px; }
   .appel { flex-direction: column; align-items: flex-start; padding: 28px 24px; }
+  .encart-sombre--large { flex-direction: column; align-items: flex-start; padding: 28px 24px; }
+  .encart-sombre--large .encart-sombre__titre { font-size: 22px; }
   .pied__colonnes { grid-template-columns: 1fr; gap: 36px; }
   .pied__legal { flex-direction: column; align-items: flex-start; }
   .pied__mentions { text-align: left; }
