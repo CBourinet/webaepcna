@@ -161,7 +161,7 @@ module.exports = function pages(BASE) {
     g('section section--blanc', g('enveloppe pile realisations', [
       g('entete-section entete-section--etroite', [p('surtitre', 'Réalisations'), t(2, 'titre-section', 'Des programmes régionaux confiés à notre collectif.')]),
       g('grille-3', [
-        realisation('photo-robots-industriels', 'Robots industriels sur une ligne de production', 'Région Nouvelle-Aquitaine · depuis 2024', '', 'Usine du Futur 4', "<strong>Plus de 150 entreprises industrielles accompagnées</strong> par 30 experts coordonnés sur l'ensemble de la région, avec une cellule dédiée : chef de projet, PMO, spécialistes Éco-Finance et AeroExcellence."),
+        realisation('photo-robots-industriels', 'Robots industriels sur une ligne de production', 'Région Nouvelle-Aquitaine · depuis 2024', '', 'Usine du Futur 4', "<strong>Plus de 150 entreprises industrielles accompagnées</strong> par 30 experts coordonnés sur l'ensemble de la région, avec une cellule dédiée (chef de projet, PMO, spécialiste Éco-Finance) et des consultants labellisés AeroExcellence sur la filière aéronautique."),
         realisation('photo-reunion-travail', "Atelier de travail autour d'un ordinateur", 'AMI RSE Région · 2026', 'vert', 'Actionnable', 'Parcours RSE retenu par la Région et référencé Néo Terra pour trois ans, avec le syndicat Cinov Nouvelle-Aquitaine.'),
         realisation('photo-ligne-agroalimentaire', "Ligne de conditionnement dans l'agroalimentaire", 'CMA · OCAPIAT–IFRIA', 'sarcelle', 'Négociation commerciale', "Marchés de formation triennaux remportés collectivement pour les artisans et l'agroalimentaire."),
       ]),
@@ -189,7 +189,7 @@ module.exports = function pages(BASE) {
           g('', [p('exemple__rubrique', 'La cellule de coordination'), g('exemple__roles', [
             miniCarte('Chef de projet', 'Pilotage et relation avec la Région'),
             miniCarte('PMO', 'Missions, livrables, échéances'),
-            miniCarte('Spécialistes', 'Éco-Finance et AeroExcellence'),
+            miniCarte('Spécialistes', 'Éco-Finance, et consultants labellisés AeroExcellence pour l’aéronautique'),
           ])]),
           g('', [p('exemple__rubrique', 'Le programme'), p('exemple__texte', "Programme de la Région Nouvelle-Aquitaine pour accompagner les PME et ETI industrielles vers l'usine de demain. L'AEPC NA, lauréate en 2024 et reconduite en 2026, coordonne 30 experts intervenant sur l'ensemble de la région : plus de 150 entreprises industrielles accompagnées.")]),
         ]),
@@ -496,7 +496,7 @@ module.exports = function pages(BASE) {
           '<strong>Le besoin</strong> : déployer un programme d’accompagnement auprès de nombreuses entreprises industrielles, sur tout un territoire, avec une qualité homogène et un reporting consolidé.',
           'Le dispositif mobilisé',
           ['Une cellule de coordination dédiée : chef de projet, PMO, spécialistes', 'Jusqu’à 30 experts mobilisés au plus près des sites', 'Diagnostics terrain, Lean, organisation de production, plans d’investissement', 'Un reporting consolidé au donneur d’ordre : avancement, livrables, indicateurs'],
-          '<strong>Référence</strong> : Usine du Futur 4, Région Nouvelle-Aquitaine — plus de 150 entreprises industrielles accompagnées par 30 experts coordonnés.',
+          '<strong>Référence</strong> : Usine du Futur 4, Région Nouvelle-Aquitaine — plus de 150 entreprises industrielles accompagnées par 30 experts coordonnés, dont des consultants labellisés AeroExcellence pour la filière aéronautique.',
           'Échanger sur ce besoin'),
         solution('formation', 'icone-formation', 'ETI, grands groupes, branches et OPCO', 'Programmes de formation',
           '<strong>Le besoin</strong> : former de nombreux collaborateurs, sur plusieurs sites ou territoires, avec un programme qui mobilise plus de cinq consultants ou formateurs.',
@@ -508,7 +508,7 @@ module.exports = function pages(BASE) {
           '<strong>Le besoin</strong> : conduire une transformation qui mobilise plusieurs expertises — stratégie, organisation, RH, finance, numérique — sur plusieurs entités ou sites.',
           'Le dispositif mobilisé',
           ['Une équipe pluridisciplinaire composée pour votre projet', 'Diagnostic et feuille de route partagés avec la direction', 'Nouveaux modèles économiques : économie de la fonctionnalité, écologie industrielle', 'Pilotage centralisé et accompagnement du changement'],
-          '<strong>Expérience</strong> : les membres de l’AEPC sont intervenus dans les dispositifs régionaux Appui Stratégique PME, Usine du Futur 3 et POIM.',
+          '<strong>Expérience</strong> : des consultants déjà mobilisés sur les programmes régionaux (Appui Stratégique PME, Usine du Futur 3) et disposant de compétences POIM, gage de leur qualité sur des programmes exigeants.',
           'Échanger sur ce besoin'),
       ]),
       g('entete-section solutions__pme', [
