@@ -5,7 +5,7 @@ const path = require('path');
 const { groupe: g, para: p, bouton: b, boutons: bs } = require('./blocs');
 
 const BASE = process.argv[2] ?? '/site';
-const VERSION = '1.5.1';
+const VERSION = '1.5.2';
 const RACINE = path.join(__dirname, '..');
 const THEME = path.join(RACINE, 'aepcna');
 const U = chemin => `${BASE}${chemin}`;

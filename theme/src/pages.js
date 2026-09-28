@@ -467,14 +467,15 @@ module.exports = function pages(BASE) {
     [shortcode('[cmplz-document type="cookie-statement" region="eu"]')]);
 
   // ---------- Solutions (point 7 : offres « productisées ») ----------
-  const solution = (ancre, icone, public_, titre_, besoin, rubrique, dispositif, reference, lien, variante = '') => g(`solution ${icone}${variante ? ' solution--' + variante : ''}`, [
+  const solution = (ancre, icone, public_, titre_, besoin, rubrique, dispositif, reference, lien, variante = '', contact = '', href = CONTACT) => g(`solution ${icone}${variante ? ' solution--' + variante : ''}`, [
     p(`solution__public${variante ? ' solution__public--' + variante : ''}`, public_),
     t(2, 'solution__titre', titre_),
     p('solution__cible', besoin),
     p('solution__rubrique', rubrique),
     liste('liste-coches', dispositif),
     p('solution__reference', reference),
-    p('solution__lien', `<a href="${CONTACT}">${lien} →</a>`),
+    ...(contact ? [p('solution__contact', contact)] : []),
+    p('solution__lien', `<a href="${href}">${lien} →</a>`),
   ], { ancre });
 
   const solutions = [
@@ -520,7 +521,9 @@ module.exports = function pages(BASE) {
         'Le parcours',
         ['Diagnostic de maturité RSE', 'Priorités et feuille de route', 'Indicateurs de suivi', 'Conduite du changement auprès des équipes'],
         '<strong>Référence</strong> : parcours « Actionnable », retenu par la Région à l’AMI RSE et référencé Néo Terra, porté avec Cinov Nouvelle-Aquitaine.',
-        'Échanger sur ce parcours', 'pme'),
+        'Écrire à rse@aepcna.fr', 'pme',
+        '<strong>Vos chefs de projet</strong> : Audrey Vautrin (Nouvelle-Aquitaine Sud) et Pascal Prevost (Nouvelle-Aquitaine Nord), pour une couverture de toute la région.',
+        'mailto:rse@aepcna.fr'),
     ]), { tag: 'section' }),
 
     g('section section--blanc', g('enveloppe pile methode', [
