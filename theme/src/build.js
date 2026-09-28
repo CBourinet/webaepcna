@@ -5,7 +5,7 @@ const path = require('path');
 const { groupe: g, para: p, bouton: b, boutons: bs } = require('./blocs');
 
 const BASE = process.argv[2] ?? '/site';
-const VERSION = '1.7.0';
+const VERSION = '1.7.1';
 const RACINE = path.join(__dirname, '..');
 const THEME = path.join(RACINE, 'aepcna');
 const U = chemin => `${BASE}${chemin}`;
@@ -168,7 +168,7 @@ ecrire('parts/footer.html', [
       g('pied__marque', [
         `<!-- wp:site-logo {"width":130,"shouldSyncIcon":false} /-->`,
         p('pied__devise', 'Au service de la transformation des acteurs du territoire !'),
-        p('pied__desc', 'Association Économique des Professionnels du Conseil de Nouvelle-Aquitaine — association loi 1901, émanation de la CPC Nouvelle-Aquitaine.'),
+        p('pied__desc', 'Association Économique des Professionnels du Conseil de Nouvelle-Aquitaine — association loi 1901.'),
       ]),
       g('', [p('pied__titre', 'Navigation'), g('pied__liens', [
         p('', lien("À propos de l'AEPC NA", U('/qui-sommes-nous/'))),
