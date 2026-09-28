@@ -57,6 +57,46 @@ module.exports = function pages(BASE) {
     ...(badge ? [p('badge', 'En cours')] : []), t(3, 'garantie__titre', titre_), p('garantie__texte', texte),
   ]);
 
+  const sectionEcosysteme =
+    g('section', g('enveloppe pile ecosysteme', [
+      g('entete-section', [
+        p('surtitre', 'Écosystème'),
+        t(2, 'titre-section', 'Un réseau de partenaires locaux et régionaux au service du territoire.'),
+        p('chapeau', 'Nous nous appuyons sur des réseaux professionnels solides pour orienter chaque entreprise vers les bons dispositifs et les bonnes compétences.'),
+      ]),
+      g('grille-4', [
+        g('logos__groupe logos__partenaires', [
+          p('logos__libelle', 'Nos partenaires officiels'),
+          g('logos__grille3', [
+            img('logo-cpc-na', 'Chambre Professionnelle du Conseil Nouvelle-Aquitaine', 'logo-tuile'),
+            img('logo-mpl-na', 'Maison des Professions Libérales Nouvelle-Aquitaine', 'logo-tuile logo-h64'),
+            img('logo-cinov-na', 'Cinov Nouvelle-Aquitaine', 'logo-tuile logo-h96'),
+          ]),
+        ]),
+        g('logos__groupe', [p('logos__libelle', 'Membre de'), img('logo-adi-na', 'ADI Nouvelle-Aquitaine', 'logo-tuile')]),
+      ]),
+      g('logos__groupe', [
+        p('logos__libelle', 'Ils nous ont confié des missions'),
+        g('grille-4 logos__clients', [
+          img('logo-region-na', 'Région Nouvelle-Aquitaine', 'logo-tuile logo-tuile--basse'),
+          img('logo-cma-na', "Chambre de Métiers et de l'Artisanat Nouvelle-Aquitaine", 'logo-tuile logo-tuile--basse logo-h72'),
+          img('logo-ocapiat', 'OCAPIAT', 'logo-tuile logo-tuile--basse'),
+          img('logo-ifria-na', 'IFRIA Nouvelle-Aquitaine', 'logo-tuile logo-tuile--basse logo-h64'),
+        ]),
+      ]),
+    ]), { tag: 'section' });
+
+  const sectionGaranties =
+    g('section--blanc', g('enveloppe pile garanties', [
+      t(2, 'titre-section', 'Nos engagements et garanties'),
+      g('grille-4', [
+        garantie('', false, 'Charte de déontologie', 'Partagée par tous nos membres et partenaires, avec formation continue obligatoire.'),
+        garantie('verte', true, 'Labellisation RSE LUCIE', 'Label RSO dédié aux métiers du conseil : nous appliquons à nous-mêmes ce que nous recommandons.'),
+        garantie('', true, 'Qualiopi', 'Certification qualité de nos actions de formation.'),
+        garantie('bleue', false, 'Un cadre sécurisé', 'Vous contractez avec une association structurée : contrat unique, facturation unique, responsabilité claire.'),
+      ]),
+    ]), { tag: 'section' });
+
   const accueil = [
     // HERO
     g('hero', [
@@ -182,34 +222,7 @@ module.exports = function pages(BASE) {
       ]),
     ]), { tag: 'section', ancre: 'territoire' }),
 
-    // ÉCOSYSTÈME
-    g('section', g('enveloppe pile ecosysteme', [
-      g('entete-section', [
-        p('surtitre', 'Écosystème'),
-        t(2, 'titre-section', 'Un réseau de partenaires locaux et régionaux au service du territoire.'),
-        p('chapeau', 'Nous nous appuyons sur des réseaux professionnels solides pour orienter chaque entreprise vers les bons dispositifs et les bonnes compétences.'),
-      ]),
-      g('grille-4', [
-        g('logos__groupe logos__partenaires', [
-          p('logos__libelle', 'Nos partenaires officiels'),
-          g('logos__grille3', [
-            img('logo-cpc-na', 'Chambre Professionnelle du Conseil Nouvelle-Aquitaine', 'logo-tuile'),
-            img('logo-mpl-na', 'Maison des Professions Libérales Nouvelle-Aquitaine', 'logo-tuile logo-h64'),
-            img('logo-cinov-na', 'Cinov Nouvelle-Aquitaine', 'logo-tuile logo-h96'),
-          ]),
-        ]),
-        g('logos__groupe', [p('logos__libelle', 'Membre de'), img('logo-adi-na', 'ADI Nouvelle-Aquitaine', 'logo-tuile')]),
-      ]),
-      g('logos__groupe', [
-        p('logos__libelle', 'Ils nous ont confié des missions'),
-        g('grille-4 logos__clients', [
-          img('logo-region-na', 'Région Nouvelle-Aquitaine', 'logo-tuile logo-tuile--basse'),
-          img('logo-cma-na', "Chambre de Métiers et de l'Artisanat Nouvelle-Aquitaine", 'logo-tuile logo-tuile--basse logo-h72'),
-          img('logo-ocapiat', 'OCAPIAT', 'logo-tuile logo-tuile--basse'),
-          img('logo-ifria-na', 'IFRIA Nouvelle-Aquitaine', 'logo-tuile logo-tuile--basse logo-h64'),
-        ]),
-      ]),
-    ]), { tag: 'section' }),
+    sectionEcosysteme,
 
     // OFFRES
     g('section section--blanc', g('enveloppe pile offres', [
@@ -232,16 +245,7 @@ module.exports = function pages(BASE) {
       ]),
     ]), { tag: 'section', ancre: 'realisations' }),
 
-    // GARANTIES
-    g('section--blanc', g('enveloppe pile garanties', [
-      t(2, 'titre-section', 'Nos engagements et garanties'),
-      g('grille-4', [
-        garantie('', false, 'Charte de déontologie', 'Partagée par tous nos membres et partenaires, avec formation continue obligatoire.'),
-        garantie('verte', true, 'Labellisation RSE LUCIE', 'Label RSO dédié aux métiers du conseil : nous appliquons à nous-mêmes ce que nous recommandons.'),
-        garantie('', true, 'Qualiopi', 'Certification qualité de nos actions de formation.'),
-        garantie('bleue', false, 'Un cadre sécurisé', 'Vous contractez avec une association structurée : contrat unique, facturation unique, responsabilité claire.'),
-      ]),
-    ]), { tag: 'section' }),
+    sectionGaranties,
 
     // CONTACT
     g('section', g('enveloppe pile contact', [
@@ -340,7 +344,85 @@ module.exports = function pages(BASE) {
     ]), { tag: 'section' }),
   ].join('\n\n');
 
+  // ---------- Qui sommes-nous ----------
+  const valeur = (icone, titre_, texte) => g(`atout a-icone a-icone--petite ${icone}`, [t(3, 'atout__titre', titre_), p('atout__texte', texte)]);
+  const quiSommesNous = [
+    g('bandeau-page', g('enveloppe', [
+      p('fil-ariane', `<a href="${U('/')}">Accueil</a> › Qui sommes-nous`),
+      p('surtitre', "L'association"),
+      t(1, 'bandeau-page__titre', 'Qui sommes-nous ?'),
+      p('chapeau', "Créée en 2023, l'AEPC Nouvelle-Aquitaine est une association loi 1901 à but non lucratif qui regroupe des consultants issus de la Chambre Professionnelle du Conseil de Nouvelle-Aquitaine, pour réaliser des actions collectives auprès des acteurs économiques de la région."),
+    ]), { tag: 'section' }),
+
+    g('chiffres', g('enveloppe grille-4', [
+      chiffre('icone-valide', '2023', "création de l'association"),
+      chiffre('icone-lieu', '30 ans', "d'ancrage régional de la CPC NA", true),
+      chiffre('icone-equipe', '50+', 'consultants experts régionaux'),
+      chiffre('icone-filieres', '15+', 'filières sectorielles', true),
+    ]), { tag: 'section' }),
+
+    g('section qui-section', g('enveloppe pile qui', [
+      g('entete-section entete-section--large', [
+        p('surtitre', 'Notre mission'),
+        t(2, 'titre-section', 'Aider les entreprises régionales à se transformer et à durer.'),
+        p('chapeau', "L'AEPC est l'émanation économique de la CPC Nouvelle-Aquitaine. Ses membres l'ont créée pour répondre ensemble aux appels d'offres, sans passer par de grands cabinets nationaux : l'association leur apporte un cadre juridique, technique et outillé."),
+      ]),
+      g('grille-3', [
+        carte('Notre origine', 'La CPC Nouvelle-Aquitaine', "Depuis plus de 30 ans, la Chambre Professionnelle du Conseil est la première instance représentative des consultants indépendants de la région, membre de la FNCPC."),
+        carte('Notre statut', 'Une association, pas un cabinet', "Pas d'actionnaire à rémunérer : une seule finalité, la réussite de vos projets et la pérennité des entreprises du territoire."),
+        carte('Notre équipe', 'Une coordination salariée', "Une équipe salariée assure la coordination des programmes : chef de projet, PMO et interlocuteur spécialiste pour chaque mission."),
+      ]),
+    ]), { tag: 'section' }),
+
+    g('section--sombre', g('enveloppe pile consultants', [
+      g('entete-section', [
+        p('surtitre', 'Nos valeurs'),
+        t(2, 'titre-section', 'Ce qui nous engage.'),
+      ]),
+      g('grille-3', [
+        valeur('icone-bouclier', 'Professionnalisme', 'Nous respectons la charte de déontologie de la CPC et appliquons une formation continue obligatoire à nos membres.'),
+        valeur('icone-equipe', 'Collaboration', "Le collectif dans les missions et le partage de connaissances par l'entraide sont au cœur de notre association."),
+        valeur('icone-pousse', 'Innovation', 'Nous accompagnons la transition de nos membres, comme de nos clients, vers des modèles économiques plus durables.'),
+      ]),
+    ]), { tag: 'section' }),
+
+    g('section section--blanc', g('enveloppe pile qui', [
+      g('entete-section', [
+        p('surtitre', 'Pourquoi travailler avec nous'),
+        t(2, 'titre-section', 'Un collectif pluridisciplinaire, présent sur toute la région.'),
+      ]),
+      g('grille-3', [
+        carte('Pluridisciplinaire', 'Des consultants qui travaillent en équipe', 'Répartis sur toute la région, nos consultants savent travailler ensemble pour optimiser le temps et les solutions apportées à vos problématiques.'),
+        carte('Expertise', 'Des compétences pointues', 'Nos membres sont experts dans leurs domaines respectifs et proposent des solutions personnalisées et efficaces.'),
+        carte('Engagement', 'Dévoués à vos projets', 'Une équipe de coordination dédiée, un seul point de contact, des délais et une qualité tenus.'),
+      ]),
+      g('competences', [
+        g('competences__entete', [t(3, 'competences__titre', 'Un réseau multisectoriel'), p('competences__sous-titre', 'des professionnels de plus de 15 filières')]),
+        g('puces', [
+          ...['Agroalimentaire', 'Bois', 'Aéronautique', 'Défense', 'Numérique et cybersécurité', 'Métallurgie', 'Traitement des déchets', 'BTP', 'Chimie', 'Plasturgie', 'Environnement', "Services à l'industrie"].map(x => p('puce', x)),
+          p('puce puce--ouverte', "et bien d'autres…"),
+        ]),
+      ]),
+    ]), { tag: 'section' }),
+
+    sectionEcosysteme,
+
+    sectionGaranties,
+
+    g('section', g('enveloppe', [
+      g('encart-sombre encart-sombre--large', [
+        g('', [
+          p('surtitre', 'Notre ambition'),
+          t(3, 'encart-sombre__titre', "Devenir le champion de l'écologie industrielle sur le territoire, et accompagner les transitions vers des modèles économiques et organisationnels plus pérennes."),
+        ]),
+        bs('', [b('Parlons de votre projet', CONTACT, 'bouton--blanc')]),
+      ]),
+    ]), { tag: 'section' }),
+  ].join('\n\n');
+
   return [
+    { slug: 'qui-sommes-nous', title: 'Qui sommes-nous ?', content: quiSommesNous,
+      description: "L'AEPC Nouvelle-Aquitaine, association loi 1901 émanation de la CPC NA, fédère des consultants experts régionaux pour accompagner la transformation des entreprises du territoire." },
     { slug: 'nos-consultants', title: 'Nos consultants', content: nosConsultants,
       description: "Plus de 50 consultants experts régionaux, indépendants et engagés, réunis dans le collectif de l'AEPC Nouvelle-Aquitaine." },
     { slug: 'accueil', title: 'Accueil', content: accueil,
