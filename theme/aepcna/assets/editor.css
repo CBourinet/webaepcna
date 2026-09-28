@@ -1,0 +1,17 @@
+/* ==========================================================================
+   Corrections propres à l'éditeur de blocs — chargée par add_editor_style().
+   Gutenberg impose « position: relative » à chaque bloc : les couches que la
+   maquette sort du flux y retombent sans ces règles.
+   ========================================================================== */
+
+/* Photo de fond du héros : reste une couche, sous le voile. */
+.hero .hero__photo { position: absolute !important; inset: 0; margin: 0 !important; }
+.hero::before { pointer-events: none; }
+.hero > .enveloppe { position: relative !important; z-index: 2; }
+
+/* Le fond du site, sinon le canevas reste blanc hors des blocs. */
+.editor-styles-wrapper { background: #F2F6F9; }
+.editor-styles-wrapper .is-root-container { padding: 0 !important; }
+
+/* Pas d'en-tête collant dans le canevas. */
+header.wp-block-template-part { position: static; }
