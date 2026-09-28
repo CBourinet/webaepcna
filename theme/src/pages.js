@@ -203,7 +203,7 @@ module.exports = function pages(BASE) {
         offre('icone-usine', 'Programmes et filières', 'Performance industrielle &amp; Usine du Futur', 'Programmes régionaux et de filière : diagnostics, Lean, modernisation, jusqu’à 30 experts coordonnés.', 'performance-industrielle'),
         offre('icone-formation', 'ETI, groupes, OPCO', 'Programmes de formation', 'Des formations d’envergure mobilisant plus de cinq formateurs praticiens, coordonnés par une équipe unique.', 'formation'),
         offre('icone-strategie', 'ETI, groupes, filières', 'Stratégie &amp; transformation', 'Des transformations menées par une équipe pluridisciplinaire, sur plusieurs entités ou sites.', 'strategie-transformation'),
-        offre('icone-pousse', 'Parcours PME', 'Trajectoire RSE — Actionnable', 'Le parcours RSE directement accessible aux PME, référencé par la Région (Néo Terra).', 'trajectoire-rse', true),
+        offre('icone-pousse', 'Parcours PME', 'Trajectoire RSE — Actionnable', 'Le parcours RSE des PME, référencé par la Région (Néo Terra) : nos chefs de projet vous conseillent et vous aident dans votre projet.', 'trajectoire-rse', true),
       ]),
       bs('', [b('Voir toutes nos solutions', U('/solutions/'), 'bouton--contour')]),
     ]), { tag: 'section', ancre: 'offres' }),
@@ -521,9 +521,9 @@ module.exports = function pages(BASE) {
         'Le parcours',
         ['Diagnostic de maturité RSE', 'Priorités et feuille de route', 'Indicateurs de suivi', 'Conduite du changement auprès des équipes'],
         '<strong>Référence</strong> : parcours « Actionnable », retenu par la Région à l’AMI RSE et référencé Néo Terra, porté avec Cinov Nouvelle-Aquitaine.',
-        'Écrire à rse@aepcna.fr', 'pme',
-        '<strong>Vos chefs de projet</strong> : Audrey Vautrin (Nouvelle-Aquitaine Sud) et Pascal Prevost (Nouvelle-Aquitaine Nord), pour une couverture de toute la région.',
-        'mailto:rse@aepcna.fr'),
+        'Contacter les chefs de projet Actionnable', 'pme',
+        '<strong>Faites-vous conseiller dès le départ</strong> : Audrey Vautrin (Nouvelle-Aquitaine Sud) et Pascal Prevost (Nouvelle-Aquitaine Nord), chefs de projet Actionnable, vous conseillent dans votre démarche et vous aident dans votre projet. Écrivez-leur à <a href="mailto:actionnable@aepcna.fr">actionnable@aepcna.fr</a>.',
+        'mailto:actionnable@aepcna.fr'),
     ]), { tag: 'section' }),
 
     g('section section--blanc', g('enveloppe pile methode', [
