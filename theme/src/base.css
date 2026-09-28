@@ -352,6 +352,10 @@ header.wp-block-template-part { position: sticky; top: 0; z-index: 50; margin: 0
 .logos__clients { gap: 16px; }
 .logo-tuile.wp-block-image { height: 140px; background: var(--blanc); border: 1px solid var(--ligne); border-radius: 10px; display: flex; align-items: center; justify-content: center; padding: 14px 18px; margin: 0; }
 .logo-tuile.wp-block-image img { max-height: 108px; max-width: 100%; width: auto; }
+.logo-tuile.wp-block-image > a { display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; }
+.logo-tuile.wp-block-image:has(> a) { transition: border-color .2s, box-shadow .2s; }
+.logo-tuile.wp-block-image:has(> a):hover { border-color: var(--sarcelle); box-shadow: var(--ombre); }
+.logo-tuile.wp-block-image > a:focus-visible { outline: 2px solid var(--sarcelle); outline-offset: 4px; border-radius: 6px; }
 .logo-tuile--basse.wp-block-image { height: 96px; }
 .logo-tuile--basse.wp-block-image img { max-height: 70px; }
 .logo-tuile.logo-h64 img { max-height: 64px; }

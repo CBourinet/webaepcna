@@ -33,11 +33,12 @@ function titre(niveau, className, html) {
 
 // core/image liée à la médiathèque : {{ID:slug}} et {{SRC:slug:taille}} sont
 // résolus côté serveur après l'import des visuels.
-function image(slug, alt, className, taille = 'full') {
-  const a = { id: `__ID_${slug}__`, sizeSlug: taille, linkDestination: 'none' };
+function image(slug, alt, className, taille = 'full', lien) {
+  const a = { id: `__ID_${slug}__`, sizeSlug: taille, linkDestination: lien ? 'custom' : 'none' };
+  if (lien) { a.href = lien; a.linkTarget = '_blank'; a.rel = 'noreferrer noopener'; }
   if (className) a.className = className;
   const json = JSON.stringify(a).replace(`"__ID_${slug}__"`, `{{ID:${slug}}}`);
-  return `<!-- wp:image ${json} -->\n<figure class="${classes('wp-block-image', 'size-' + taille, className)}"><img src="{{SRC:${slug}:${taille}}}" alt="${alt}" class="wp-image-{{ID:${slug}}}"/></figure>\n<!-- /wp:image -->`;
+  return `<!-- wp:image ${json} -->\n<figure class="${classes('wp-block-image', 'size-' + taille, className)}">${lien ? `<a href="${lien}" target="_blank" rel="noreferrer noopener">` : ''}<img src="{{SRC:${slug}:${taille}}}" alt="${alt}" class="wp-image-{{ID:${slug}}}"/>${lien ? '</a>' : ''}</figure>\n<!-- /wp:image -->`;
 }
 
 function bouton(texte, url, className) {

@@ -68,20 +68,20 @@ module.exports = function pages(BASE) {
         g('logos__groupe logos__partenaires', [
           p('logos__libelle', 'Nos partenaires officiels'),
           g('logos__grille3', [
-            img('logo-cpc-na', 'Chambre Professionnelle du Conseil Nouvelle-Aquitaine', 'logo-tuile'),
-            img('logo-mpl-na', 'Maison des Professions Libérales Nouvelle-Aquitaine', 'logo-tuile logo-h64'),
-            img('logo-cinov-na', 'Cinov Nouvelle-Aquitaine', 'logo-tuile logo-h96'),
+            img('logo-cpc-na', 'Chambre Professionnelle du Conseil Nouvelle-Aquitaine', 'logo-tuile', 'full', 'https://www.cpcna.org/'),
+            img('logo-mpl-na', 'Maison des Professions Libérales Nouvelle-Aquitaine', 'logo-tuile logo-h64', 'full', 'https://www.araplna.org/'),
+            img('logo-cinov-na', 'Cinov Nouvelle-Aquitaine', 'logo-tuile logo-h96', 'full', 'https://www.cinov.fr/regions/nouvelle-aquitaine'),
           ]),
         ]),
-        g('logos__groupe', [p('logos__libelle', 'Membre de'), img('logo-adi-na', 'ADI Nouvelle-Aquitaine', 'logo-tuile')]),
+        g('logos__groupe', [p('logos__libelle', 'Membre de'), img('logo-adi-na', 'ADI Nouvelle-Aquitaine', 'logo-tuile', 'full', 'https://www.adi-na.fr/')]),
       ]),
       g('logos__groupe', [
         p('logos__libelle', 'Ils nous ont confié des missions'),
         g('grille-4 logos__clients', [
-          img('logo-region-na', 'Région Nouvelle-Aquitaine', 'logo-tuile logo-tuile--basse'),
-          img('logo-cma-na', "Chambre de Métiers et de l'Artisanat Nouvelle-Aquitaine", 'logo-tuile logo-tuile--basse logo-h72'),
-          img('logo-ocapiat', 'OCAPIAT', 'logo-tuile logo-tuile--basse'),
-          img('logo-ifria-na', 'IFRIA Nouvelle-Aquitaine', 'logo-tuile logo-tuile--basse logo-h64'),
+          img('logo-region-na', 'Région Nouvelle-Aquitaine', 'logo-tuile logo-tuile--basse', 'full', 'https://les-aides.nouvelle-aquitaine.fr/transition-energetique-et-ecologique/usine-du-futur-agissons-aujourd-hui-pour-une-industrie-durable-et-competitive'),
+          img('logo-cma-na', "Chambre de Métiers et de l'Artisanat Nouvelle-Aquitaine", 'logo-tuile logo-tuile--basse logo-h72', 'full', 'https://cma-nouvelleaquitaine.fr/'),
+          img('logo-ocapiat', 'OCAPIAT', 'logo-tuile logo-tuile--basse', 'full', 'https://www.ocapiat.fr/'),
+          img('logo-ifria-na', 'IFRIA Nouvelle-Aquitaine', 'logo-tuile logo-tuile--basse logo-h64', 'full', 'https://www.ifria.fr/'),
         ]),
       ]),
     ]), { tag: 'section' });
