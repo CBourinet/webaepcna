@@ -508,7 +508,7 @@ module.exports = function pages(BASE) {
           '<strong>Le besoin</strong> : conduire une transformation qui mobilise plusieurs expertises — stratégie, organisation, RH, finance, numérique — sur plusieurs entités ou sites.',
           'Le dispositif mobilisé',
           ['Une équipe pluridisciplinaire composée pour votre projet', 'Diagnostic et feuille de route partagés avec la direction', 'Nouveaux modèles économiques : économie de la fonctionnalité, écologie industrielle', 'Pilotage centralisé et accompagnement du changement'],
-          '<strong>Expérience</strong> : des consultants déjà mobilisés sur les programmes régionaux (Appui Stratégique PME, Usine du Futur 3) et disposant de compétences POIM, gage de leur qualité sur des programmes exigeants.',
+          '<strong>Qualité des consultants</strong> : près de 50 % des consultants labellisés du parcours régional <a href="https://www.nouvelle-aquitaine.cci.fr/produit/parcours-organisation-industrielle-et-management-poim" target="_blank" rel="noreferrer noopener">POIM (Parcours Organisation Industrielle et Management)</a> sont consultants de l’AEPC. Nos membres sont aussi intervenus sur Appui Stratégique PME et Usine du Futur 3.',
           'Échanger sur ce besoin'),
       ]),
       g('entete-section solutions__pme', [
