@@ -5,7 +5,7 @@
 <label class="champ"><span>Fonction</span>[text fonction autocomplete:organization-title]</label>
 <label class="champ"><span>E-mail <span class="requis">*</span></span>[email* email autocomplete:email]</label>
 <label class="champ"><span>Téléphone</span>[tel telephone autocomplete:tel]</label>
-<label class="champ"><span>Objet de votre demande <span class="requis">*</span></span>[select* objet first_as_label "Choisir…" "Confier un projet ou une mission" "Constituer une réponse à un appel d'offres" "Formation professionnelle" "Parcours RSE Actionnable" "Rejoindre l'AEPC NA (consultant)" "Presse / partenariat" "Autre demande"]</label>
+<label class="champ"><span>Objet de votre demande <span class="requis">*</span></span>[select* objet first_as_label "Choisir…" "Confier un projet ou une mission|contact@aepcna.fr" "Constituer une réponse à un appel d'offres|contact@aepcna.fr" "Formation professionnelle|contact@aepcna.fr" "Parcours RSE Actionnable (PME)|rse@aepcna.fr" "Rejoindre l'AEPC NA (consultant)|contact@aepcna.fr" "Presse / partenariat|contact@aepcna.fr" "Autre demande|contact@aepcna.fr"]</label>
 <label class="champ"><span>Département concerné</span>[select departement first_as_label "Choisir…" "Toute la Nouvelle-Aquitaine" "Charente (16)" "Charente-Maritime (17)" "Corrèze (19)" "Creuse (23)" "Dordogne (24)" "Gironde (33)" "Landes (40)" "Lot-et-Garonne (47)" "Pyrénées-Atlantiques (64)" "Deux-Sèvres (79)" "Vienne (86)" "Haute-Vienne (87)"]</label>
 </div>
 <label class="champ"><span>Votre message <span class="requis">*</span></span>[textarea* message 40x6]</label>

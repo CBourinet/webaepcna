@@ -141,7 +141,7 @@ module.exports = function pages(BASE) {
       ]),
       g('grille-3', [
         pilier('icone-bouclier', "La rigueur d'un cabinet", 'Une cellule de coordination dédiée — chef de projet, PMO, interlocuteur spécialiste —, un reporting régulier, un contrat et une facturation uniques.'),
-        pilier('icone-equipe', "L'agilité des indépendants", 'Des experts choisis pour votre problématique, mobilisés seuls ou en équipe pluridisciplinaire, sans la lourdeur d’une grande structure.'),
+        pilier('icone-equipe', "L'agilité des indépendants", 'Une équipe d’experts indépendants composée pour votre problématique, pluridisciplinaire si besoin, sans la lourdeur d’une grande structure.'),
         pilier('icone-lieu', "L'ancrage du territoire", 'Des consultants qui vivent et travaillent en Nouvelle-Aquitaine, au plus près de vos sites, de vos filières et de vos interlocuteurs.'),
       ]),
       g('equation', [
@@ -177,7 +177,7 @@ module.exports = function pages(BASE) {
       g('etapes', [
         etape('01 · Vous', "Le donneur d'ordre", 'Région, collectivité, OPCO, chambre consulaire ou entreprise : vous fixez les objectifs.'),
         etape('02 · La cellule AEPC', 'Coordination dédiée', 'Chef de projet, PMO, interlocuteur spécialiste : pilotage, reporting, qualité, suivi administratif et financier.', true),
-        etape('03 · Les experts', 'Consultants mobilisés', 'Choisis selon la filière et la proximité géographique, liés par une charte de déontologie commune.'),
+        etape('03 · Les experts', 'L’équipe d’experts', 'Composée selon la filière et la proximité géographique, liée par une charte de déontologie commune.'),
         etape('04 · Le territoire', 'Entreprises accompagnées', 'Des interventions sur site, des résultats mesurés et un bilan partagé avec vous.'),
       ]),
       g('exemple', [
@@ -230,7 +230,7 @@ module.exports = function pages(BASE) {
         ]),
       ]),
       g('grille-3', [
-        atout('icone-etoile', 'Compétences spécifiques', 'Chaque consultant apporte une expertise unique, pour des conseils et des solutions adaptés à vos problématiques.'),
+        atout('icone-etoile', 'Des compétences complémentaires', 'Chaque équipe réunit les expertises complémentaires dont votre projet a besoin, pour des solutions adaptées à vos problématiques.'),
         atout('icone-bouclier', 'Expérience et fiabilité', 'Nos membres possèdent une expérience solide et une réputation de fiabilité reconnue dans leurs secteurs respectifs.'),
         atout('icone-cible', 'Approche personnalisée', "Nous mettons un point d'honneur à comprendre vos besoins spécifiques pour vous proposer des solutions sur mesure."),
       ]),
@@ -294,8 +294,8 @@ module.exports = function pages(BASE) {
     g('section--sombre', g('enveloppe pile consultants', [
       g('consultants__entete', [
         g('entete-section', [
-          p('surtitre', 'Pourquoi nous choisir'),
-          t(2, 'titre-section', 'Pourquoi choisir nos consultants ?'),
+          p('surtitre', 'Pourquoi le collectif'),
+          t(2, 'titre-section', 'Pourquoi faire appel au collectif ?'),
           p('chapeau', 'Des experts régionaux, indépendants et engagés, réunis dans un collectif qui garantit leur sérieux.'),
         ]),
         g('consultants__droite', [
@@ -311,7 +311,7 @@ module.exports = function pages(BASE) {
         ]),
       ]),
       g('grille-3', [
-        atout('icone-etoile', 'Compétences spécifiques', 'Chaque consultant apporte une expertise unique, pour des conseils et des solutions adaptés à vos problématiques.'),
+        atout('icone-etoile', 'Des compétences complémentaires', 'Chaque équipe réunit les expertises complémentaires dont votre projet a besoin, pour des solutions adaptées à vos problématiques.'),
         atout('icone-bouclier', 'Expérience et fiabilité', 'Nos membres possèdent une expérience solide et une réputation de fiabilité reconnue dans leurs secteurs respectifs.'),
         atout('icone-cible', 'Approche personnalisée', "Nous mettons un point d'honneur à comprendre vos besoins spécifiques pour vous proposer des solutions sur mesure."),
       ]),
@@ -320,7 +320,7 @@ module.exports = function pages(BASE) {
     g('section section--blanc', g('enveloppe pile qui', [
       g('entete-section', [
         p('surtitre', "Domaines d'intervention"),
-        t(2, 'titre-section', 'Une large gamme de compétences, mobilisables seules ou en équipe.'),
+        t(2, 'titre-section', 'Une large gamme de compétences, réunies au sein d’une même équipe.'),
         p('chapeau', "Nos consultants couvrent l'ensemble des besoins des entreprises et des organisations, de la stratégie à la mise en œuvre."),
       ]),
       g('competences', [

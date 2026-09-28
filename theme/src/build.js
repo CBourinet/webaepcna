@@ -5,7 +5,7 @@ const path = require('path');
 const { groupe: g, para: p, bouton: b, boutons: bs } = require('./blocs');
 
 const BASE = process.argv[2] ?? '/site';
-const VERSION = '1.5.2';
+const VERSION = '1.6.0';
 const RACINE = path.join(__dirname, '..');
 const THEME = path.join(RACINE, 'aepcna');
 const U = chemin => `${BASE}${chemin}`;
@@ -43,6 +43,7 @@ const icones = [
   ...['usine', 'formation', 'strategie'].map(n => `.icone-${n}::before { background-image: ${svgUrl(n, '#0F3D66', 1.6)}; }`),
   `.icone-pousse::before { background-image: ${svgUrl('pousse', '#2F5D50', 1.6)}; }`,
   `.icone-usine-s::before { background-image: ${svgUrl('usine', '#0E7A87', 1.8)}; }`,
+  `.nav-actionnable .wp-block-navigation-item__content::before { background-image: ${svgUrl('pousse', '#2F5D50', 1.8)}; }`,
   `.liste-coches li::before { background-image: ${svgUrl('valide', '#0E7A87', 1.8)}; }`,
   `.carte-equipe__pied::before { background-image: ${svgUrl('equipe', '#0F3D66', 1.7)}; }`,
   ...['lieu', 'courriel', 'telephone'].map(n => `.pied__ligne.pied-${n}::before { background-image: ${svgUrl(n, '#9FDDE2', 1.8)}; }`),
@@ -137,6 +138,7 @@ ecrire('parts/header.html', g('site-entete', g('enveloppe', [
     lienNav('Réalisations', U('/#realisations')),
     lienNav('Consultants', U('/nos-consultants/')),
     lienNav("L'association", U('/qui-sommes-nous/')),
+    `<!-- wp:navigation-link ${JSON.stringify({ label: 'RSE Actionnable', title: 'Parcours RSE pour les PME, référencé par la Région', url: U('/solutions/#trajectoire-rse'), kind: 'custom', isTopLevelLink: true, className: 'nav-actionnable' })} /-->`,
     `<!-- wp:navigation-link ${JSON.stringify({ label: 'Échanger sur mon projet', url: U('/contact/'), kind: 'custom', isTopLevelLink: true, className: 'nav-contact' })} /-->`,
   ].join('\n') + '\n<!-- /wp:navigation -->',
   bs('entete-cta', [b('Échanger sur mon projet', U('/contact/'), '')]),
