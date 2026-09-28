@@ -246,7 +246,7 @@ module.exports = function pages(BASE) {
       ]),
       g('carte-region', [
         img('carte-nouvelle-aquitaine', 'Carte de la Nouvelle-Aquitaine : siège à Bordeaux, consultants présents dans les douze départements', '', 'full'),
-        p('legende', "Plus de 50 consultants experts présents sur l'ensemble de la région"),
+        p('legende', "Plus de 50 consultants experts présents sur l'ensemble de la région : Bordeaux, La Rochelle, Poitiers, Niort, Angoulême, Limoges, Guéret, Tulle, Périgueux, Agen, Mont-de-Marsan, Pau et Bayonne."),
       ]),
     ]), { tag: 'section', ancre: 'territoire' }),
 
@@ -591,23 +591,23 @@ module.exports = function pages(BASE) {
   ].join('\n\n');
 
   return [
-    { slug: 'solutions', title: 'Nos solutions', content: solutions,
+    { slug: 'solutions', seo_title: "Performance industrielle, RSE, stratégie et formation | AEPC NA", title: 'Nos solutions', content: solutions,
       description: "Exemples de projets menés par l'AEPC Nouvelle-Aquitaine pour des ETI, grands groupes, filières et acteurs publics, et parcours RSE Actionnable pour les PME." },
-    { slug: 'adherer', title: "Rejoindre l'AEPC", content: adherer,
+    { slug: 'adherer', seo_title: "Consultant indépendant : rejoindre l'AEPC Nouvelle-Aquitaine", title: "Rejoindre l'AEPC", content: adherer,
       description: "Consultant indépendant en Nouvelle-Aquitaine ? Rejoignez l'AEPC pour répondre ensemble aux appels d'offres dans un cadre juridique, technique et outillé." },
-    { slug: 'mentions-legales', title: 'Mentions légales', content: mentionsLegales,
+    { slug: 'mentions-legales', seo_title: "Mentions légales | AEPC Nouvelle-Aquitaine", title: 'Mentions légales', content: mentionsLegales,
       description: "Mentions légales du site de l'AEPC Nouvelle-Aquitaine : éditeur, directeur de la publication, hébergeur." },
-    { slug: 'declaration-de-confidentialite-ue', title: 'Déclaration de confidentialité (UE)', content: confidentialite,
+    { slug: 'declaration-de-confidentialite-ue', seo_title: "Déclaration de confidentialité | AEPC Nouvelle-Aquitaine", title: 'Déclaration de confidentialité (UE)', content: confidentialite,
       description: "Déclaration de confidentialité de l'AEPC Nouvelle-Aquitaine : traitement et protection de vos données personnelles." },
-    { slug: 'politique-de-cookies-ue-2', title: 'Politique de cookies (UE)', content: cookies,
+    { slug: 'politique-de-cookies-ue-2', seo_title: "Politique de cookies | AEPC Nouvelle-Aquitaine", title: 'Politique de cookies (UE)', content: cookies,
       description: "Politique de cookies du site de l'AEPC Nouvelle-Aquitaine et gestion de votre consentement." },
-    { slug: 'qui-sommes-nous', title: 'Qui sommes-nous ?', content: quiSommesNous,
+    { slug: 'qui-sommes-nous', seo_title: "Association de consultants de la CPC Nouvelle-Aquitaine | AEPC NA", title: 'Qui sommes-nous ?', content: quiSommesNous,
       description: "L'AEPC Nouvelle-Aquitaine, association loi 1901 émanation de la CPC NA, fédère des consultants experts régionaux pour accompagner la transformation des entreprises du territoire." },
-    { slug: 'nos-consultants', title: 'Nos consultants', content: nosConsultants,
+    { slug: 'nos-consultants', seo_title: "Collectif de consultants experts en Nouvelle-Aquitaine | AEPC NA", title: 'Nos consultants', content: nosConsultants,
       description: "Plus de 50 consultants experts régionaux, indépendants et engagés, réunis dans le collectif de l'AEPC Nouvelle-Aquitaine." },
-    { slug: 'accueil', title: 'Accueil', content: accueil,
-      description: "L'AEPC Nouvelle-Aquitaine réunit plus de 50 consultants experts régionaux et place chaque projet sous la conduite d'une équipe de coordination dédiée." },
-    { slug: 'contact', title: 'Contact', content: contact,
+    { slug: 'accueil', seo_title: "Conseil en transformation d'entreprise en Nouvelle-Aquitaine | AEPC NA", title: 'Accueil', content: accueil,
+      description: "Collectif de plus de 50 consultants indépendants en Nouvelle-Aquitaine : performance industrielle, Lean, RSE, stratégie et formation, pilotés par une équipe de coordination dédiée." },
+    { slug: 'contact', seo_title: "Contact : consultants à Bordeaux et en Nouvelle-Aquitaine | AEPC NA", title: 'Contact', content: contact,
       description: "Entreprise, collectivité, financeur ou consultant : décrivez votre besoin, l'équipe de coordination de l'AEPC Nouvelle-Aquitaine vous répond." },
   ];
 };

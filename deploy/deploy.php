@@ -198,7 +198,25 @@ function aepcna_deploy( $source, $etapes = array( 'sauvegarde', 'theme', 'medias
 			delete_post_meta( $id, '_elementor_edit_mode' );
 			delete_post_meta( $id, '_wp_page_template' );
 			update_post_meta( $id, '_yoast_wpseo_metadesc', $pg['description'] );
+			if ( ! empty( $pg['seo_title'] ) ) {
+				update_post_meta( $id, '_yoast_wpseo_title', $pg['seo_title'] );
+			}
 			$rapport['pages'][ $pg['slug'] ] = $id;
+		}
+	}
+
+	// 5 bis · SEO seul : titres et descriptions Yoast, sans toucher aux contenus.
+	if ( in_array( 'seo', $etapes, true ) ) {
+		foreach ( json_decode( file_get_contents( $source . '/deploy/content.json' ), true ) as $pg ) {
+			$page = get_page_by_path( $pg['slug'] );
+			if ( ! $page ) {
+				continue;
+			}
+			update_post_meta( $page->ID, '_yoast_wpseo_metadesc', $pg['description'] );
+			if ( ! empty( $pg['seo_title'] ) ) {
+				update_post_meta( $page->ID, '_yoast_wpseo_title', $pg['seo_title'] );
+			}
+			$rapport['seo'][ $pg['slug'] ] = $pg['seo_title'] ?? '';
 		}
 	}
 
