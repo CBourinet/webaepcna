@@ -136,6 +136,7 @@ ecrire('parts/header.html', g('site-entete', g('enveloppe', [
     lienNav('Nos offres', U('/#offres')),
     lienNav('Réalisations', U('/#realisations')),
     lienNav("L'association", U('/qui-sommes-nous/')),
+    `<!-- wp:navigation-link ${JSON.stringify({ label: 'Parlons de votre projet', url: U('/contact/'), kind: 'custom', isTopLevelLink: true, className: 'nav-contact' })} /-->`,
   ].join('\n') + '\n<!-- /wp:navigation -->',
   bs('entete-cta', [b('Parlons de votre projet', U('/contact/'), '')]),
 ])) + '\n');
