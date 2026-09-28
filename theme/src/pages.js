@@ -26,7 +26,6 @@ module.exports = function pages(BASE) {
         g('coordonnees__corps', [
           t(2, 'coordonnees__titre', 'Nos coordonnées'),
           g('coordonnee a-icone a-icone--mini icone-lieu', g('', [p('coordonnee__libelle', 'Siège'), p('coordonnee__valeur', '51-53 boulevard du Président Wilson<br>33000 Bordeaux')])),
-          g('coordonnee a-icone a-icone--mini icone-courriel', g('', [p('coordonnee__libelle', 'E-mail'), p('coordonnee__valeur', '<a href="mailto:contact@aepcna.fr">contact@aepcna.fr</a>')])),
           g('coordonnee a-icone a-icone--mini icone-telephone', g('', [p('coordonnee__libelle', 'Téléphone'), p('coordonnee__valeur', '<a href="tel:+33610501077">06 10 50 10 77</a>')])),
         ]),
       ]),
