@@ -83,7 +83,7 @@ add_filter(
 		$data['alternateName'] = 'Association Économique des Professionnels du Conseil de Nouvelle-Aquitaine';
 		$data['description']   = "Collectif de plus de 50 consultants indépendants de Nouvelle-Aquitaine, issus de la CPC NA : l'AEPC constitue et pilote l'équipe d'experts adaptée à chaque projet de transformation.";
 		$data['foundingDate']  = '2023';
-		$data['email']         = 'contact@aepcna.fr';
+		$data['email']         = 'contactweb@aepcna.fr';
 		$data['telephone']     = '+33610501077';
 		$data['address']       = array(
 			'@type'           => 'PostalAddress',

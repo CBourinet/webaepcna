@@ -443,7 +443,7 @@ module.exports = function pages(BASE) {
       "Le présent site est la propriété de l'<strong>Association Économique des Professionnels du Conseil de Nouvelle-Aquitaine (AEPC NA)</strong>, association régie par la loi du 1er juillet 1901.",
       '<strong>Siège</strong> : 51-53 boulevard du Président Wilson, 33000 Bordeaux',
       '<strong>SIRET</strong> : 924 343 379 00021<br><strong>Code APE</strong> : 9499Z<br><strong>N° TVA intracommunautaire</strong> : FR66 924 343 379',
-      '<strong>Téléphone</strong> : <a href="tel:+33610501077">06 10 50 10 77</a><br><strong>E-mail</strong> : <a href="mailto:contact@aepcna.fr">contact@aepcna.fr</a>',
+      '<strong>Téléphone</strong> : <a href="tel:+33610501077">06 10 50 10 77</a><br><strong>E-mail</strong> : <a href="mailto:contactweb@aepcna.fr">contactweb@aepcna.fr</a>',
     ]),
     ...rubrique('Directeur de la publication', ["Charles Bourinet, président de l'AEPC Nouvelle-Aquitaine."]),
     ...rubrique('Hébergement', [
