@@ -559,6 +559,10 @@ footer.wp-block-template-part { margin: 0; }
 .pied__ligne::before { content: ''; flex: none; width: 18px; height: 18px; margin-top: 2px; background: center / contain no-repeat; }
 .pied__liens .pied__lien-fort { margin-top: 6px; }
 .pied__liens .pied__lien-fort a { color: var(--blanc); font-weight: 600; font-size: 14px; text-decoration: underline; }
+.pied__linkedin a { display: inline-flex; align-items: center; gap: 12px; color: var(--sur-sombre); font-size: 14px; font-weight: 600; text-decoration: none; }
+.pied__linkedin a::before { content: ''; flex: none; width: 40px; height: 40px; border-radius: 8px; background: rgba(255, 255, 255, .1) center / 20px 20px no-repeat; border: 1px solid rgba(255, 255, 255, .22); transition: background-color .2s, border-color .2s; }
+.pied__linkedin a:hover { color: var(--blanc); }
+.pied__linkedin a:hover::before, .pied__linkedin a:focus-visible::before { background-color: #0A66C2; border-color: #0A66C2; }
 .pied__legal { padding-top: 24px; border-top: 1px solid rgba(255, 255, 255, .14); display: flex; justify-content: space-between; align-items: center; gap: 24px; }
 .pied__legal-liens { font-size: 16px; }
 .pied__legal-liens a { color: var(--blanc); text-decoration: none; }

@@ -94,6 +94,7 @@ add_filter(
 			'addressCountry'  => 'FR',
 		);
 		$data['areaServed']    = array( '@type' => 'AdministrativeArea', 'name' => 'Nouvelle-Aquitaine' );
+		$data['sameAs']        = array_values( array_unique( array_merge( (array) ( $data['sameAs'] ?? array() ), array( 'https://www.linkedin.com/company/aepcna' ) ) ) );
 		$data['knowsAbout']    = array( 'Performance industrielle', 'Lean', 'Usine du futur', 'RSE', 'Stratégie d\'entreprise', 'Transformation des organisations', 'Formation professionnelle', 'Management' );
 		return $data;
 	}

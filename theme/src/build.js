@@ -5,7 +5,7 @@ const path = require('path');
 const { groupe: g, para: p, bouton: b, boutons: bs } = require('./blocs');
 
 const BASE = process.argv[2] ?? '/site';
-const VERSION = '1.7.3';
+const VERSION = '1.7.4';
 const RACINE = path.join(__dirname, '..');
 const THEME = path.join(RACINE, 'aepcna');
 const U = chemin => `${BASE}${chemin}`;
@@ -36,6 +36,12 @@ const svgUrl = (nom, couleur, epaisseur) => {
   const svg = `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='${couleur}' stroke-width='${epaisseur}' stroke-linecap='round' stroke-linejoin='round'>${TRACES[nom].replace(/"/g, "'")}</svg>`;
   return `url("data:image/svg+xml,${encodeURIComponent(svg).replace(/%20/g, ' ').replace(/%3D/g, '=').replace(/%3A/g, ':').replace(/%2F/g, '/').replace(/%2C/g, ',').replace(/%27/g, "'")}")`;
 };
+// Logo LinkedIn (glyphe « in », plein) : forme de marque, donc tracé plein et non au trait.
+const LINKEDIN = 'M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 110-4.13 2.06 2.06 0 010 4.13zM7.12 20.45H3.56V9h3.56v11.45z';
+const logoUrl = (trace, couleur) => {
+  const svg = `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='${couleur}'><path d='${trace}'/></svg>`;
+  return `url("data:image/svg+xml,${encodeURIComponent(svg).replace(/%20/g, ' ').replace(/%3D/g, '=').replace(/%3A/g, ':').replace(/%2F/g, '/').replace(/%2C/g, ',').replace(/%27/g, "'")}")`;
+};
 const icones = [
   '/* ---------- Icônes (générées par theme/src/build.js) ---------- */',
   ...['equipe', 'valide', 'filieres', 'lieu', 'courriel', 'telephone', 'horloge', 'etoile', 'bouclier', 'cible']
@@ -47,6 +53,7 @@ const icones = [
   `.liste-coches li::before { background-image: ${svgUrl('valide', '#0E7A87', 1.8)}; }`,
   `.carte-equipe__pied::before { background-image: ${svgUrl('equipe', '#0F3D66', 1.7)}; }`,
   ...['lieu', 'courriel', 'telephone'].map(n => `.pied__ligne.pied-${n}::before { background-image: ${svgUrl(n, '#9FDDE2', 1.8)}; }`),
+  `.pied__linkedin a::before { background-image: ${logoUrl(LINKEDIN, '#FFFFFF')}; }`,
 ].join('\n');
 
 // ---------- style.css ----------
@@ -169,6 +176,7 @@ ecrire('parts/footer.html', [
         `<!-- wp:site-logo {"width":130,"shouldSyncIcon":false} /-->`,
         p('pied__devise', 'Au service de la transformation des acteurs du territoire !'),
         p('pied__desc', 'Association Économique des Professionnels du Conseil de Nouvelle-Aquitaine — association loi 1901.'),
+        p('pied__linkedin', '<a href="https://www.linkedin.com/company/aepcna" target="_blank" rel="noreferrer noopener">Suivez-nous sur LinkedIn</a>'),
       ]),
       g('', [p('pied__titre', 'Navigation'), g('pied__liens', [
         p('', lien("À propos de l'AEPC NA", U('/qui-sommes-nous/'))),
