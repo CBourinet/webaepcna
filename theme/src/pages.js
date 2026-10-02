@@ -466,16 +466,109 @@ module.exports = function pages(BASE) {
     [shortcode('[cmplz-document type="cookie-statement" region="eu"]')]);
 
   // ---------- Solutions (point 7 : offres « productisées ») ----------
-  const solution = (ancre, icone, public_, titre_, besoin, rubrique, dispositif, reference, lien, variante = '', contact = '', href = CONTACT) => g(`solution ${icone}${variante ? ' solution--' + variante : ''}`, [
-    p(`solution__public${variante ? ' solution__public--' + variante : ''}`, public_),
+  const solution = (ancre, icone, public_, titre_, besoin, rubrique, dispositif, reference, lien) => g(`solution ${icone}`, [
+    p('solution__public', public_),
     t(2, 'solution__titre', titre_),
     p('solution__cible', besoin),
     p('solution__rubrique', rubrique),
     liste('liste-coches', dispositif),
     p('solution__reference', reference),
-    ...(contact ? [p('solution__contact', contact)] : []),
-    p('solution__lien', `<a href="${href}">${lien} →</a>`),
+    p('solution__lien', `<a href="${CONTACT}">${lien} →</a>`),
   ], { ancre });
+
+  // Actionnable : parcours RSE des PME, repris de la présentation « Actionnable · Offre RSE AEPC NA × Cinov NA ».
+  // {{URL:…}} est résolu au déploiement (document importé depuis deploy/documents/).
+  const PDF_ACTIONNABLE = '{{URL:actionnable-offre-rse-aepc-na-cinov-na}}';
+  const repere = (valeur, libelle) => g('repere', [p('repere__valeur', valeur), p('repere__libelle', libelle)]);
+  const module_ = (num, duree, titre_, complement, libelle = 'À la carte') => g('module', [
+    p('module__num', `Module ${num} · ${duree}`),
+    t(4, 'module__titre', titre_),
+    ...(complement ? [g('module__carte', [p('module__carte-titre', libelle), p('module__carte-texte', complement)])] : []),
+  ]);
+  const tarif = (montant, libelle) => g('tarif', [p('tarif__montant', montant), p('tarif__libelle', libelle)]);
+  const actionnable = g('section actionnable', g('enveloppe pile', [
+    g('actionnable__intro', [
+      g('actionnable__presentation', [
+        p('surtitre', 'Vous êtes une PME ?'),
+        t(2, 'titre-section', 'Actionnable : apprenez à vous adapter aux changements.'),
+        p('chapeau', 'Un parcours RSE en cohorte, avec des consultants experts : en six mois, votre entreprise construit sa stratégie, son plan d’actions et son rapport RSE.'),
+        g('actionnable__porteurs', [
+          g('actionnable__logos', [
+            img('logo-aepc-na', 'AEPC Nouvelle-Aquitaine', '', 'full'),
+            img('logo-cinov-na', 'Cinov Nouvelle-Aquitaine', '', 'full'),
+            img('logo-region-na', 'Région Nouvelle-Aquitaine', '', 'full'),
+          ]),
+          p('actionnable__mention', 'Offre portée par l’AEPC et Cinov Nouvelle-Aquitaine, en collaboration avec la CPC Nouvelle-Aquitaine. Référencée Néo Terra par la Région Nouvelle-Aquitaine.'),
+        ]),
+        bs('', [b('Télécharger la présentation (PDF)', PDF_ACTIONNABLE, 'bouton--vert', { nouvelOnglet: true })]),
+      ]),
+      img('photo-ardoise-possible', 'Une main cache les deux premières lettres du mot « impossible » écrit à la craie sur une ardoise : il reste « possible ».', 'actionnable__photo', 'large'),
+    ]),
+    g('reperes', [
+      repere('3 à 8', 'entreprises non concurrentes par cohorte'),
+      repere('6 jours', 'de parcours consolidé, plus 3 jours à la carte'),
+      repere('6 mois', 'un module toutes les quatre semaines'),
+      repere('25', 'consultants experts régionaux, AEPC et Cinov'),
+    ]),
+    g('actionnable__contexte', [
+      img('photo-objectif-paysage', 'Un objectif photo tenu à la main rend net un lac de montagne, flou tout autour.', 'actionnable__contexte-photo', 'large'),
+      g('actionnable__contexte-texte', [
+        t(3, 'actionnable__citation', '« Nothing is certain, except change »'),
+        p('actionnable__texte', 'Ces sujets vont transformer votre entreprise. Actionnable vous apprend à vous y adapter, avec une méthode, une cohorte de dirigeants et des experts à vos côtés.'),
+        g('puces', ['IA', 'Vision', 'Démocratie', 'Santé', 'Climat', 'Alimentation', 'Politique', 'Impacts', 'Vivant', 'Économie', 'Eau', 'Tendance', 'Génération', 'Risques', 'Catastrophes', 'Image', 'Relations humaines'].map(x => p('puce', x))),
+      ]),
+    ]),
+    g('parcours', [
+      g('entete-section', [
+        t(3, 'actionnable__soustitre', 'Neuf modules, de la compréhension des enjeux au rapport RSE'),
+        p('actionnable__texte', 'Un parcours généraliste, avec du sur-mesure : des journées à la carte approfondissent les sujets propres à votre entreprise. Les séances ont lieu chez les participants, chaque entreprise accueillant la cohorte à son tour.'),
+      ]),
+      g('parcours__phase', [
+        p('parcours__libelle', 'De la compréhension aux enjeux'),
+        g('modules modules--5', [
+          module_(1, '0,5 jour', 'Contexte'),
+          module_(2, '0,5 jour', 'Questions centrales et principes de la norme ISO 26000'),
+          module_(3, '1 jour', 'Identifier ses impacts, risques et opportunités', 'Bilan et décarbonation, eau, biodiversité, 7 piliers'),
+          module_(4, '0,5 jour', 'Prioriser ses enjeux avec la double matérialité', 'Inclusion, RPPS, égalité homme-femme, discriminations'),
+          module_(5, '0,5 jour', 'Modèle économique', 'Modèle d’affaires, économie circulaire'),
+        ]),
+      ]),
+      g('parcours__phase', [
+        p('parcours__libelle', 'De l’action au rapport RSE'),
+        g('modules modules--4', [
+          module_(6, '1 jour', 'Innover avec ses parties prenantes', 'Impliquer ses parties prenantes pour transformer'),
+          module_(7, '1 jour', 'Transformer les métiers de son entreprise', 'SI, RH, commerce, achats, supply, performance industrielle, communication'),
+          module_(8, '0,5 jour', 'Construction et pilotage des données', 'Tableau de bord global personnalisé'),
+          module_(9, '0,5 jour', 'Faire son rapport RSE', 'Analyse du rapport RSE par un des chefs de projet, qui émet un avis extérieur.', 'Avis extérieur'),
+        ]),
+      ]),
+    ]),
+    g('actionnable__bas', [
+      g('livrables', [
+        t(3, 'actionnable__soustitre', 'Ce que votre entreprise construit'),
+        liste('livrables__liste', [
+          'Ses outils de dialogue et son plan de communication, sa stratégie et son plan d’actions',
+          'Son plan d’actions par métier pour embarquer ses équipes',
+          'Son tableau de bord et son plan de pilotage, global et par métier',
+          'Son questionnaire de compétences, avant et après le parcours',
+          'Ses atouts et ses points d’amélioration au regard de la norme ISO 26000',
+          'Sa cartographie des parties prenantes et sa matrice impacts, risques et opportunités',
+          'Ses enjeux posés dans une matrice de double matérialité',
+          'Son business model Canvas durable et ses pistes d’économie de la fonctionnalité et d’économie circulaire',
+          'Son rapport RSE',
+        ], { numerotee: true }),
+        p('livrables__note', 'Avis des experts tout au long du parcours, puis avis d’une évaluatrice RSE à la fin du programme.'),
+      ]),
+      g('inscription', [
+        t(3, 'inscription__titre', 'Le coût par entreprise'),
+        tarif('2 227,50 € HT', 'pour les 6 jours d’accompagnement collectif'),
+        tarif('371,25 € HT', 'par module complémentaire à la carte'),
+        p('inscription__lancement', 'Lancement de la cohorte « Impulse » le 12 janvier 2027'),
+        p('inscription__texte', 'L’inscription se fait après un échange téléphonique avec Audrey Vautrin, responsable RSE et évaluatrice ICA en R.S., pour comprendre vos besoins et vous proposer le parcours qui vous correspond. Écrivez à <a href="mailto:actionnable@aepcna.fr">actionnable@aepcna.fr</a>.'),
+        bs('', [b('Contacter l’équipe Actionnable', 'mailto:actionnable@aepcna.fr', 'bouton--blanc')]),
+      ]),
+    ]),
+  ]), { tag: 'section', ancre: 'trajectoire-rse' });
 
   const solutions = [
     g('bandeau-page', g('enveloppe', [
@@ -511,18 +604,6 @@ module.exports = function pages(BASE) {
           '<strong>Qualité des consultants</strong> : près de 50 % des consultants labellisés du parcours régional <a href="https://www.nouvelle-aquitaine.cci.fr/produit/parcours-organisation-industrielle-et-management-poim" target="_blank" rel="noreferrer noopener">POIM (Parcours Organisation Industrielle et Management)</a> sont consultants de l’AEPC. Nos membres sont aussi intervenus sur Appui Stratégique PME et Usine du Futur 3.',
           'Échanger sur ce besoin'),
       ]),
-      g('entete-section solutions__pme', [
-        p('surtitre', 'Vous êtes une PME ?'),
-        t(2, 'titre-section', 'Un parcours RSE directement accessible.'),
-      ]),
-      solution('trajectoire-rse', 'icone-pousse', 'Parcours PME', 'Trajectoire RSE — Actionnable',
-        '<strong>Pour les PME</strong> qui veulent structurer leur démarche RSE et en faire un levier de performance : un parcours d’un an renouvelable, directement accessible, sans programme à monter.',
-        'L’organisation du programme',
-        ['6 jours d’accompagnement et 4 jours à la carte', '24 experts en RSE, RH, IT, finance, performance industrielle, qualité et innovation', 'Livrable en fin de parcours : le rapport RSE de l’entreprise', 'Transformation de l’organisation et des services par la RSE'],
-        '<strong>Référence</strong> : parcours « Actionnable », retenu par la Région à l’AMI RSE et référencé Néo Terra, porté avec Cinov Nouvelle-Aquitaine.',
-        'Contacter l’équipe Actionnable', 'pme',
-        '<strong>Faites-vous conseiller dès le départ</strong> : Audrey Vautrin, en charge du projet Actionnable, vous conseille dans votre démarche et vous aide dans votre projet. Écrivez à <a href="mailto:actionnable@aepcna.fr">actionnable@aepcna.fr</a>.',
-        'mailto:actionnable@aepcna.fr'),
     ]), { tag: 'section' }),
 
     g('section section--blanc', g('enveloppe pile methode', [
@@ -544,6 +625,8 @@ module.exports = function pages(BASE) {
         bs('', [b('Échanger sur mon projet', CONTACT, 'bouton--blanc')]),
       ]),
     ]), { tag: 'section' }),
+
+    actionnable,
   ].join('\n\n');
 
   // ---------- Rejoindre l'AEPC (point 10 : entrée secondaire des consultants) ----------

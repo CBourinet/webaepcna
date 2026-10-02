@@ -45,7 +45,7 @@ body {
 img { max-width: 100%; height: auto; display: block; }
 a { color: var(--encre); }
 a:hover { color: var(--sarcelle); }
-h1, h2, h3 {
+h1, h2, h3, h4 {
   font-family: 'Figtree', system-ui, sans-serif;
   font-weight: 800;
   letter-spacing: -0.01em;
@@ -390,7 +390,7 @@ header.wp-block-template-part { position: sticky; top: 0; z-index: 50; margin: 0
 .offre__texte { font-size: 15px; line-height: 1.6; color: var(--texte); }
 
 .offre__public, .solution__public { font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--sarcelle); }
-.offre__public--pme, .solution__public--pme { color: var(--vert); }
+.offre__public--pme { color: var(--vert); }
 .offre__lien { margin-top: auto; font-size: 15px; font-weight: 600; }
 .offre__lien a { color: var(--sarcelle); text-decoration: none; }
 .offre__lien a:hover { color: var(--marine); }
@@ -409,19 +409,69 @@ header.wp-block-template-part { position: sticky; top: 0; z-index: 50; margin: 0
 .liste-coches li { position: relative; padding-left: 30px; font-size: 15px; line-height: 1.6; color: var(--texte); }
 .liste-coches li::before { content: ''; position: absolute; left: 0; top: 2px; width: 20px; height: 20px; background: center / contain no-repeat; }
 .solution__reference { margin-top: auto; padding: 14px 16px; border-left: 3px solid var(--sarcelle); background: var(--fond); border-radius: 0 8px 8px 0; font-size: 14px; line-height: 1.6; color: var(--texte); }
-.solution__contact { font-size: 15px; line-height: 1.6; color: var(--texte); }
-.solution__contact strong { color: var(--encre); }
-.solution--pme .solution__contact { background: var(--blanc); border: 1px solid #C6D8CF; border-radius: 10px; padding: 16px 18px; }
-.solution__contact a { color: var(--vert); font-weight: 700; }
-.solution--pme .solution__lien a { display: inline-block; background: var(--vert); color: var(--blanc); padding: 12px 20px; border-radius: 6px; }
-.solution--pme .solution__lien a:hover { background: var(--encre); color: var(--blanc); }
 .solution__lien a { color: var(--marine); font-weight: 700; text-decoration: none; }
 .solution__lien a:hover { color: var(--sarcelle); }
 .etapes--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-.solutions__pme { margin-top: 24px; }
-.solution--pme { background: #F2F7F4; border-color: #C6D8CF; }
-.solution--pme .liste-coches { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 32px; }
-.solution--pme .solution__reference { background: var(--blanc); border-left-color: var(--vert); }
+
+/* ---------- Actionnable : parcours RSE des PME (page Solutions) ----------
+   Vert RSE comme dans le menu (.nav-actionnable) et la présentation PDF de l'offre. */
+.actionnable { background: #F2F7F4; border-top: 1px solid #C6D8CF; scroll-margin-top: 88px; }
+.actionnable > .enveloppe { gap: 64px; }
+.actionnable .surtitre { color: var(--vert); }
+.actionnable__intro { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 64px; align-items: center; }
+.actionnable__presentation { display: flex; flex-direction: column; gap: 20px; }
+.actionnable__porteurs { display: flex; flex-direction: column; gap: 12px; padding-top: 20px; border-top: 1px solid #C6D8CF; }
+.actionnable__logos { display: flex; flex-wrap: wrap; gap: 10px; }
+.actionnable__logos .wp-block-image { height: 64px; padding: 8px 14px; background: var(--blanc); border: 1px solid var(--ligne); border-radius: 8px; display: flex; align-items: center; }
+.actionnable__logos .wp-block-image img { max-height: 46px; width: auto; }
+.actionnable__mention { font-size: 14px; line-height: 1.6; color: var(--texte); }
+.actionnable__presentation .wp-block-buttons { margin-top: 8px; }
+.actionnable__photo img { width: 100%; aspect-ratio: 5 / 4; object-fit: cover; border-radius: 14px; }
+.wp-block-button.bouton--vert .wp-block-button__link { background: var(--vert); color: var(--blanc); }
+.wp-block-button.bouton--vert .wp-block-button__link:hover { background: var(--encre); color: var(--blanc); }
+
+/* Repères chiffrés : un seul bandeau, les filets sont le fond visible entre les cases. */
+.reperes { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1px; background: #C6D8CF; border: 1px solid #C6D8CF; border-radius: 14px; overflow: hidden; }
+.repere { background: var(--blanc); padding: 28px; display: flex; flex-direction: column; gap: 8px; }
+.repere__valeur { font-size: 40px; font-weight: 800; line-height: 1; color: var(--vert); }
+.repere__libelle { font-size: 15px; line-height: 1.45; color: var(--texte); }
+
+.actionnable__contexte { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 56px; align-items: center; }
+.actionnable__contexte-photo img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 14px; }
+.actionnable__contexte-texte { display: flex; flex-direction: column; gap: 18px; }
+.actionnable__citation { font-size: 34px; line-height: 1.15; }
+.actionnable__texte { font-size: 17px; line-height: 1.6; color: var(--texte); max-width: 720px; }
+.actionnable .puce { border-color: #C6D8CF; }
+
+.parcours { display: flex; flex-direction: column; gap: 28px; }
+.actionnable__soustitre { font-size: 28px; line-height: 1.2; }
+.parcours__phase { display: flex; flex-direction: column; gap: 14px; }
+.parcours__libelle { font-size: 13px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--vert); }
+.modules { display: grid; gap: 16px; }
+.modules--5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.modules--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.module { background: var(--blanc); border: 1px solid var(--ligne); border-top: 4px solid var(--sarcelle); border-radius: 10px; padding: 22px 20px; display: flex; flex-direction: column; gap: 10px; }
+.module__num { font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--sarcelle); }
+.module__titre { font-size: 18px; line-height: 1.25; margin: 0; }
+.module__carte { margin-top: auto; background: #E8F1EC; border-radius: 8px; padding: 12px 14px; display: flex; flex-direction: column; gap: 4px; }
+.module__carte-titre { font-size: 13px; font-weight: 700; color: var(--vert); }
+.module__carte-texte { font-size: 14px; line-height: 1.5; color: var(--texte); }
+
+.actionnable__bas { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 24px; }
+.livrables { background: var(--blanc); border: 1px solid var(--ligne); border-radius: 16px; padding: 40px; display: flex; flex-direction: column; gap: 24px; }
+.livrables__liste { list-style: none; counter-reset: livrable; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 32px; }
+.livrables__liste li { counter-increment: livrable; position: relative; padding-left: 36px; font-size: 15px; line-height: 1.55; color: var(--texte); }
+.livrables__liste li::before { content: counter(livrable); position: absolute; left: 0; top: -3px; font-size: 22px; font-weight: 800; line-height: 1.2; color: var(--sarcelle); }
+.livrables__note { margin-top: auto; padding: 14px 16px; border-left: 3px solid var(--vert); background: #F2F7F4; border-radius: 0 8px 8px 0; font-size: 14px; line-height: 1.6; color: var(--texte); }
+.inscription { background: var(--vert); color: var(--blanc); border-radius: 16px; padding: 40px; display: flex; flex-direction: column; gap: 18px; }
+.inscription__titre { font-size: 22px; color: var(--blanc); }
+.tarif { padding-bottom: 16px; border-bottom: 1px solid rgba(255, 255, 255, .2); display: flex; flex-direction: column; gap: 4px; }
+.tarif__montant { font-size: 36px; font-weight: 800; line-height: 1.1; color: var(--blanc); }
+.tarif__libelle { font-size: 15px; color: #D9E8E1; }
+.inscription__lancement { align-self: flex-start; background: rgba(255, 255, 255, .12); border-radius: 6px; padding: 10px 14px; font-size: 16px; font-weight: 700; color: var(--blanc); }
+.inscription__texte { font-size: 15px; line-height: 1.6; color: #D9E8E1; }
+.inscription__texte a { color: var(--blanc); font-weight: 700; }
+.inscription .wp-block-buttons { margin-top: auto; }
 
 /* ---------- Réalisations ---------- */
 .realisations { gap: 48px; }
@@ -612,10 +662,8 @@ footer.wp-block-template-part { margin: 0; }
   .logos__partenaires { grid-column: span 2; }
   .pied__colonnes { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .etapes.etapes--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-.solutions__pme { margin-top: 24px; }
-.solution--pme { background: #F2F7F4; border-color: #C6D8CF; }
-.solution--pme .liste-coches { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 32px; }
-.solution--pme .solution__reference { background: var(--blanc); border-left-color: var(--vert); }
+  .modules--5 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .modules--4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .etapes--3 .etape { border-left-width: 0; border-radius: 0; }
   .etapes--3 .etape:first-child { border-left-width: 1px; border-radius: 10px 0 0 10px; }
   .etapes--3 .etape:last-child { border-radius: 0 10px 10px 0; }
@@ -639,7 +687,9 @@ footer.wp-block-template-part { margin: 0; }
   .consultants__droite { align-items: flex-start; }
   .grille-3 { grid-template-columns: 1fr; }
   .solutions-grille { grid-template-columns: 1fr; }
-  .solution--pme .liste-coches { grid-template-columns: 1fr; }
+  .actionnable__intro, .actionnable__contexte, .actionnable__bas { grid-template-columns: 1fr; gap: 40px; }
+  .actionnable__photo img, .actionnable__contexte-photo img { aspect-ratio: 3 / 2; }
+  .reperes, .modules--5 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .encart-sombre--large { flex-direction: column; align-items: flex-start; }
   .pied__appels .enveloppe { grid-template-columns: 1fr; }
 }
@@ -673,6 +723,13 @@ footer.wp-block-template-part { margin: 0; }
   .appel { flex-direction: column; align-items: flex-start; padding: 28px 24px; }
   .document-legal { padding: 28px 22px; }
   .solution { padding: 28px 22px; }
+  .actionnable > .enveloppe { gap: 48px; }
+  .repere { padding: 20px; }
+  .repere__valeur { font-size: 32px; }
+  .actionnable__citation { font-size: 26px; }
+  .actionnable__soustitre { font-size: 24px; }
+  .modules--5, .modules--4, .livrables__liste { grid-template-columns: 1fr; }
+  .livrables, .inscription { padding: 28px 22px; }
   .equation { padding: 28px 22px; }
   .equation__terme { font-size: 15px; padding: 10px 16px; }
   .etapes.etapes--3 { grid-template-columns: 1fr; }

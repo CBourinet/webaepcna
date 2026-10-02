@@ -73,11 +73,12 @@ function aepcna_deploy( $source, $etapes = array( 'sauvegarde', 'theme', 'medias
 		$rapport['theme'] = get_stylesheet() . ' ' . wp_get_theme()->get( 'Version' );
 	}
 
-	// 3 · Visuels dans la médiathèque (réutilisés s'ils existent déjà).
+	// 3 · Visuels du thème et documents PDF du dépôt dans la médiathèque (réutilisés s'ils existent déjà).
 	$ids = array();
 	if ( in_array( 'medias', $etapes, true ) || in_array( 'pages', $etapes, true ) ) {
-		$dossier = get_theme_root() . '/' . $slug . '/assets/img';
-		foreach ( glob( $dossier . '/*.{jpg,png}', GLOB_BRACE ) as $f ) {
+		$dossier  = get_theme_root() . '/' . $slug . '/assets/img';
+		$fichiers = array_merge( glob( $dossier . '/*.{jpg,png}', GLOB_BRACE ) ?: array(), glob( $source . '/deploy/documents/*.pdf' ) ?: array() );
+		foreach ( $fichiers as $f ) {
 			$nom      = pathinfo( $f, PATHINFO_FILENAME );
 			$existant = get_posts(
 				array(
@@ -160,7 +161,7 @@ function aepcna_deploy( $source, $etapes = array( 'sauvegarde', 'theme', 'medias
 			}
 			$contenu = str_replace( '{{FORMULAIRE}}', $formulaire, $pg['content'] );
 			$contenu = preg_replace_callback(
-				'/\{\{(ID|SRC):([a-z0-9-]+)(?::([a-z_]+))?\}\}/',
+				'/\{\{(ID|SRC|URL):([a-z0-9-]+)(?::([a-z_]+))?\}\}/',
 				function ( $m ) use ( $ids, &$rapport ) {
 					$id = $ids[ $m[2] ] ?? 0;
 					if ( ! $id ) {
@@ -168,6 +169,9 @@ function aepcna_deploy( $source, $etapes = array( 'sauvegarde', 'theme', 'medias
 					}
 					if ( 'ID' === $m[1] ) {
 						return (string) $id;
+					}
+					if ( 'URL' === $m[1] ) {
+						return (string) wp_get_attachment_url( $id ); // lien vers un document (PDF)
 					}
 					$src = wp_get_attachment_image_src( $id, $m[3] ?: 'full' );
 					return $src ? $src[0] : '';

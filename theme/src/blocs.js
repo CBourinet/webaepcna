@@ -41,9 +41,12 @@ function image(slug, alt, className, taille = 'full', lien) {
   return `<!-- wp:image ${json} -->\n<figure class="${classes('wp-block-image', 'size-' + taille, className)}">${lien ? `<a href="${lien}" target="_blank" rel="noreferrer noopener">` : ''}<img src="{{SRC:${slug}:${taille}}}" alt="${alt}" class="wp-image-{{ID:${slug}}}"/>${lien ? '</a>' : ''}</figure>\n<!-- /wp:image -->`;
 }
 
-function bouton(texte, url, className) {
+// nouvelOnglet : linkTarget + rel, comme les pose l'éditeur (« Ouvrir dans un nouvel onglet »).
+function bouton(texte, url, className, { nouvelOnglet = false } = {}) {
   const a = className ? { className } : {};
-  return `<!-- wp:button${attrs(a)} -->\n<div class="${classes('wp-block-button', className)}"><a class="wp-block-button__link wp-element-button" href="${url}">${texte}</a></div>\n<!-- /wp:button -->`;
+  if (nouvelOnglet) Object.assign(a, { linkTarget: '_blank', rel: 'noreferrer noopener' });
+  const cible = nouvelOnglet ? ' target="_blank" rel="noreferrer noopener"' : '';
+  return `<!-- wp:button${attrs(a)} -->\n<div class="${classes('wp-block-button', className)}"><a class="wp-block-button__link wp-element-button" href="${url}"${cible}>${texte}</a></div>\n<!-- /wp:button -->`;
 }
 
 function boutons(className, liste) {
@@ -51,11 +54,13 @@ function boutons(className, liste) {
   return `<!-- wp:buttons${attrs(a)} -->\n<div class="${classes('wp-block-buttons', className)}">${liste.join('\n')}</div>\n<!-- /wp:buttons -->`;
 }
 
-// core/list + core/list-item
-function liste(className, items) {
-  const a = className ? { className } : {};
+// core/list + core/list-item ; numerotee : liste ordonnée (<ol>).
+function liste(className, items, { numerotee = false } = {}) {
+  const a = numerotee ? { ordered: true } : {};
+  if (className) a.className = className;
+  const tag = numerotee ? 'ol' : 'ul';
   const lis = items.map(x => `<!-- wp:list-item -->\n<li>${x}</li>\n<!-- /wp:list-item -->`).join('\n\n');
-  return `<!-- wp:list${attrs(a)} -->\n<ul class="${classes('wp-block-list', className)}">${lis}</ul>\n<!-- /wp:list -->`;
+  return `<!-- wp:list${attrs(a)} -->\n<${tag} class="${classes('wp-block-list', className)}">${lis}</${tag}>\n<!-- /wp:list -->`;
 }
 
 function shortcode(code) {

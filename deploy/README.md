@@ -5,6 +5,9 @@
 - `theme/aepcna/` : thème bloc généré — ne pas éditer à la main, relancer `node theme/src/build.js`.
 - `deploy/content.json` : contenu des pages Accueil et Contact en blocs natifs (généré).
 - `deploy/formulaire.txt` : gabarit Contact Form 7.
+- `deploy/documents/` : documents PDF importés dans la médiathèque à l'étape `medias` ; dans `pages.js`,
+  `{{URL:nom-du-fichier}}` (sans `.pdf`) devient leur adresse. Un document déjà importé est réutilisé tel quel :
+  pour publier une nouvelle version, changer le nom du fichier (et le lien dans `pages.js`).
 - `deploy/deploy.php` : script idempotent (sauvegarde, thème, médiathèque, formulaire, pages, page d'accueil, purge).
 
 ## Redéployer
