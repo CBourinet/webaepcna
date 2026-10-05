@@ -94,6 +94,7 @@ main.wp-block-group { margin: 0; }
 .entete-section--etroite { max-width: 760px; }
 
 .grille-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.grille-2--cartes { gap: 24px; }
 .grille-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
 .grille-4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
 
@@ -289,6 +290,7 @@ header.wp-block-template-part { position: sticky; top: 0; z-index: 50; margin: 0
 }
 .carte__etiquette { font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--sarcelle); }
 .carte__titre { font-size: 22px; line-height: 1.25; }
+.section--sombre .carte__titre { color: var(--encre); }
 .carte__texte { font-size: 15px; line-height: 1.6; color: var(--texte); }
 
 .competences { background: var(--fond-carte); border-radius: 12px; padding: 36px 40px; display: flex; flex-direction: column; gap: 20px; }
@@ -637,7 +639,7 @@ footer.wp-block-template-part { margin: 0; }
   .hero__corps { gap: 40px; }
   .consultants__entete { flex-direction: column; align-items: flex-start; }
   .consultants__droite { align-items: flex-start; }
-  .grille-3 { grid-template-columns: 1fr; }
+  .grille-3, .grille-2--cartes { grid-template-columns: 1fr; }
   .solutions-grille { grid-template-columns: 1fr; }
   .solution--pme .liste-coches { grid-template-columns: 1fr; }
   .encart-sombre--large { flex-direction: column; align-items: flex-start; }
@@ -645,6 +647,7 @@ footer.wp-block-template-part { margin: 0; }
 }
 @media (max-width: 640px) {
   :root { --gouttiere: 20px; }
+  .chiffre__valeur { font-size: 34px; overflow-wrap: anywhere; }
   .section { padding-top: 72px; padding-bottom: 72px; }
   .site-entete .enveloppe { height: 72px; }
   .site-entete .wp-block-site-logo img { height: 42px; }

@@ -49,7 +49,7 @@ module.exports = function pages(BASE) {
   const atout = (icone, titre_, texte) => g(`atout a-icone a-icone--petite ${icone}`, [t(3, 'atout__titre', titre_), p('atout__texte', texte)]);
   const etape = (num, titre_, texte, active) => g(`etape${active ? ' etape--active' : ''}`, [p('etape__num', num), t(3, 'etape__titre', titre_), p('etape__texte', texte)]);
   const miniCarte = (titre_, texte) => g('mini-carte', [p('mini-carte__titre', titre_), p('mini-carte__texte', texte)]);
-  const offre = (icone, public_, titre_, texte, ancre, pme) => g(`offre ${icone}`, [p(`offre__public${pme ? ' offre__public--pme' : ''}`, public_), t(3, 'offre__titre', titre_), p('offre__texte', texte), p('offre__lien', `<a href="${U('/solutions/#' + ancre)}">${pme ? 'Voir le parcours' : 'Voir un exemple'} →</a>`)]);
+  const offre = (icone, public_, titre_, texte, ancre, pme) => g(`offre ${icone}`, [p(`offre__public${pme ? ' offre__public--pme' : ''}`, public_), t(3, 'offre__titre', titre_), p('offre__texte', texte), p('offre__lien', `<a href="${U(pme ? '/rse-actionnable/' : '/solutions/#' + ancre)}">${pme ? 'Voir le parcours' : 'Voir un exemple'} →</a>`)]);
   const pilier = (icone, titre_, texte) => g(`atout atout--bord a-icone a-icone--petite ${icone}`, [t(3, 'atout__titre', titre_), p('atout__texte', texte)]);
   const realisation = (photo, alt, etiquette, variante, titre_, texte) => g('realisation', [
     img(photo, alt, 'realisation__photo', 'large'),
@@ -534,9 +534,9 @@ module.exports = function pages(BASE) {
       solution('trajectoire-rse', 'icone-pousse', 'Parcours PME', 'Trajectoire RSE — Actionnable',
         '<strong>Pour les PME</strong> qui veulent structurer leur démarche RSE et en faire un levier de performance : un parcours d’un an renouvelable, directement accessible, sans programme à monter.',
         'L’organisation du programme',
-        ['6 jours d’accompagnement et 4 jours à la carte', '24 experts en RSE, RH, IT, finance, performance industrielle, qualité et innovation', 'Livrable en fin de parcours : le rapport RSE de l’entreprise', 'Transformation de l’organisation et des services par la RSE'],
+        ['6 jours d’accompagnement et 3 jours à la carte', '25 experts en RSE, RH, IT, finance, performance industrielle, qualité et innovation', 'Livrable en fin de parcours : le rapport RSE de l’entreprise', 'Transformation de l’organisation et des services par la RSE'],
         '<strong>Référence</strong> : parcours « Actionnable », retenu par la Région à l’AMI RSE et référencé Néo Terra, porté avec Cinov Nouvelle-Aquitaine.',
-        'Contacter l’équipe Actionnable', 'pme',
+        'Découvrir le parcours Actionnable', 'pme',
         '<strong>Faites-vous conseiller dès le départ</strong> : Audrey Vautrin, en charge du projet Actionnable, vous conseille dans votre démarche et vous aide dans votre projet. Écrivez à <a href="mailto:actionnable@aepcna.fr">actionnable@aepcna.fr</a>.',
         'mailto:actionnable@aepcna.fr'),
     ]), { tag: 'section' }),
@@ -605,9 +605,138 @@ module.exports = function pages(BASE) {
     ]), { tag: 'section' }),
   ].join('\n\n');
 
+  // ---------- Page dédiée : parcours RSE Actionnable (offre NéoTerr'actions, avec Cinov NA) ----------
+  const ACTIONNABLE = 'mailto:actionnable@aepcna.fr';
+  const modul = (num, duree, titre_, carte_) => carte(`Module ${num} · ${duree}`, titre_, carte_ || '&nbsp;');
+  const livrable = (num, texte) => miniCarte(`Livrable ${num}`, texte);
+  const actionnable = [
+    g('bandeau-page', g('enveloppe', [
+      p('fil-ariane', `<a href="${U('/')}">Accueil</a> › <a href="${U('/solutions/')}">Solutions</a> › RSE Actionnable`),
+      p('surtitre', 'Parcours PME · Offre RSE référencée Néo Terra'),
+      t(1, 'bandeau-page__titre', 'Actionnable : apprenez à vous adapter aux changements.'),
+      p('chapeau', "Une cohorte d'entreprises, un parcours de neuf modules, des experts et des livrables concrets, jusqu'au rapport RSE de votre entreprise. Offre portée par l'AEPC Nouvelle-Aquitaine avec Cinov Nouvelle-Aquitaine, référencée Néo Terra par la Région. Un dispositif d'un an renouvelable."),
+      bs('', [b('Contacter l’équipe Actionnable', ACTIONNABLE, 'bouton--sarcelle')]),
+    ]), { tag: 'section' }),
+
+    g('chiffres', g('enveloppe grille-4', [
+      chiffre('icone-horloge', '6 jours', 'de parcours consolidé'),
+      chiffre('icone-etoile', '+3 jours', 'à la carte, pour le sur-mesure', true),
+      chiffre('icone-valide', '6 mois', 'un module toutes les 4 semaines'),
+      chiffre('icone-equipe', '25', 'consultants experts régionaux, AEPC et Cinov', true),
+    ]), { tag: 'section' }),
+
+    g('section', g('enveloppe pile', [
+      g('entete-section', [
+        p('surtitre', 'Le contexte'),
+        t(2, 'titre-section', '« Nothing is certain, except change ». Ces sujets vont transformer votre entreprise.'),
+      ]),
+      g('puces', ['IA', 'Vision', 'Démocratie', 'Santé', 'Climat', 'Alimentation', 'Politique', 'Impacts', 'Vivant', 'Économie', 'Eau', 'Tendance', 'Génération', 'Risques', 'Catastrophes', 'Image', 'Relations humaines'].map(x => p('puce', x))),
+    ]), { tag: 'section' }),
+
+    g('section section--blanc', g('enveloppe pile', [
+      g('entete-section', [
+        p('surtitre', 'Solution n°1 · La cohorte'),
+        t(2, 'titre-section', 'Une cohorte de participants pour développer votre réseau.'),
+        p('chapeau', "Objectif : développer le réseau des participants et favoriser l'intelligence collective. Développer l'ancrage territorial et l'ETI, favoriser la collaboration et les synergies entre les entreprises et les dirigeants."),
+      ]),
+      g('grille-4', [
+        miniCarte('3 à 8 entreprises', 'dans chaque session'),
+        miniCarte('Animation sur site', 'chaque entreprise reçoit à son tour'),
+        miniCarte('Secteurs d’activités périphériques', 'et entreprises non concurrentes'),
+        miniCarte('Proximité géographique', 'des entreprises pas trop éloignées'),
+      ]),
+    ]), { tag: 'section' }),
+
+    g('section', g('enveloppe pile', [
+      g('entete-section', [
+        p('surtitre', 'Solution n°2 · Le parcours'),
+        t(2, 'titre-section', 'Développer et prouver vos compétences.'),
+        p('chapeau', "Un parcours généraliste, avec du sur-mesure : 6 jours de parcours consolidé, 3 jours à la carte, sur 6 mois, à raison d'un module toutes les 4 semaines."),
+      ]),
+      g('entete-section', [t(3, 'competences__titre', 'De la compréhension aux enjeux')]),
+      g('grille-3', [
+        modul(1, '0,5 jour', 'Contexte'),
+        modul(2, '0,5 jour', 'Questions centrales et principes de la norme ISO 26000'),
+        modul(3, '1 jour', 'Identifier ses impacts, risques et opportunités', 'À la carte : bilan et décarbonation, eau, biodiversité, 7 piliers.'),
+        modul(4, '0,5 jour', 'Prioriser ses enjeux avec la double matérialité', 'À la carte : inclusion, RPPS, égalité femmes-hommes, discriminations.'),
+        modul(5, '0,5 jour', 'Modèle économique', 'À la carte : modèle d’affaires, économie circulaire.'),
+      ]),
+      g('entete-section', [t(3, 'competences__titre', 'De l’action au rapport RSE')]),
+      g('grille-3', [
+        modul(6, '1 jour', 'Innover avec ses parties prenantes', 'À la carte : impliquer ses parties prenantes pour transformer.'),
+        modul(7, '1 jour', 'Transformer les métiers de son entreprise', 'À la carte : SI, RH, commerce, achats, supply, performance industrielle, communication.'),
+        modul(8, '0,5 jour', 'Construction et pilotage des données', 'À la carte : tableau de bord global personnalisé.'),
+        modul(9, '0,5 jour', 'Faire son rapport RSE', 'Avis extérieur : analyse du rapport RSE par un des chefs de projet, qui émet un avis extérieur.'),
+      ]),
+    ]), { tag: 'section' }),
+
+    g('section--sombre', g('enveloppe pile consultants', [
+      g('entete-section', [
+        p('surtitre', 'Solution n°3 · Les experts'),
+        t(2, 'titre-section', 'Collaborer avec des experts.'),
+        p('chapeau', 'Objectif : mutualiser des expertises et des connaissances au service de vos besoins.'),
+      ]),
+      g('grille-3', [
+        carte('AEPC Nouvelle-Aquitaine', '25 consultants experts', 'régionaux, AEPC et Cinov, dans leurs thématiques d’intervention : RSE, HSE, RH, qualité, performance industrielle, modèle économique, économie de la fonctionnalité (EFC), commerce, achats, supply, S.I., bilan carbone, biodiversité, eau.'),
+        carte('Cinov Nouvelle-Aquitaine', '16 syndicats métiers, 14 fédérations régionales', 'dont 5 consultants experts ou bureaux d’études.'),
+        carte('CPC Nouvelle-Aquitaine', 'En collaboration avec la CPC NA', 'En charge de la professionnalisation et de la déontologie des consultants.'),
+      ]),
+      g('grille-2 grille-2--cartes', [
+        carte('L’équipe · 2 PMO', 'Audrey Vautrin', 'Responsable RSE et évaluatrice ICA en R.S.'),
+        carte('L’équipe · 2 PMO', 'Chef de projet', 'Spécialiste RSE et direction B.U.'),
+      ]),
+    ]), { tag: 'section' }),
+
+    g('section section--blanc', g('enveloppe pile', [
+      g('entete-section', [
+        p('surtitre', 'Solution n°4 · Les livrables'),
+        t(2, 'titre-section', 'Des livrables pour impulser le changement.'),
+        p('chapeau', "Objectif : construire ou renforcer votre stratégie, définir un plan d'actions et créer un rapport RSE. À chaque module, construction du livrable et du rapport : stratégie, vision, mission, plan d'action. Communiquer sur des preuves concrètes vers ses parties prenantes internes (salariés, CSE…) et externes (clients, fournisseurs, banques…), se donner un cap et partager la vision, capter de nouveaux partenariats, investisseurs… Avis des experts tout au long du parcours, puis avis d'une évaluatrice RSE à la fin du programme."),
+      ]),
+      g('entete-section', [t(3, 'competences__titre', 'Ce que votre entreprise construit')]),
+      g('grille-3', [
+        livrable(1, 'Ses outils de dialogue et plan de communication + stratégie et plan d’actions'),
+        livrable(2, 'Son plan d’actions par métier pour embarquer ses équipes'),
+        livrable(3, 'Son tableau de bord et plan de pilotage global et par métiers'),
+        livrable(4, 'Son questionnaire de compétences avant et après parcours'),
+        livrable(5, 'Ses atouts et points d’amélioration par rapport à la norme ISO 26000'),
+        livrable(6, 'Sa cartographie des parties prenantes et sa matrice impacts, risques et opportunités'),
+        livrable(7, 'Ses enjeux posés dans une matrice de double matérialité'),
+        livrable(8, 'Son business model Canvas durable + pistes EFC/EC'),
+        livrable(9, 'Son rapport RSE'),
+      ]),
+    ]), { tag: 'section' }),
+
+    g('section', g('enveloppe pile', [
+      g('entete-section', [
+        p('surtitre', 'Solution n°5 · Investir pour se transformer'),
+        t(2, 'titre-section', 'Un coût accessible sur une durée optimale.'),
+        p('chapeau', 'Le coût par entreprise.'),
+      ]),
+      g('grille-2 grille-2--cartes', [
+        chiffre('icone-horloge', '2 227,50 € HT', "6 jours d'accompagnement collectif"),
+        chiffre('icone-etoile', '371,25 € HT', 'par module complémentaire à la carte', true),
+      ]),
+    ]), { tag: 'section' }),
+
+    g('section', g('enveloppe', [
+      g('encart-sombre encart-sombre--large', [
+        g('', [
+          p('surtitre', 'Pour en savoir plus'),
+          t(3, 'encart-sombre__titre', 'Lancement de la cohorte « Impulse » le 12 janvier 2027.'),
+          p('', "Inscription suite à un échange téléphonique, pour bien comprendre vos besoins et vos enjeux et vous proposer le parcours qui vous correspond. Contact : Audrey Vautrin, <a href=\"tel:+33668013700\">06 68 01 37 00</a>, <a href=\"mailto:actionnable@aepcna.fr\">actionnable@aepcna.fr</a>."),
+          p('', 'Offre RSE référencée Néo Terra – Région Nouvelle-Aquitaine.'),
+        ]),
+        bs('', [b('Contacter l’équipe Actionnable', ACTIONNABLE, 'bouton--blanc')]),
+      ]),
+    ]), { tag: 'section' }),
+  ].join('\n\n');
+
   return [
     { slug: 'solutions', seo_title: "Performance industrielle, RSE, stratégie et formation | AEPC NA", title: 'Nos solutions', content: solutions,
       description: "Exemples de projets menés par l'AEPC Nouvelle-Aquitaine pour des ETI, grands groupes, filières et acteurs publics, et parcours RSE Actionnable pour les PME." },
+    { slug: 'rse-actionnable', seo_title: "Parcours RSE pour PME en Nouvelle-Aquitaine : Actionnable | AEPC NA", title: 'RSE Actionnable', content: actionnable,
+      description: "Actionnable, le parcours RSE des PME de Nouvelle-Aquitaine : cohorte, 9 modules, 25 experts et rapport RSE. Offre AEPC NA et Cinov NA référencée Néo Terra." },
     { slug: 'adherer', seo_title: "Consultant indépendant : rejoindre l'AEPC Nouvelle-Aquitaine", title: "Rejoindre l'AEPC", content: adherer,
       description: "Consultant indépendant en Nouvelle-Aquitaine ? Rejoignez l'AEPC pour répondre ensemble aux appels d'offres dans un cadre juridique, technique et outillé." },
     { slug: 'mentions-legales', seo_title: "Mentions légales | AEPC Nouvelle-Aquitaine", title: 'Mentions légales', content: mentionsLegales,

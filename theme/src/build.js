@@ -5,7 +5,7 @@ const path = require('path');
 const { groupe: g, para: p, bouton: b, boutons: bs } = require('./blocs');
 
 const BASE = process.argv[2] ?? '/site';
-const VERSION = '1.7.5';
+const VERSION = '1.7.6';
 const RACINE = path.join(__dirname, '..');
 const THEME = path.join(RACINE, 'aepcna');
 const U = chemin => `${BASE}${chemin}`;
@@ -145,7 +145,7 @@ ecrire('parts/header.html', g('site-entete', g('enveloppe', [
     lienNav('Réalisations', U('/#realisations')),
     lienNav('Consultants', U('/nos-consultants/')),
     lienNav("L'association", U('/qui-sommes-nous/')),
-    `<!-- wp:navigation-link ${JSON.stringify({ label: 'RSE Actionnable', title: 'Parcours RSE pour les PME, référencé par la Région', url: U('/solutions/#trajectoire-rse'), kind: 'custom', isTopLevelLink: true, className: 'nav-actionnable' })} /-->`,
+    `<!-- wp:navigation-link ${JSON.stringify({ label: 'RSE Actionnable', title: 'Parcours RSE pour les PME, référencé par la Région', url: U('/rse-actionnable/'), kind: 'custom', isTopLevelLink: true, className: 'nav-actionnable' })} /-->`,
     `<!-- wp:navigation-link ${JSON.stringify({ label: 'Échanger sur mon projet', url: U('/contact/'), kind: 'custom', isTopLevelLink: true, className: 'nav-contact' })} /-->`,
   ].join('\n') + '\n<!-- /wp:navigation -->',
   bs('entete-cta', [b('Échanger sur mon projet', U('/contact/'), '')]),
