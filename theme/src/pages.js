@@ -465,6 +465,22 @@ module.exports = function pages(BASE) {
   const cookies = pageLegale('Politique de cookies (UE)', 'Les cookies utilisés sur ce site et la gestion de votre consentement.',
     [shortcode('[cmplz-document type="cookie-statement" region="eu"]')]);
 
+  const politiqueQse = pageLegale('Politique Intégrée QSE-RSE', "Qualité, Sécurité, Environnement, Responsabilité Sociétale des Entreprises : les engagements de l'AEPC Nouvelle-Aquitaine.", [
+    p('', "Dans le cadre de ses missions de représentation, d'animation et de développement de la profession, l'Association Économique des Professionnels du Conseil de Nouvelle-Aquitaine adopte une <strong>Politique intégrée QSE-RSE</strong>, applicable à son fonctionnement et diffusée auprès de ses collaborateurs, ses membres, son bureau, les membres du CA, ses fournisseurs et sous-traitants."),
+    t(2, '', 'Qualité'),
+    liste('', ['Assurer un accompagnement et des services adaptés aux besoins de nos collaborateurs et de nos membres ainsi que de l\u2019ensemble de nos parties prenantes', 'Développer une relation de confiance et de proximité avec nos adhérents, partenaires et parties prenantes']),
+    t(2, '', 'Sécurité et santé'),
+    liste('', ['Promouvoir une culture de prévention des risques auprès de nos collaborateurs, de nos membres, de nos partenaires et de leurs équipes', 'Mettre en avant la protection de la santé et de la sécurité au travail dans l\u2019ensemble des actions et événements portés par l\u2019association']),
+    t(2, '', 'Environnement'),
+    liste('', ['Intégrer la gestion environnementale dans l\u2019organisation de nos projets, événements et actions collectives', 'Sensibiliser nos collaborateurs et nos membres ainsi que leurs clients à la réduction de leur empreinte écologique']),
+    t(2, '', 'Responsabilité sociétale'),
+    liste('', ['Encourager une gouvernance responsable et éthique, au sein de l\u2019association comme auprès de ses membres', 'Favoriser la performance durable et la création de valeur partagée entre les professionnels du conseil de Nouvelle-Aquitaine', 'Contribuer à la formation et à l\u2019élévation des compétences des acteurs économiques']),
+    t(2, '', 'Engagement'),
+    p('', "Cet engagement s'inscrit dans une logique d'amélioration continue et de développement durable, afin d'apporter une valeur ajoutée aux professionnels du conseil adhérents de l'AEPC Nouvelle-Aquitaine, ainsi qu'aux organisations avec lesquelles elle collabore."),
+    p('', 'Fait à Bordeaux, le 4 juillet 2026.<br>Le Président, Charles Bourinet.'),
+    p('', `<a href="${U('/wp-content/themes/aepcna/assets/docs/politique-integree-qse-rse-aepc-na.pdf')}" target="_blank" rel="noreferrer noopener">Télécharger la politique signée (PDF)</a>`),
+  ]);
+
   // ---------- Solutions (point 7 : offres « productisées ») ----------
   const solution = (ancre, icone, public_, titre_, besoin, rubrique, dispositif, reference, lien, variante = '', contact = '', href = CONTACT) => g(`solution ${icone}${variante ? ' solution--' + variante : ''}`, [
     p(`solution__public${variante ? ' solution__public--' + variante : ''}`, public_),
@@ -596,6 +612,8 @@ module.exports = function pages(BASE) {
       description: "Consultant indépendant en Nouvelle-Aquitaine ? Rejoignez l'AEPC pour répondre ensemble aux appels d'offres dans un cadre juridique, technique et outillé." },
     { slug: 'mentions-legales', seo_title: "Mentions légales | AEPC Nouvelle-Aquitaine", title: 'Mentions légales', content: mentionsLegales,
       description: "Mentions légales du site de l'AEPC Nouvelle-Aquitaine : éditeur, directeur de la publication, hébergeur." },
+    { slug: 'politique-qse-rse', seo_title: "Politique Intégrée QSE-RSE | AEPC Nouvelle-Aquitaine", title: 'Politique Intégrée QSE-RSE', content: politiqueQse,
+      description: "Politique intégrée Qualité, Sécurité, Environnement et RSE de l'AEPC Nouvelle-Aquitaine : engagements et amélioration continue." },
     { slug: 'declaration-de-confidentialite-ue', seo_title: "Déclaration de confidentialité | AEPC Nouvelle-Aquitaine", title: 'Déclaration de confidentialité (UE)', content: confidentialite,
       description: "Déclaration de confidentialité de l'AEPC Nouvelle-Aquitaine : traitement et protection de vos données personnelles." },
     { slug: 'politique-de-cookies-ue-2', seo_title: "Politique de cookies | AEPC Nouvelle-Aquitaine", title: 'Politique de cookies (UE)', content: cookies,

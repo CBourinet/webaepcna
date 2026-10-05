@@ -5,7 +5,7 @@ const path = require('path');
 const { groupe: g, para: p, bouton: b, boutons: bs } = require('./blocs');
 
 const BASE = process.argv[2] ?? '/site';
-const VERSION = '1.7.4';
+const VERSION = '1.7.5';
 const RACINE = path.join(__dirname, '..');
 const THEME = path.join(RACINE, 'aepcna');
 const U = chemin => `${BASE}${chemin}`;
@@ -151,6 +151,10 @@ ecrire('parts/header.html', g('site-entete', g('enveloppe', [
   bs('entete-cta', [b('Échanger sur mon projet', U('/contact/'), '')]),
 ])) + '\n');
 
+// Document signé de la politique QSE-RSE, servi avec le thème.
+fs.mkdirSync(path.join(THEME, 'assets/docs'), { recursive: true });
+fs.copyFileSync(path.join(__dirname, 'docs/politique-integree-qse-rse-aepc-na.pdf'), path.join(THEME, 'assets/docs/politique-integree-qse-rse-aepc-na.pdf'));
+
 // ---------- parts/footer.html ----------
 const lien = (texte, url) => `<a href="${url}">${texte}</a>`;
 ecrire('parts/footer.html', [
@@ -194,13 +198,14 @@ ecrire('parts/footer.html', [
       ])]),
       g('', [p('pied__titre', 'Informations'), g('pied__liens', [
         p('', lien('Mentions légales', U('/mentions-legales/'))),
+        p('', lien('Politique Intégrée QSE-RSE', U('/politique-qse-rse/'))),
         p('', lien('Déclaration de confidentialité (UE)', U('/declaration-de-confidentialite-ue/'))),
         p('', lien('Politique de cookies (UE)', U('/politique-de-cookies-ue-2/'))),
         p('', lien('Gérer le consentement', U('/politique-de-cookies-ue-2/'))),
       ])]),
     ]),
     g('pied__legal', [
-      p('pied__legal-liens', `${lien('Mentions légales', U('/mentions-legales/'))} | ${lien('Politique de cookies (UE)', U('/politique-de-cookies-ue-2/'))} | ${lien('Déclaration de confidentialité (UE)', U('/declaration-de-confidentialite-ue/'))}`),
+      p('pied__legal-liens', `${lien('Mentions légales', U('/mentions-legales/'))} | ${lien('Politique QSE-RSE', U('/politique-qse-rse/'))} | ${lien('Politique de cookies (UE)', U('/politique-de-cookies-ue-2/'))} | ${lien('Déclaration de confidentialité (UE)', U('/declaration-de-confidentialite-ue/'))}`),
       p('pied__mentions', '© 2026 AEPC Nouvelle-Aquitaine · Association loi 1901<br>SIRET 924 343 379 00021 · APE 9499Z · TVA FR66 924 343 379 · Hébergement OVH'),
     ]),
   ])),
