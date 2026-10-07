@@ -91,6 +91,16 @@ function aepcna_deploy( $source, $etapes = array( 'sauvegarde', 'theme', 'medias
 			);
 			if ( $existant ) {
 				$ids[ $nom ] = (int) $existant[0];
+				// Visuel modifié dans le thème : on remplace le fichier de la médiathèque (même identifiant, mêmes liens).
+				$actuel = get_attached_file( $existant[0] );
+				if ( in_array( 'medias', $etapes, true ) && $actuel && is_file( $actuel ) && md5_file( $actuel ) !== md5_file( $f ) ) {
+					copy( $f, $actuel );
+					foreach ( (array) get_post_meta( $existant[0], '_wp_attachment_metadata', true )['sizes'] ?? array() as $t ) {
+						@unlink( dirname( $actuel ) . '/' . $t['file'] );
+					}
+					wp_update_attachment_metadata( $existant[0], wp_generate_attachment_metadata( $existant[0], $actuel ) );
+					$rapport['medias_remplaces'][] = $nom;
+				}
 				continue;
 			}
 			if ( ! in_array( 'medias', $etapes, true ) ) {
