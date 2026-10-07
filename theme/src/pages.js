@@ -69,11 +69,13 @@ module.exports = function pages(BASE) {
       g('grille-4', [
         g('logos__groupe logos__partenaires', [
           p('logos__libelle', 'Nos partenaires officiels'),
-          g('logos__grille3', [
+          g('logos__grille3 logos__grille4', [
             img('logo-cpc-na', 'Chambre Professionnelle du Conseil Nouvelle-Aquitaine', 'logo-tuile', 'full', 'https://www.cpcna.org/'),
             img('logo-mpl-na', 'Maison des Professions Libérales Nouvelle-Aquitaine', 'logo-tuile logo-h64', 'full', 'https://www.araplna.org/'),
             img('logo-cinov-na', 'Cinov Nouvelle-Aquitaine', 'logo-tuile logo-h96', 'full', 'https://www.cinov.fr/regions/nouvelle-aquitaine'),
+            img('logo-agence-lucie', 'Agence LUCIE', 'logo-tuile', 'full', 'https://agence-lucie.com/'),
           ]),
+          p('logos__note', '<strong>Agence LUCIE</strong>, partenaire de l’AEPC : plus de 20 consultants labellisés RSE dans le cadre de ce partenariat.'),
         ]),
         g('logos__groupe', [p('logos__libelle', 'Membre de'), img('logo-adi-na', 'ADI Nouvelle-Aquitaine', 'logo-tuile', 'full', 'https://www.adi-na.fr/')]),
       ]),
@@ -190,7 +192,7 @@ module.exports = function pages(BASE) {
             miniCarte('PMO', 'Missions, livrables, échéances'),
             miniCarte('Spécialistes', 'Éco-Finance, et consultants labellisés AeroExcellence pour l’aéronautique'),
           ])]),
-          g('', [p('exemple__rubrique', 'Le programme'), p('exemple__texte', "Programme de la Région Nouvelle-Aquitaine pour accompagner les PME et ETI industrielles vers l'usine de demain. L'AEPC NA, lauréate en 2024 et reconduite en 2026, coordonne 30 experts intervenant sur l'ensemble de la région : plus de 150 entreprises industrielles accompagnées.")]),
+          g('', [p('exemple__rubrique', 'Le programme'), p('exemple__texte', "Programme de la Région Nouvelle-Aquitaine pour accompagner les PME et ETI industrielles vers l'usine de demain. L'AEPC NA, lauréate en 2024 et reconduite en 2026, coordonne 30 experts intervenant sur l'ensemble de la région : plus de 150 entreprises industrielles accompagnées."), p('exemple__note', 'Nos consultants intervenants sont labellisés RSE — partenariat Agence LUCIE.')]),
         ]),
       ]),
     ]), { tag: 'section', ancre: 'methode' }),
@@ -512,7 +514,7 @@ module.exports = function pages(BASE) {
           '<strong>Le besoin</strong> : déployer un programme d’accompagnement auprès de nombreuses entreprises industrielles, sur tout un territoire, avec une qualité homogène et un reporting consolidé.',
           'Le dispositif mobilisé',
           ['Une cellule de coordination dédiée : chef de projet, PMO, spécialistes', 'Jusqu’à 30 experts mobilisés au plus près des sites', 'Diagnostics terrain, Lean, organisation de production, plans d’investissement', 'Un reporting consolidé au donneur d’ordre : avancement, livrables, indicateurs'],
-          '<strong>Référence</strong> : Usine du Futur 4, Région Nouvelle-Aquitaine — plus de 150 entreprises industrielles accompagnées par 30 experts coordonnés, dont des consultants labellisés AeroExcellence pour la filière aéronautique.',
+          '<strong>Référence</strong> : Usine du Futur 4, Région Nouvelle-Aquitaine — plus de 150 entreprises industrielles accompagnées par 30 experts coordonnés, dont des consultants labellisés AeroExcellence pour la filière aéronautique.<br><small>Nos consultants intervenants sont labellisés RSE — partenariat Agence LUCIE.</small>',
           'Échanger sur ce besoin'),
         solution('formation', 'icone-formation', 'ETI, grands groupes, branches et OPCO', 'Programmes de formation',
           '<strong>Le besoin</strong> : former de nombreux collaborateurs, sur plusieurs sites ou territoires, avec un programme qui mobilise plus de cinq consultants ou formateurs.',

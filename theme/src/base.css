@@ -371,6 +371,9 @@ header.wp-block-template-part { position: sticky; top: 0; z-index: 50; margin: 0
 .logos__libelle { font-size: 13px; font-weight: 700; color: var(--texte-doux); }
 .logos__partenaires { grid-column: span 3; }
 .logos__grille3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.logos__grille4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.logos__note { font-size: 14px; line-height: 1.5; color: var(--texte); }
+.exemple__note { font-size: 13px; line-height: 1.5; color: var(--texte-doux); margin-top: 10px; }
 .logos__clients { gap: 16px; }
 .logo-tuile.wp-block-image { height: 140px; background: var(--blanc); border: 1px solid var(--ligne); border-radius: 10px; display: flex; align-items: center; justify-content: center; padding: 14px 18px; margin: 0; }
 .logo-tuile.wp-block-image img { max-height: 108px; max-width: 100%; width: auto; }
