@@ -106,10 +106,12 @@ module.exports = function seo(BASE, { carte, chiffre, CONTACT }) {
     ],
     ['Vous êtes dirigeant ?', 'Parlons de votre modèle, de vos fonds propres et de votre gouvernance.', 'Échanger sur mon projet', CONTACT]);
 
-  const articleActionnable = article('Actionnable référencé Néo Terra', 'RSE · Région Nouvelle-Aquitaine · Octobre 2026',
+  const articleActionnable = article('Actionnable référencé Néo Terra', 'RSE · Région Nouvelle-Aquitaine · 28 septembre 2026',
     'Actionnable référencé « Offre RSE Néo Terra » par la Région Nouvelle-Aquitaine',
     "Le parcours de transformation Actionnable, porté par l'AEPC Nouvelle-Aquitaine avec la Fédération Cinov Nouvelle-Aquitaine, est référencé « Offre RSE Néo Terra » par la Région Nouvelle-Aquitaine, à la suite de l'appel à manifestation d'intérêt RSE.",
     [
+      img('photo-signature-charte-rse-region', 'Signature de la charte d’engagement des partenaires de la RSE en Nouvelle-Aquitaine à la Région, le 28 septembre 2026', 'article__photo', 'large'),
+      p('', "Le 28 septembre 2026, l'AEPC Nouvelle-Aquitaine a signé à la Région la charte d'engagement des partenaires de la RSE en Nouvelle-Aquitaine, aux côtés d'autres acteurs de la RSE (AFNOR, Agence LUCIE, B Lab, Fédération Cinov…). Le parcours Actionnable est désormais référencé « Offre RSE Néo Terra »."),
       p('', "L'AEPC Nouvelle-Aquitaine a été retenue comme porteur de solutions dans le cadre de l'appel à manifestation d'intérêt (AMI) RSE de la Région Nouvelle-Aquitaine, et a signé une convention avec la Région. L'objectif du dispositif : permettre aux entreprises du territoire de développer leur résilience par la RSE."),
       p('', "L'offre est née de l'initiative de Pierre Proietti et d'Audrey Vautrin, qui ont construit un parcours modulaire pour accompagner les entreprises néo-aquitaines dans les enjeux auxquels elles font face. Pour la déployer, l'AEPC s'est entourée d'acteurs locaux aux valeurs similaires et aux compétences complémentaires, à commencer par la Fédération Cinov Nouvelle-Aquitaine."),
       t(2, '', 'Le parcours en bref'),
@@ -134,7 +136,7 @@ module.exports = function seo(BASE, { carte, chiffre, CONTACT }) {
 
   const articleFage = article('Usine du Futur 4, année 2026-2027', 'Usine du Futur · Septembre 2026',
     'Usine du Futur 4 : une nouvelle année démarre à Château Fage',
-    "Le 17 septembre 2026, les consultants de l'AEPC Nouvelle-Aquitaine engagés dans Usine du Futur se sont réunis toute la journée près de Libourne avec les partenaires du dispositif, pour lancer l'année 2026-2027.",
+    "Le 15 septembre 2026, les consultants de l'AEPC Nouvelle-Aquitaine engagés dans Usine du Futur se sont réunis toute la journée près de Libourne avec les partenaires du dispositif, pour lancer l'année 2026-2027.",
     [
       p('', "Cette rencontre marquait le lancement de la nouvelle année du dispositif, dans le cadre de la confiance renouvelée par la Région Nouvelle-Aquitaine envers l'AEPC NA en tant qu'animateur d'Usine du Futur 4 pour la période 2026-2027."),
       p('', "Plus d'une vingtaine de participants, experts et représentants de la Région Nouvelle-Aquitaine, d'ADI Nouvelle-Aquitaine (Agence de Développement et d'Innovation) et d'Aero Excellence, se sont retrouvés pour réfléchir ensemble aux évolutions du dispositif et de sa méthodologie."),
@@ -202,7 +204,7 @@ module.exports = function seo(BASE, { carte, chiffre, CONTACT }) {
       g('entete-section', [
         p('surtitre', 'Un écosystème qui nous fait confiance'),
         t(2, 'titre-section', 'Lancement de l’année 2026-2027 à Château Fage.'),
-        p('chapeau', `Le 17 septembre 2026, nos consultants ont réuni la Région Nouvelle-Aquitaine, ADI Nouvelle-Aquitaine, Aero Excellence, le Campus Cyber Nouvelle-Aquitaine et Arts et Métiers autour des évolutions du dispositif. ${lien('Lire le compte rendu', U('/actualites/usine-du-futur-4-lancement-2026-2027-chateau-fage/'))}.`),
+        p('chapeau', `Le 15 septembre 2026, nos consultants ont réuni la Région Nouvelle-Aquitaine, ADI Nouvelle-Aquitaine, Aero Excellence, le Campus Cyber Nouvelle-Aquitaine et Arts et Métiers autour des évolutions du dispositif. ${lien('Lire le compte rendu', U('/actualites/usine-du-futur-4-lancement-2026-2027-chateau-fage/'))}.`),
       ]),
       g('grille-3 galerie', [
         img('udf4-fage-ateliers', 'Ateliers entre consultants Usine du Futur 4 à Château Fage', 'galerie__photo', 'full'),
@@ -231,17 +233,17 @@ module.exports = function seo(BASE, { carte, chiffre, CONTACT }) {
   ]), { tag: 'section' });
 
   const posts = [
-    { type: 'post', slug: 'usine-du-futur-4-lancement-2026-2027-chateau-fage', date: '2026-10-22 08:00:00', image: 'udf4-fage-collectif',
+    { type: 'post', slug: 'usine-du-futur-4-lancement-2026-2027-chateau-fage', date: '2026-09-15 18:00:00', image: 'udf4-fage-collectif',
       title: 'Usine du Futur 4 : une nouvelle année démarre à Château Fage', content: articleFage,
       seo_title: 'Usine du Futur 4 : lancement 2026-2027 à Château Fage | AEPC NA',
-      description: "Séminaire Usine du Futur 4 du 17 septembre 2026 : l'AEPC NA, animateur du dispositif, réunit Région, ADI, Aero Excellence, Campus Cyber et Arts et Métiers.",
-      excerpt: "Le 17 septembre 2026, nos consultants Usine du Futur ont lancé l'année 2026-2027 avec la Région, ADI, Aero Excellence, le Campus Cyber NA et Arts et Métiers." },
-    { type: 'post', slug: 'actionnable-offre-rse-neo-terra-region-nouvelle-aquitaine', date: '2026-10-22 08:10:00', image: 'photo-reunion-travail',
+      description: "Séminaire Usine du Futur 4 du 15 septembre 2026 : l'AEPC NA, animateur du dispositif, réunit Région, ADI, Aero Excellence, Campus Cyber et Arts et Métiers.",
+      excerpt: "Le 15 septembre 2026, nos consultants Usine du Futur ont lancé l'année 2026-2027 avec la Région, ADI, Aero Excellence, le Campus Cyber NA et Arts et Métiers." },
+    { type: 'post', slug: 'actionnable-offre-rse-neo-terra-region-nouvelle-aquitaine', date: '2026-09-28 18:00:00', image: 'photo-signature-charte-rse-region',
       title: 'Actionnable référencé « Offre RSE Néo Terra » par la Région Nouvelle-Aquitaine', content: articleActionnable,
       seo_title: 'Actionnable, offre RSE référencée Néo Terra en Nouvelle-Aquitaine | AEPC NA',
       description: "Le parcours RSE Actionnable de l'AEPC NA et de Cinov NA est référencé Offre RSE Néo Terra par la Région Nouvelle-Aquitaine. Prochaine cohorte le 12 janvier 2027.",
-      excerpt: "Retenu dans le cadre de l'AMI RSE de la Région, le parcours Actionnable, porté avec Cinov Nouvelle-Aquitaine, est référencé Offre RSE Néo Terra." },
-    { type: 'post', slug: 'antifragilite-inquietudes-dirigeants-nouvelle-aquitaine', date: '2026-10-22 08:20:00', image: 'photo-charles-bourinet',
+      excerpt: "Le 28 septembre 2026, l'AEPC NA a signé la charte d'engagement des partenaires de la RSE en Nouvelle-Aquitaine : le parcours Actionnable est référencé Offre RSE Néo Terra." },
+    { type: 'post', slug: 'antifragilite-inquietudes-dirigeants-nouvelle-aquitaine', date: '2026-10-19 12:00:00', image: 'photo-charles-bourinet',
       title: '« Il faut gagner en antifragilité » : les inquiétudes des dirigeants vues du terrain', content: articlePlaceco,
       seo_title: 'Inquiétudes des dirigeants en Nouvelle-Aquitaine : l’analyse de l’AEPC NA',
       description: "Dans Placéco, Charles Bourinet, président de l'AEPC Nouvelle-Aquitaine, décrypte les inquiétudes des dirigeants : matières premières, 2027, transmission, cyber, IA.",

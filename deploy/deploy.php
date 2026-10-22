@@ -209,7 +209,7 @@ function aepcna_deploy( $source, $etapes = array( 'sauvegarde', 'theme', 'medias
 				if ( $categorie ) {
 					$data['post_category'] = array( $categorie->term_id );
 				}
-				if ( ( ! $existe || 'future' === $existe->post_status ) && ! empty( $pg['date'] ) ) {
+				if ( ! empty( $pg['date'] ) ) {
 					// Jamais dans le futur (sinon l'article serait programmé, pas publié) ;
 					// l'ordre du fichier est conservé, une minute d'écart entre articles.
 					$restants = count( array_filter( array_slice( $pages, array_search( $pg, $pages, true ) + 1 ), function ( $x ) { return 'post' === ( $x['type'] ?? 'page' ); } ) );
