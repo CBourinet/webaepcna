@@ -62,4 +62,30 @@ function shortcode(code) {
   return `<!-- wp:shortcode -->\n${code}\n<!-- /wp:shortcode -->`;
 }
 
-module.exports = { groupe, para, titre, image, bouton, boutons, liste, shortcode };
+// core/details : une question repliable (FAQ). Le résumé est du texte riche.
+function details(question, reponses, className = 'faq__item') {
+  const a = className ? { className } : {};
+  return `<!-- wp:details${attrs(a)} -->\n<details class="${classes('wp-block-details', className)}"><summary>${question}</summary>${[].concat(reponses).map(x => para('', x)).join('\n\n')}</details>\n<!-- /wp:details -->`;
+}
+
+// core/query : les dernières publications (blocs dynamiques, rendus côté serveur).
+function requete(className, nombre) {
+  const q = { queryId: nombre * 10 + 1, query: { perPage: nombre, pages: 0, offset: 0, postType: 'post', order: 'desc', orderBy: 'date', author: '', search: '', exclude: [], sticky: '', inherit: false }, className, layout: { type: 'default' } };
+  return `<!-- wp:query ${JSON.stringify(q)} -->
+<div class="wp-block-query ${className}"><!-- wp:post-template {"className":"actus__liste","layout":{"type":"default"}} -->
+<!-- wp:group {"className":"actu","layout":{"type":"default"}} -->
+<div class="wp-block-group actu"><!-- wp:post-featured-image {"isLink":true,"aspectRatio":"4/3","className":"actu__visuel"} /-->
+
+<!-- wp:group {"className":"actu__corps","layout":{"type":"default"}} -->
+<div class="wp-block-group actu__corps"><!-- wp:post-date {"className":"actu__date"} /-->
+
+<!-- wp:post-title {"level":3,"isLink":true,"className":"actu__titre"} /-->
+
+<!-- wp:post-excerpt {"moreText":"Lire l’article →","excerptLength":30,"className":"actu__extrait"} /--></div>
+<!-- /wp:group --></div>
+<!-- /wp:group -->
+<!-- /wp:post-template --></div>
+<!-- /wp:query -->`;
+}
+
+module.exports = { groupe, para, titre, image, bouton, boutons, liste, shortcode, details, requete };

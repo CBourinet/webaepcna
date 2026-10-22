@@ -5,7 +5,7 @@ const path = require('path');
 const { groupe: g, para: p, bouton: b, boutons: bs } = require('./blocs');
 
 const BASE = process.argv[2] ?? '/site';
-const VERSION = '1.7.8';
+const VERSION = '1.8.1';
 const RACINE = path.join(__dirname, '..');
 const THEME = path.join(RACINE, 'aepcna');
 const U = chemin => `${BASE}${chemin}`;
@@ -188,6 +188,8 @@ ecrire('parts/footer.html', [
         p('', lien('Nos consultants', U('/nos-consultants/'))),
         p('', lien('Réalisations', U('/#realisations'))),
         p('', lien("Rejoindre l'AEPC", U('/adherer/'))),
+        p('', lien('Usine du Futur', U('/usine-du-futur/'))),
+        p('', lien('Actualités', U('/actualites/'))),
         p('', lien('Contact', U('/contact/'))),
         p('', lien('Espace adhérents', U('/espace-adherents/'))),
       ])]),
@@ -231,10 +233,8 @@ ecrire('templates/index.html', cadre(`<!-- wp:group {"tagName":"main","className
 <!-- /wp:query-no-results --></div>
 <!-- /wp:query --></main>
 <!-- /wp:group -->`));
-ecrire('templates/single.html', cadre(`<!-- wp:group {"tagName":"main","className":"enveloppe page-contenu","layout":{"type":"default"}} -->
-<main class="wp-block-group enveloppe page-contenu"><!-- wp:post-title {"level":1,"className":"titre-section"} /-->
-<!-- wp:post-content {"layout":{"type":"default"}} /--></main>
-<!-- /wp:group -->`));
+// Les articles portent leur bandeau (fil d'Ariane, date, titre) dans leur contenu, comme les pages.
+ecrire('templates/single.html', cadre(principal));
 ecrire('templates/404.html', cadre(`<!-- wp:group {"tagName":"main","className":"enveloppe page-contenu","layout":{"type":"default"}} -->
 <main class="wp-block-group enveloppe page-contenu"><!-- wp:heading {"level":1,"className":"titre-section"} -->
 <h1 class="wp-block-heading titre-section">Cette page n’existe pas</h1>
@@ -254,4 +254,38 @@ const pages = require('./pages')(BASE);
 const sortie = path.join(RACINE, '..', 'deploy', 'content.json');
 fs.mkdirSync(path.dirname(sortie), { recursive: true });
 fs.writeFileSync(sortie, JSON.stringify(pages, null, 1));
+
+// Questions fréquentes décrites aux moteurs (FAQPage) par functions.php.
+ecrire('donnees/faq.json', JSON.stringify(pages.faq, null, 1));
+
+// llms.txt : fiche d'identité factuelle destinée aux assistants IA (https://llmstxt.org).
+const SITE = 'https://aepcna.fr' + BASE;
+fs.writeFileSync(path.join(RACINE, '..', 'deploy', 'llms.txt'), `# AEPC Nouvelle-Aquitaine
+
+> L'Association Économique des Professionnels du Conseil de Nouvelle-Aquitaine (AEPC NA) est une association loi 1901, créée en 2023 à Bordeaux par des consultants issus de la Chambre Professionnelle du Conseil de Nouvelle-Aquitaine (CPC NA). Elle réunit plus de 50 consultants indépendants et constitue, pour chaque projet de transformation d'entreprise ou de filière, l'équipe d'experts adaptée, coordonnée par une équipe salariée (chef de projet, PMO, spécialistes). On ne choisit pas l'AEPC pour un expert, mais pour la qualité d'un collectif.
+
+Faits clés :
+- Siège : 51-53 boulevard du Président Wilson, 33000 Bordeaux. Intervention dans les douze départements de Nouvelle-Aquitaine.
+- Président : Charles Bourinet, consultant, membre de l'Institut Lean France.
+- Usine du Futur 4 (Région Nouvelle-Aquitaine) : l'AEPC NA anime le dispositif ; lauréate en 2024, confiance renouvelée pour 2026-2027 ; plus de 150 entreprises industrielles accompagnées par une trentaine d'experts ; équipe labellisée Aero Excellence pour l'aéronautique.
+- Actionnable : parcours RSE pour PME, offre RSE référencée Néo Terra par la Région Nouvelle-Aquitaine, porté avec la Fédération Cinov Nouvelle-Aquitaine ; cohorte de 3 à 8 entreprises, 6 jours + 3 jours à la carte sur 6 mois, 25 experts, rapport RSE en fin de parcours ; 2 227,50 € HT par entreprise ; prochaine cohorte « Impulse » le 12 janvier 2027. Référencement : catalogue des offres et labels RSE reconnus par la Région (https://www.calameo.com/read/0060092718ce69b679e0c), annonce régionale (https://entreprises.nouvelle-aquitaine.fr/actualites/un-referencement-regional-pour-structurer-les-demarches-rse), catalogue en ligne ADI (https://events.adi-na.fr/content/les-solutions-rse).
+- Formation : marchés de formation triennaux 2024-2026 pour la Chambre de Métiers et de l'Artisanat et pour OCAPIAT–IFRIA.
+- Partenaires : CPC Nouvelle-Aquitaine, Maison des Professions Libérales, Fédération Cinov Nouvelle-Aquitaine, Agence LUCIE (plus de 20 consultants labellisés RSE). Membre d'ADI Nouvelle-Aquitaine.
+- Contact : ${SITE}/contact/ ; téléphone 06 10 50 10 77.
+
+## Offres
+- [Nos solutions](${SITE}/solutions/) : performance industrielle, programmes de formation, stratégie et transformation des organisations, parcours RSE pour PME.
+- [Usine du Futur Nouvelle-Aquitaine](${SITE}/usine-du-futur/) : rôle de l'AEPC NA dans le programme régional.
+- [RSE Actionnable](${SITE}/rse-actionnable/) : parcours RSE des PME, modules, livrables, tarifs.
+
+## L'association
+- [Qui sommes-nous](${SITE}/qui-sommes-nous/) : origine, modèle, valeurs, écosystème.
+- [Nos consultants](${SITE}/nos-consultants/) : le collectif d'experts.
+- [Rejoindre l'AEPC](${SITE}/adherer/) : adhésion des consultants indépendants.
+- [Politique QSE-RSE](${SITE}/politique-qse-rse/) : engagements qualité, sécurité, environnement, RSE.
+
+## Actualités
+- [Actualités et presse](${SITE}/actualites/)
+${pages.filter(x => x.type === 'post').reverse().map(x => `- [${x.title}](${SITE}/actualites/${x.slug}/) : ${x.excerpt}`).join('\n')}
+`);
 console.log('thème et contenu écrits — base', BASE, '— version', VERSION);

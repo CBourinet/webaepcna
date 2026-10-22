@@ -1,0 +1,76 @@
+{
+ "accueil": [
+  {
+   "q": "Qu'est-ce que l'AEPC Nouvelle-Aquitaine ?",
+   "r": "L'Association Économique des Professionnels du Conseil de Nouvelle-Aquitaine (AEPC NA) est une association loi 1901 créée en 2023 par des consultants issus de la Chambre Professionnelle du Conseil de Nouvelle-Aquitaine. Elle réunit plus de 50 consultants indépendants et constitue, pour chaque projet de transformation, l'équipe d'experts adaptée, coordonnée par une équipe salariée."
+  },
+  {
+   "q": "En quoi l'AEPC est-elle différente d'un cabinet de conseil ?",
+   "r": "On ne choisit pas l'AEPC pour un expert, mais pour la qualité d'un collectif : une équipe pluridisciplinaire composée pour votre projet, une gouvernance de mission unique, un interlocuteur unique et une coordination salariée qui s'engage sur les délais et la qualité. Association à but non lucratif, l'AEPC n'a pas d'actionnaire à rémunérer."
+  },
+  {
+   "q": "Sur quels sujets intervenez-vous ?",
+   "r": "Performance industrielle, Lean et Usine du Futur, RSE avec le parcours Actionnable, stratégie et transformation des organisations (business model, gouvernance), et programmes de formation mobilisant plusieurs formateurs."
+  },
+  {
+   "q": "Où intervenez-vous ?",
+   "r": "Dans toute la Nouvelle-Aquitaine. Le siège est à Bordeaux et nos consultants sont présents dans les douze départements, au plus près des sites des entreprises."
+  },
+  {
+   "q": "Qui fait appel à l'AEPC ?",
+   "r": "La Région Nouvelle-Aquitaine (Usine du Futur 4, plus de 150 entreprises industrielles accompagnées), la Chambre de Métiers et de l'Artisanat et OCAPIAT–IFRIA pour des marchés de formation, des ETI, des grands groupes, des filières et, avec Actionnable, des PME."
+  },
+  {
+   "q": "Comment démarrer un projet avec vous ?",
+   "r": "Décrivez votre enjeu via le formulaire de contact. L'équipe de coordination vous répond, qualifie le besoin et constitue l'équipe d'experts adaptée à votre projet."
+  }
+ ],
+ "rse-actionnable": [
+  {
+   "q": "À qui s'adresse le parcours Actionnable ?",
+   "r": "Aux PME de Nouvelle-Aquitaine qui veulent structurer leur démarche RSE et en faire un levier de performance et de résilience, sans programme à monter elles-mêmes."
+  },
+  {
+   "q": "Combien coûte Actionnable ?",
+   "r": "2 227,50 € HT par entreprise pour les 6 jours d'accompagnement collectif, et 371,25 € HT par module complémentaire à la carte."
+  },
+  {
+   "q": "Combien de temps dure le parcours ?",
+   "r": "Le parcours s'étale sur 6 mois, à raison d'un module toutes les 4 semaines : 6 jours de parcours consolidé et jusqu'à 3 jours à la carte. Le dispositif est d'un an renouvelable."
+  },
+  {
+   "q": "Qu'obtient l'entreprise à la fin du parcours ?",
+   "r": "Neuf livrables construits module après module, jusqu'au rapport RSE de l'entreprise, analysé par un chef de projet qui émet un avis extérieur."
+  },
+  {
+   "q": "Actionnable est-il reconnu par la Région ?",
+   "r": "Oui. Actionnable est une offre RSE référencée Néo Terra par la Région Nouvelle-Aquitaine, retenue dans le cadre de l'appel à manifestation d'intérêt RSE et portée avec la Fédération Cinov Nouvelle-Aquitaine. Elle figure dans le catalogue des offres et labels RSE reconnus par la Région et dans le catalogue en ligne des solutions RSE opéré par ADI Nouvelle-Aquitaine."
+  },
+  {
+   "q": "Comment s'inscrire ?",
+   "r": "L'inscription se fait après un échange téléphonique, pour comprendre vos besoins et vous proposer le parcours adapté. Écrivez à actionnable@aepcna.fr. Prochaine cohorte : « Impulse », lancée le 12 janvier 2027."
+  }
+ ],
+ "usine-du-futur": [
+  {
+   "q": "Qu'est-ce que le programme Usine du Futur ?",
+   "r": "Un programme de la Région Nouvelle-Aquitaine qui accompagne les PME et ETI industrielles vers l'usine de demain : organisation de la production, Lean, numérique, investissements et compétitivité durable."
+  },
+  {
+   "q": "Quel est le rôle de l'AEPC Nouvelle-Aquitaine ?",
+   "r": "Lauréate en 2024, l'AEPC NA anime le dispositif Usine du Futur 4 ; la Région lui a renouvelé sa confiance pour la période 2026-2027. Une cellule de coordination (chef de projet, PMO, spécialistes) pilote une trentaine d'experts sur l'ensemble de la région."
+  },
+  {
+   "q": "Combien d'entreprises ont été accompagnées ?",
+   "r": "Plus de 150 entreprises industrielles de Nouvelle-Aquitaine ont été accompagnées dans le cadre d'Usine du Futur 4."
+  },
+  {
+   "q": "Quelles expertises sont mobilisées ?",
+   "r": "Diagnostic 360°, Lean et organisation de production, évolution vers l'industrie X.0, plans d'investissement, sensibilisation au risque cyber, RSE (consultants labellisés dans le cadre du partenariat Agence LUCIE) et, pour la filière aéronautique, une équipe labellisée Aero Excellence."
+  },
+  {
+   "q": "Comment une entreprise peut-elle en bénéficier ?",
+   "r": "Le dispositif est porté par la Région Nouvelle-Aquitaine. Contactez-nous : l'équipe de coordination vous oriente et vous explique les modalités d'accès."
+  }
+ ]
+}

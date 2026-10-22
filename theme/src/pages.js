@@ -101,6 +101,8 @@ module.exports = function pages(BASE) {
       ]),
     ]), { tag: 'section' });
 
+  const S = require('./seo')(BASE, { carte, chiffre, CONTACT });
+
   const accueil = [
     // HERO — que faisons-nous, pour qui (point 3) ; promesse (point 1)
     g('hero', [
@@ -192,7 +194,7 @@ module.exports = function pages(BASE) {
             miniCarte('PMO', 'Missions, livrables, échéances'),
             miniCarte('Spécialistes', 'Éco-Finance, et consultants labellisés AeroExcellence pour l’aéronautique'),
           ])]),
-          g('', [p('exemple__rubrique', 'Le programme'), p('exemple__texte', "Programme de la Région Nouvelle-Aquitaine pour accompagner les PME et ETI industrielles vers l'usine de demain. L'AEPC NA, lauréate en 2024 et reconduite en 2026, coordonne 30 experts intervenant sur l'ensemble de la région : plus de 150 entreprises industrielles accompagnées."), p('exemple__note', 'Nos consultants intervenants sont labellisés RSE — partenariat Agence LUCIE.')]),
+          g('', [p('exemple__rubrique', 'Le programme'), p('exemple__texte', "Programme de la Région Nouvelle-Aquitaine pour accompagner les PME et ETI industrielles vers l'usine de demain. L'AEPC NA, lauréate en 2024 et reconduite en 2026, coordonne 30 experts intervenant sur l'ensemble de la région : plus de 150 entreprises industrielles accompagnées."), p('exemple__note', 'Nos consultants intervenants sont labellisés RSE — partenariat Agence LUCIE.'), p('exemple__lien', `<a href="${U('/usine-du-futur/')}">Découvrir notre rôle dans Usine du Futur →</a>`)]),
         ]),
       ]),
     ]), { tag: 'section', ancre: 'methode' }),
@@ -254,6 +256,10 @@ module.exports = function pages(BASE) {
     sectionEcosysteme,
 
     sectionGaranties,
+
+    S.sectionActusAccueil,
+
+    S.sectionFaq('accueil', 'Vos questions sur l’AEPC Nouvelle-Aquitaine.'),
 
     // CONTACT
     g('section', g('enveloppe pile contact', [
@@ -413,6 +419,8 @@ module.exports = function pages(BASE) {
       ]),
     ]), { tag: 'section' }),
 
+    S.sectionPresident,
+
     sectionEcosysteme,
 
     sectionGaranties,
@@ -515,7 +523,7 @@ module.exports = function pages(BASE) {
           'Le dispositif mobilisé',
           ['Une cellule de coordination dédiée : chef de projet, PMO, spécialistes', 'Jusqu’à 30 experts mobilisés au plus près des sites', 'Diagnostics terrain, Lean, organisation de production, plans d’investissement', 'Un reporting consolidé au donneur d’ordre : avancement, livrables, indicateurs'],
           '<strong>Référence</strong> : Usine du Futur 4, Région Nouvelle-Aquitaine — plus de 150 entreprises industrielles accompagnées par 30 experts coordonnés, dont des consultants labellisés AeroExcellence pour la filière aéronautique.<br><small>Nos consultants intervenants sont labellisés RSE — partenariat Agence LUCIE.</small>',
-          'Échanger sur ce besoin'),
+          'Découvrir le programme Usine du Futur', '', '', U('/usine-du-futur/')),
         solution('formation', 'icone-formation', 'ETI, grands groupes, branches et OPCO', 'Programmes de formation',
           '<strong>Le besoin</strong> : former de nombreux collaborateurs, sur plusieurs sites ou territoires, avec un programme qui mobilise plus de cinq consultants ou formateurs.',
           'Le dispositif mobilisé',
@@ -721,6 +729,21 @@ module.exports = function pages(BASE) {
       ]),
     ]), { tag: 'section' }),
 
+    g('section section--blanc', g('enveloppe pile', [
+      g('entete-section', [
+        p('surtitre', 'Reconnu par la Région Nouvelle-Aquitaine'),
+        t(2, 'titre-section', 'Une offre RSE référencée, consultable dans les catalogues officiels.'),
+        p('chapeau', "Actionnable figure dans le catalogue des offres et labels RSE reconnus par la Région Nouvelle-Aquitaine, et dans le catalogue en ligne des solutions RSE opéré par ADI Nouvelle-Aquitaine."),
+      ]),
+      g('grille-3', [
+        carte('Région Nouvelle-Aquitaine', 'Catalogue des offres et labels RSE reconnus par la Région', '<a href="https://www.calameo.com/read/0060092718ce69b679e0c?page=1" target="_blank" rel="noreferrer noopener">Consulter le catalogue (version définitive) →</a>'),
+        carte('Portail des entreprises de Nouvelle-Aquitaine', 'Un référencement régional pour structurer les démarches RSE', '<a href="https://entreprises.nouvelle-aquitaine.fr/actualites/un-referencement-regional-pour-structurer-les-demarches-rse" target="_blank" rel="noreferrer noopener">Lire l’annonce de la Région →</a>'),
+        carte('ADI Nouvelle-Aquitaine', 'Les solutions RSE', '<a href="https://events.adi-na.fr/content/les-solutions-rse?secteur=toussecteurs&amp;page=1" target="_blank" rel="noreferrer noopener">Voir le catalogue en ligne opéré par ADI →</a>'),
+      ]),
+    ]), { tag: 'section' }),
+
+    S.sectionFaq('rse-actionnable', 'Actionnable : vos questions.'),
+
     g('section', g('enveloppe', [
       g('encart-sombre encart-sombre--large', [
         g('', [
@@ -734,7 +757,12 @@ module.exports = function pages(BASE) {
     ]), { tag: 'section' }),
   ].join('\n\n');
 
-  return [
+  const liste_ = [
+    { slug: 'usine-du-futur', seo_title: "Usine du Futur Nouvelle-Aquitaine : consultants et Lean industriel | AEPC NA", title: 'Usine du Futur', content: S.usineDuFutur,
+      description: "L'AEPC NA anime Usine du Futur 4 pour la Région Nouvelle-Aquitaine : plus de 150 entreprises industrielles accompagnées par 30 experts, reconduite pour 2026-2027." },
+    { slug: 'actualites', seo_title: "Actualités et presse | AEPC Nouvelle-Aquitaine", title: 'Actualités', content: S.actualites,
+      description: "Actualités de l'AEPC Nouvelle-Aquitaine : Usine du Futur, parcours RSE Actionnable, prises de parole dans la presse régionale." },
+    ...S.posts,
     { slug: 'solutions', seo_title: "Performance industrielle, RSE, stratégie et formation | AEPC NA", title: 'Nos solutions', content: solutions,
       description: "Exemples de projets menés par l'AEPC Nouvelle-Aquitaine pour des ETI, grands groupes, filières et acteurs publics, et parcours RSE Actionnable pour les PME." },
     { slug: 'rse-actionnable', seo_title: "Parcours RSE pour PME en Nouvelle-Aquitaine : Actionnable | AEPC NA", title: 'RSE Actionnable', content: actionnable,
@@ -746,9 +774,9 @@ module.exports = function pages(BASE) {
     { slug: 'politique-qse-rse', seo_title: "Politique Intégrée QSE-RSE | AEPC Nouvelle-Aquitaine", title: 'Politique Intégrée QSE-RSE', content: politiqueQse,
       description: "Politique intégrée Qualité, Sécurité, Environnement et RSE de l'AEPC Nouvelle-Aquitaine : engagements et amélioration continue." },
     { slug: 'declaration-de-confidentialite-ue', seo_title: "Déclaration de confidentialité | AEPC Nouvelle-Aquitaine", title: 'Déclaration de confidentialité (UE)', content: confidentialite,
-      description: "Déclaration de confidentialité de l'AEPC Nouvelle-Aquitaine : traitement et protection de vos données personnelles." },
+      description: "Déclaration de confidentialité de l'AEPC Nouvelle-Aquitaine : traitement et protection de vos données personnelles.", noindex: true },
     { slug: 'politique-de-cookies-ue-2', seo_title: "Politique de cookies | AEPC Nouvelle-Aquitaine", title: 'Politique de cookies (UE)', content: cookies,
-      description: "Politique de cookies du site de l'AEPC Nouvelle-Aquitaine et gestion de votre consentement." },
+      description: "Politique de cookies du site de l'AEPC Nouvelle-Aquitaine et gestion de votre consentement.", noindex: true },
     { slug: 'qui-sommes-nous', seo_title: "Association de consultants de la CPC Nouvelle-Aquitaine | AEPC NA", title: 'Qui sommes-nous ?', content: quiSommesNous,
       description: "L'AEPC Nouvelle-Aquitaine, association loi 1901 émanation de la CPC NA, fédère des consultants experts régionaux pour accompagner la transformation des entreprises du territoire." },
     { slug: 'nos-consultants', seo_title: "Collectif de consultants experts en Nouvelle-Aquitaine | AEPC NA", title: 'Nos consultants', content: nosConsultants,
@@ -758,4 +786,6 @@ module.exports = function pages(BASE) {
     { slug: 'contact', seo_title: "Contact : consultants à Bordeaux et en Nouvelle-Aquitaine | AEPC NA", title: 'Contact', content: contact,
       description: "Entreprise, collectivité, financeur ou consultant : décrivez votre besoin, l'équipe de coordination de l'AEPC Nouvelle-Aquitaine vous répond." },
   ];
+  liste_.faq = S.faqSchema;
+  return liste_;
 };

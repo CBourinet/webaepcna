@@ -99,3 +99,116 @@ add_filter(
 		return $data;
 	}
 );
+
+/**
+ * Le président, auteur des articles : sa fonction et ses appartenances,
+ * pour que moteurs et assistants IA relient l'expert à l'association.
+ */
+add_filter(
+	'wpseo_schema_person',
+	function ( $data ) {
+		if ( false === stripos( (string) ( $data['name'] ?? '' ), 'bourinet' ) ) {
+			return $data;
+		}
+		$data['name']       = 'Charles Bourinet';
+		$data['jobTitle']   = 'Président de l\'AEPC Nouvelle-Aquitaine, consultant';
+		$data['worksFor']   = array( '@id' => trailingslashit( home_url() ) . '#organization' );
+		$data['memberOf']   = array( '@type' => 'Organization', 'name' => 'Institut Lean France' );
+		$data['knowsAbout'] = array( 'Lean', 'Business model', 'Gouvernance', 'Transformation d\'entreprise', 'Performance industrielle' );
+		return $data;
+	}
+);
+
+/**
+ * Données structurées propres au thème, ajoutées au graphe Yoast :
+ * questions fréquentes (FAQPage), offre Actionnable (Service, Offer, Event)
+ * et programme Usine du Futur (Service).
+ */
+add_filter(
+	'wpseo_schema_graph',
+	function ( $graph ) {
+		if ( ! is_singular( 'page' ) && ! is_front_page() ) {
+			return $graph;
+		}
+		$slug  = is_front_page() ? 'accueil' : get_post_field( 'post_name', get_queried_object_id() );
+		$url   = is_front_page() ? trailingslashit( home_url() ) : get_permalink( get_queried_object_id() );
+		$orga  = array( '@id' => trailingslashit( home_url() ) . '#organization' );
+		$zone  = array( '@type' => 'AdministrativeArea', 'name' => 'Nouvelle-Aquitaine' );
+		$faq   = json_decode( (string) @file_get_contents( get_theme_file_path( 'donnees/faq.json' ) ), true );
+
+		if ( ! empty( $faq[ $slug ] ) ) {
+			$graph[] = array(
+				'@type'      => 'FAQPage',
+				'@id'        => $url . '#faq',
+				'url'        => $url,
+				'inLanguage' => 'fr-FR',
+				'isPartOf'   => array( '@id' => $url ),
+				'mainEntity' => array_map(
+					function ( $item ) {
+						return array(
+							'@type'          => 'Question',
+							'name'           => $item['q'],
+							'acceptedAnswer' => array( '@type' => 'Answer', 'text' => $item['r'] ),
+						);
+					},
+					$faq[ $slug ]
+				),
+			);
+		}
+
+		if ( 'rse-actionnable' === $slug ) {
+			$graph[] = array(
+				'@type'       => 'Service',
+				'@id'         => $url . '#service',
+				'name'        => 'Actionnable — parcours RSE pour les PME de Nouvelle-Aquitaine',
+				'serviceType' => 'Accompagnement RSE',
+				'description' => 'Parcours RSE en cohorte de 3 à 8 entreprises : 6 jours de parcours consolidé et jusqu\'à 3 jours à la carte sur 6 mois, 25 consultants experts, neuf livrables jusqu\'au rapport RSE. Offre RSE référencée Néo Terra – Région Nouvelle-Aquitaine, portée par l\'AEPC NA avec la Fédération Cinov Nouvelle-Aquitaine.',
+				'provider'    => $orga,
+				'areaServed'  => $zone,
+				'audience'    => array( '@type' => 'BusinessAudience', 'audienceType' => 'PME' ),
+				'subjectOf'   => array(
+					array( '@type' => 'CreativeWork', 'name' => 'Catalogue des offres et labels RSE reconnus par la Région', 'url' => 'https://www.calameo.com/read/0060092718ce69b679e0c', 'publisher' => array( '@type' => 'GovernmentOrganization', 'name' => 'Région Nouvelle-Aquitaine' ) ),
+					array( '@type' => 'WebPage', 'name' => 'Un référencement régional pour structurer les démarches RSE', 'url' => 'https://entreprises.nouvelle-aquitaine.fr/actualites/un-referencement-regional-pour-structurer-les-demarches-rse' ),
+					array( '@type' => 'WebPage', 'name' => 'Les solutions RSE', 'url' => 'https://events.adi-na.fr/content/les-solutions-rse', 'publisher' => array( '@type' => 'Organization', 'name' => 'ADI Nouvelle-Aquitaine' ) ),
+				),
+				'url'         => $url,
+				'offers'      => array(
+					array( '@type' => 'Offer', 'name' => '6 jours d\'accompagnement collectif', 'price' => '2227.50', 'priceCurrency' => 'EUR', 'priceSpecification' => array( '@type' => 'UnitPriceSpecification', 'price' => '2227.50', 'priceCurrency' => 'EUR', 'valueAddedTaxIncluded' => false ), 'url' => $url ),
+					array( '@type' => 'Offer', 'name' => 'Module complémentaire à la carte', 'price' => '371.25', 'priceCurrency' => 'EUR', 'priceSpecification' => array( '@type' => 'UnitPriceSpecification', 'price' => '371.25', 'priceCurrency' => 'EUR', 'valueAddedTaxIncluded' => false ), 'url' => $url ),
+				),
+			);
+			$graph[] = array(
+				'@type'               => 'Event',
+				'@id'                 => $url . '#cohorte-impulse',
+				'name'                => 'Lancement de la cohorte « Impulse » du parcours RSE Actionnable',
+				'description'         => 'Première session de la cohorte « Impulse » : 3 à 8 PME de Nouvelle-Aquitaine engagées dans le parcours RSE Actionnable, avec une animation sur site chez chaque entreprise à tour de rôle.',
+				'startDate'           => '2027-01-12',
+				'eventStatus'         => 'https://schema.org/EventScheduled',
+				'eventAttendanceMode' => 'https://schema.org/OfflineEventAttendanceMode',
+				'location'            => array(
+					'@type'   => 'Place',
+					'name'    => 'Nouvelle-Aquitaine — sur site, dans les entreprises de la cohorte',
+					'address' => array( '@type' => 'PostalAddress', 'addressRegion' => 'Nouvelle-Aquitaine', 'addressCountry' => 'FR' ),
+				),
+				'organizer'           => $orga,
+				'offers'              => array( '@type' => 'Offer', 'price' => '2227.50', 'priceCurrency' => 'EUR', 'url' => $url, 'availability' => 'https://schema.org/InStock' ),
+				'url'                 => $url,
+			);
+		}
+
+		if ( 'usine-du-futur' === $slug ) {
+			$graph[] = array(
+				'@type'       => 'Service',
+				'@id'         => $url . '#service',
+				'name'        => 'Usine du Futur Nouvelle-Aquitaine — animation et accompagnement des entreprises industrielles',
+				'serviceType' => 'Conseil en performance industrielle',
+				'description' => 'L\'AEPC NA anime le dispositif Usine du Futur 4 de la Région Nouvelle-Aquitaine : plus de 150 entreprises industrielles accompagnées par une trentaine d\'experts coordonnés (Lean, organisation de production, industrie X.0, investissements, sensibilisation cyber, RSE, filière aéronautique labellisée Aero Excellence).',
+				'provider'    => $orga,
+				'areaServed'  => $zone,
+				'audience'    => array( '@type' => 'BusinessAudience', 'audienceType' => 'PME et ETI industrielles' ),
+				'url'         => $url,
+			);
+		}
+		return $graph;
+	}
+);

@@ -185,14 +185,39 @@ function aepcna_deploy( $source, $etapes = array( 'sauvegarde', 'theme', 'medias
 				$contenu
 			);
 			$contenu = str_replace( '"/site/', '"' . $base . '/', $contenu );
-			$existe  = get_page_by_path( $pg['slug'] );
+			$type    = $pg['type'] ?? 'page';
+			$existe  = get_page_by_path( $pg['slug'], OBJECT, $type );
 			$data    = array(
-				'post_type'    => 'page',
+				'post_type'    => $type,
 				'post_title'   => $pg['title'],
 				'post_name'    => $pg['slug'],
 				'post_status'  => 'publish',
 				'post_content' => $contenu,
 			);
+			if ( 'post' === $type ) {
+				// Articles : signés par le président, classés en Actualités, datés à leur première publication.
+				$auteur               = get_user_by( 'login', 'charles.bourinet' );
+				$categorie            = get_category_by_slug( 'actualites' );
+				if ( ! $categorie ) {
+					wp_insert_term( 'Actualités', 'category', array( 'slug' => 'actualites' ) );
+					$categorie = get_category_by_slug( 'actualites' );
+				}
+				$data['post_excerpt'] = $pg['excerpt'] ?? '';
+				if ( $auteur ) {
+					$data['post_author'] = $auteur->ID;
+				}
+				if ( $categorie ) {
+					$data['post_category'] = array( $categorie->term_id );
+				}
+				if ( ( ! $existe || 'future' === $existe->post_status ) && ! empty( $pg['date'] ) ) {
+					// Jamais dans le futur (sinon l'article serait programmé, pas publié) ;
+					// l'ordre du fichier est conservé, une minute d'écart entre articles.
+					$restants = count( array_filter( array_slice( $pages, array_search( $pg, $pages, true ) + 1 ), function ( $x ) { return 'post' === ( $x['type'] ?? 'page' ); } ) );
+					$horaire  = min( strtotime( $pg['date'] ), current_time( 'timestamp' ) - 60 * ( $restants + 1 ) );
+					$data['post_date']     = gmdate( 'Y-m-d H:i:s', $horaire );
+					$data['post_date_gmt'] = get_gmt_from_date( $data['post_date'] );
+				}
+			}
 			if ( $existe ) {
 				$data['ID'] = $existe->ID;
 				$id         = wp_update_post( wp_slash( $data ), true );
@@ -211,6 +236,12 @@ function aepcna_deploy( $source, $etapes = array( 'sauvegarde', 'theme', 'medias
 			if ( ! empty( $pg['seo_title'] ) ) {
 				update_post_meta( $id, '_yoast_wpseo_title', $pg['seo_title'] );
 			}
+			if ( ! empty( $pg['noindex'] ) ) {
+				update_post_meta( $id, '_yoast_wpseo_meta-robots-noindex', '1' );
+			}
+			if ( ! empty( $pg['image'] ) && ! empty( $ids[ $pg['image'] ] ) ) {
+				set_post_thumbnail( $id, $ids[ $pg['image'] ] );
+			}
 			$rapport['pages'][ $pg['slug'] ] = $id;
 		}
 	}
@@ -218,7 +249,7 @@ function aepcna_deploy( $source, $etapes = array( 'sauvegarde', 'theme', 'medias
 	// 5 bis · SEO seul : titres et descriptions Yoast, sans toucher aux contenus.
 	if ( in_array( 'seo', $etapes, true ) ) {
 		foreach ( json_decode( file_get_contents( $source . '/deploy/content.json' ), true ) as $pg ) {
-			$page = get_page_by_path( $pg['slug'] );
+			$page = get_page_by_path( $pg['slug'], OBJECT, $pg['type'] ?? 'page' );
 			if ( ! $page ) {
 				continue;
 			}
@@ -226,8 +257,48 @@ function aepcna_deploy( $source, $etapes = array( 'sauvegarde', 'theme', 'medias
 			if ( ! empty( $pg['seo_title'] ) ) {
 				update_post_meta( $page->ID, '_yoast_wpseo_title', $pg['seo_title'] );
 			}
+			if ( ! empty( $pg['noindex'] ) ) {
+				update_post_meta( $page->ID, '_yoast_wpseo_meta-robots-noindex', '1' );
+			}
 			$rapport['seo'][ $pg['slug'] ] = $pg['seo_title'] ?? '';
 		}
+	}
+
+	// 5 ter · Réglages de référencement : adresses des actualités, catégorie,
+	// profil LinkedIn, pages sans valeur hors index, llms.txt pour les assistants IA.
+	if ( in_array( 'reglages', $etapes, true ) ) {
+		if ( '/actualites/%postname%/' !== get_option( 'permalink_structure' ) ) {
+			global $wp_rewrite;
+			$wp_rewrite->set_permalink_structure( '/actualites/%postname%/' );
+			flush_rewrite_rules( false );
+		}
+		if ( ! get_category_by_slug( 'actualites' ) ) {
+			wp_insert_term( 'Actualités', 'category', array( 'slug' => 'actualites' ) );
+		}
+		$categorie = get_category_by_slug( 'actualites' );
+		update_option( 'default_category', $categorie->term_id );
+		if ( class_exists( 'WPSEO_Options' ) ) {
+			WPSEO_Options::set( 'linkedin_url', 'https://www.linkedin.com/company/aepcna' );
+			$defaut = get_posts( array( 'post_type' => 'attachment', 'post_status' => 'inherit', 'meta_key' => '_aepcna_source', 'meta_value' => 'photo-reunion-travail', 'numberposts' => 1, 'fields' => 'ids' ) );
+			if ( $defaut ) {
+				WPSEO_Options::set( 'og_default_image', wp_get_attachment_url( $defaut[0] ) );
+				WPSEO_Options::set( 'og_default_image_id', $defaut[0] );
+			}
+		}
+		foreach ( array( 'avertissement', 'espace-adherents' ) as $sans_valeur ) {
+			$p = get_page_by_path( $sans_valeur );
+			if ( $p ) {
+				update_post_meta( $p->ID, '_yoast_wpseo_meta-robots-noindex', '1' );
+			}
+		}
+		$llms = file_get_contents( $source . '/deploy/llms.txt' );
+		$ecrits = array();
+		foreach ( array_unique( array( ABSPATH, trailingslashit( dirname( ABSPATH ) ) ) ) as $dossier ) {
+			if ( is_writable( $dossier ) && false !== file_put_contents( $dossier . 'llms.txt', $llms ) ) {
+				$ecrits[] = $dossier . 'llms.txt';
+			}
+		}
+		$rapport['reglages'] = array( 'permaliens' => get_option( 'permalink_structure' ), 'categorie' => $categorie->term_id, 'llms' => $ecrits );
 	}
 
 	// 6 · Page d'accueil statique.
