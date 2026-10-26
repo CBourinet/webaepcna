@@ -1,0 +1,239 @@
+/* =====================================================================
+   Proposition « dynamique » : hiérarchie des boutons, micro-interactions,
+   apparitions au défilement, transitions entre pages, accents visuels.
+   Principes (Emil Kowalski) : courbes ease-out franches, interactions sous
+   300 ms, retour au clic par scale(0.97), survols réservés aux pointeurs
+   fins, rien ne bouge avec « réduire les animations ».
+   ===================================================================== */
+
+:root {
+  --ambre: #FFB547;          /* accent : CTA principal et informations clés */
+  --ambre-fort: #F59E0B;     /* survol du CTA principal */
+  --ambre-pale: #FFE7BF;     /* surlignage des chiffres clés */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  interpolate-size: allow-keywords; /* ouverture fluide des questions (navigateurs récents) */
+}
+
+/* ---------- 1. Boutons : une hiérarchie, un comportement par niveau ----------
+   Principal  = ambre, texte marine, flèche qui glisse au survol.
+   Secondaire = contour (marine sur clair, blanc sur sombre), se remplit au survol.
+   Tertiaire  = lien souligné avec flèche. */
+.wp-block-button .wp-block-button__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition:
+    background-color 200ms ease,
+    color 200ms ease,
+    border-color 200ms ease,
+    box-shadow 200ms ease,
+    transform 160ms var(--ease-out);
+}
+.wp-block-button .wp-block-button__link:active { transform: scale(0.97); }
+
+/* Principal : bouton sans variante (en-tête), --sarcelle, --blanc */
+.wp-block-button:not([class*="bouton--"]) .wp-block-button__link,
+.wp-block-button.bouton--sarcelle .wp-block-button__link,
+.wp-block-button.bouton--blanc .wp-block-button__link {
+  background: var(--ambre);
+  border-color: var(--ambre);
+  color: var(--encre);
+  font-weight: 700;
+}
+.wp-block-button:not([class*="bouton--"]) .wp-block-button__link::after,
+.wp-block-button.bouton--sarcelle .wp-block-button__link::after,
+.wp-block-button.bouton--blanc .wp-block-button__link::after {
+  content: '→';
+  font-weight: 700;
+  transition: transform 200ms var(--ease-out);
+}
+
+/* Secondaire */
+.wp-block-button.bouton--contour .wp-block-button__link { background: transparent; border-color: var(--encre); color: var(--encre); }
+.wp-block-button.bouton--contour-blanc .wp-block-button__link { background: transparent; border-color: rgba(255, 255, 255, .7); color: var(--blanc); }
+.wp-block-button.bouton--sarcelle-fonce .wp-block-button__link { background: transparent; border-color: var(--sarcelle); color: var(--sarcelle); }
+
+@media (hover: hover) and (pointer: fine) {
+  .wp-block-button:not([class*="bouton--"]) .wp-block-button__link:hover,
+  .wp-block-button.bouton--sarcelle .wp-block-button__link:hover,
+  .wp-block-button.bouton--blanc .wp-block-button__link:hover {
+    background: var(--ambre-fort);
+    border-color: var(--ambre-fort);
+    color: var(--encre);
+    box-shadow: 0 10px 22px -10px rgba(245, 158, 11, .8);
+    transform: translateY(-2px);
+  }
+  .wp-block-button .wp-block-button__link:hover::after { transform: translateX(4px); }
+  .wp-block-button .wp-block-button__link:hover:active { transform: translateY(0) scale(0.97); }
+  .wp-block-button.bouton--contour .wp-block-button__link:hover { background: var(--encre); color: var(--blanc); }
+  .wp-block-button.bouton--contour-blanc .wp-block-button__link:hover { background: var(--blanc); border-color: var(--blanc); color: var(--encre); }
+  .wp-block-button.bouton--sarcelle-fonce .wp-block-button__link:hover { background: var(--sarcelle); color: var(--blanc); }
+}
+.wp-block-button .wp-block-button__link:focus-visible { outline: 3px solid var(--ambre); outline-offset: 3px; }
+
+/* Menu mobile : l'entrée « Échanger sur mon projet » suit le style principal */
+.wp-block-navigation.nav-principale .is-menu-open .nav-contact .wp-block-navigation-item__content { background: var(--ambre) !important; color: var(--encre) !important; }
+
+/* Tertiaire : liens fléchés, le soulignement s'éloigne au survol */
+.offre__lien a, .solution__lien a, .realisation__lien a, .actus__tout a, .president__lien a, .exemple__lien a, .pied__lien-fort a, .actu__extrait .wp-block-post-excerpt__more-link {
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1.5px;
+  transition: text-underline-offset 200ms var(--ease-out), color 200ms ease;
+}
+@media (hover: hover) and (pointer: fine) {
+  .offre__lien a:hover, .solution__lien a:hover, .realisation__lien a:hover, .actus__tout a:hover, .president__lien a:hover, .exemple__lien a:hover, .pied__lien-fort a:hover, .actu__extrait .wp-block-post-excerpt__more-link:hover {
+    text-underline-offset: 6px;
+    color: var(--sarcelle);
+  }
+}
+
+/* ---------- 2. Ce qui n'est pas cliquable ne doit pas en avoir l'air ---------- */
+.puces { gap: 12px 28px; }
+.puce, .puce--ouverte {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  cursor: default;
+}
+.puce::before { content: ''; flex: none; width: 8px; height: 8px; border-radius: 50%; background: var(--sarcelle-vif); }
+.puce--ouverte { font-style: italic; color: var(--texte); }
+.puce--ouverte::before { background: transparent; border: 1.5px solid var(--texte-doux); }
+
+/* Réalisations : seule une carte qui mène quelque part réagit au survol, et toute la carte est cliquable. */
+.realisation:hover { box-shadow: none; transform: none; }
+.realisation--lien { position: relative; transition: box-shadow 200ms ease, transform 200ms var(--ease-out); }
+.realisation__lien { margin-top: 4px; font-weight: 700; }
+.realisation__lien a { color: var(--marine); }
+.realisation__lien a::after { content: ''; position: absolute; inset: 0; border-radius: inherit; }
+@media (hover: hover) and (pointer: fine) {
+  .realisation--lien:hover { box-shadow: var(--ombre); transform: translateY(-3px); }
+}
+.realisation__photo { overflow: hidden; }
+.realisation__photo img { transition: transform 600ms var(--ease-out); }
+@media (hover: hover) and (pointer: fine) {
+  .realisation--lien:hover .realisation__photo img, .actu:hover .actu__visuel img { transform: scale(1.04); }
+}
+.actu { transition: box-shadow 200ms ease, border-color 200ms ease, transform 200ms var(--ease-out); }
+.actu .actu__visuel { overflow: hidden; }
+.actu .actu__visuel img { transition: transform 600ms var(--ease-out); }
+@media (hover: hover) and (pointer: fine) {
+  .actu:hover { transform: translateY(-3px); }
+}
+
+/* ---------- 3. Accents visuels (« accidents ») ---------- */
+/* Un trait ambre devant chaque surtitre : un repère répété qui rythme la lecture. */
+.surtitre::before {
+  content: '';
+  display: inline-block;
+  width: 22px;
+  height: 3px;
+  margin-right: 10px;
+  border-radius: 2px;
+  background: var(--ambre);
+  vertical-align: middle;
+  transform: translateY(-2px);
+}
+
+/* Chiffres clés surlignés */
+.chiffre__valeur {
+  width: fit-content;
+  background: linear-gradient(transparent 60%, var(--ambre-pale) 60%, var(--ambre-pale) 94%, transparent 94%);
+}
+
+/* Bandeaux de page : une illustration au trait (motif du logo, collectif, parcours, usine). */
+.bandeau-page { position: relative; overflow: hidden; }
+.bandeau-page .enveloppe { position: relative; z-index: 1; }
+.bandeau-page::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: max(16px, calc((100vw - var(--largeur)) / 2 - 40px));
+  width: 400px;
+  height: 280px;
+  transform: translateY(-50%);
+  background: center / contain no-repeat;
+  pointer-events: none;
+}
+.bandeau-page .chapeau, .bandeau-page__titre { max-width: min(760px, calc(100% - 360px)); }
+
+/* Sections sombres et encarts : un anneau ambre qui déborde, en écho au logo. */
+.section--sombre, .encart-sombre, .hero { position: relative; overflow: hidden; }
+.section--sombre > .enveloppe, .encart-sombre > * { position: relative; z-index: 1; }
+.section--sombre::before, .encart-sombre::before, .hero::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  border: 2px solid rgba(255, 181, 71, .35);
+  box-shadow: inset 0 0 0 46px rgba(255, 181, 71, .07);
+}
+.section--sombre::before { width: 440px; height: 440px; right: -170px; top: -190px; }
+.encart-sombre::before { width: 220px; height: 220px; right: -70px; bottom: -110px; }
+.hero::after { z-index: 1; width: 380px; height: 380px; right: -140px; bottom: -170px; }
+
+/* Photos : un léger voile de marque pour unifier visuels réels et banque d'images. */
+.realisation__photo { position: relative; }
+.realisation__photo::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(11, 42, 71, 0) 55%, rgba(11, 42, 71, .28) 100%);
+  pointer-events: none;
+}
+
+/* ---------- 4. En-tête : une ombre dès que la page défile ---------- */
+header.wp-block-template-part { transition: box-shadow 200ms ease; }
+header.wp-block-template-part.est-defile { box-shadow: 0 10px 24px -18px rgba(11, 42, 71, .55); }
+
+/* ---------- 5. Questions fréquentes : ouverture fluide ---------- */
+.faq__item summary::after { content: '+'; transition: transform 200ms var(--ease-out); }
+.faq__item[open] summary::after { content: '+'; transform: translateY(-50%) rotate(45deg); }
+.faq__item::details-content {
+  block-size: 0;
+  overflow: hidden;
+  transition: block-size 260ms var(--ease-out), content-visibility 260ms allow-discrete;
+}
+.faq__item[open]::details-content { block-size: auto; }
+@media (hover: hover) and (pointer: fine) {
+  .faq__item summary { transition: color 200ms ease; }
+  .faq__item summary:hover { color: var(--sarcelle); }
+}
+
+/* ---------- 6. Apparition des blocs au défilement (assets/anime.js) ---------- */
+.js-anime .a-reveler {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 600ms var(--ease-out) var(--decalage, 0ms),
+    transform 700ms var(--ease-out) var(--decalage, 0ms);
+}
+.js-anime .a-reveler.est-visible { opacity: 1; transform: none; }
+
+/* ---------- 7. Transitions entre pages (View Transitions, navigateurs récents) ---------- */
+@view-transition { navigation: auto; }
+header.wp-block-template-part { view-transition-name: entete; }
+::view-transition-old(root) { animation: 160ms ease both vt-sortie; }
+::view-transition-new(root) { animation: 320ms var(--ease-out) both vt-entree; }
+@keyframes vt-sortie { to { opacity: 0; } }
+@keyframes vt-entree { from { opacity: 0; transform: translateY(10px); } }
+
+/* ---------- Mobile et accessibilité ---------- */
+@media (max-width: 1024px) {
+  .bandeau-page::after { display: none; }
+  .bandeau-page .chapeau, .bandeau-page__titre { max-width: 760px; }
+}
+@media (max-width: 640px) {
+  .section--sombre::before { width: 260px; height: 260px; right: -120px; top: -130px; }
+  .hero::after { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  @view-transition { navigation: none; }
+  ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
+  .wp-block-button .wp-block-button__link, .realisation--lien, .actu, .realisation__photo img, .actu .actu__visuel img, .faq__item::details-content { transition: none; }
+  .wp-block-button .wp-block-button__link:hover, .realisation--lien:hover, .actu:hover { transform: none; }
+}

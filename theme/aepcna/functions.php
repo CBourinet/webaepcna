@@ -27,6 +27,29 @@ add_action(
 	function () {
 		$version = wp_get_theme()->get( 'Version' );
 		wp_enqueue_style( 'aepcna', get_stylesheet_uri(), array(), $version );
+		// Apparitions au défilement et ombre de l'en-tête : petit script, chargé en différé.
+		wp_enqueue_script( 'aepcna-anime', get_theme_file_uri( 'assets/anime.js' ), array(), $version, array( 'in_footer' => true, 'strategy' => 'defer' ) );
+	}
+);
+
+// Avant le premier affichage : signale que les apparitions sont possibles
+// (jamais si le visiteur a demandé de réduire les animations).
+add_action(
+	'wp_head',
+	function () {
+		echo "<script>if(!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('js-anime')</script>\n";
+	},
+	0
+);
+
+// Classe « page-<slug> » sur le corps de page : choisit l'illustration du bandeau.
+add_filter(
+	'body_class',
+	function ( $classes ) {
+		if ( is_page() ) {
+			$classes[] = 'page-' . sanitize_html_class( get_post_field( 'post_name', get_queried_object_id() ) );
+		}
+		return $classes;
 	}
 );
 

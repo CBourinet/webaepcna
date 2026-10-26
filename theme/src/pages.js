@@ -51,9 +51,13 @@ module.exports = function pages(BASE) {
   const miniCarte = (titre_, texte) => g('mini-carte', [p('mini-carte__titre', titre_), p('mini-carte__texte', texte)]);
   const offre = (icone, public_, titre_, texte, ancre, pme) => g(`offre ${icone}`, [p(`offre__public${pme ? ' offre__public--pme' : ''}`, public_), t(3, 'offre__titre', titre_), p('offre__texte', texte), p('offre__lien', `<a href="${U(pme ? '/rse-actionnable/' : '/solutions/#' + ancre)}">${pme ? 'Voir le parcours' : 'Voir un exemple'} →</a>`)]);
   const pilier = (icone, titre_, texte) => g(`atout atout--bord a-icone a-icone--petite ${icone}`, [t(3, 'atout__titre', titre_), p('atout__texte', texte)]);
-  const realisation = (photo, alt, etiquette, variante, titre_, texte) => g('realisation', [
+  // Une réalisation n'est cliquable (carte entière) que si une page la détaille.
+  const realisation = (photo, alt, etiquette, variante, titre_, texte, lien) => g(`realisation${lien ? ' realisation--lien' : ''}`, [
     img(photo, alt, 'realisation__photo', 'large'),
-    g('realisation__corps', [p(`realisation__etiquette${variante ? ' realisation__etiquette--' + variante : ''}`, etiquette), t(3, 'realisation__titre', titre_), p('realisation__texte', texte)]),
+    g('realisation__corps', [
+      p(`realisation__etiquette${variante ? ' realisation__etiquette--' + variante : ''}`, etiquette), t(3, 'realisation__titre', titre_), p('realisation__texte', texte),
+      ...(lien ? [p('realisation__lien', `<a href="${lien[1]}">${lien[0]} →</a>`)] : []),
+    ]),
   ]);
   const garantie = (variante, badge, titre_, texte) => g(`garantie${variante ? ' garantie--' + variante : ''}`, [
     ...(badge ? [p('badge', 'En cours')] : []), t(3, 'garantie__titre', titre_), p('garantie__texte', texte),
@@ -164,8 +168,8 @@ module.exports = function pages(BASE) {
     g('section section--blanc', g('enveloppe pile realisations', [
       g('entete-section entete-section--etroite', [p('surtitre', 'Réalisations'), t(2, 'titre-section', 'Des programmes régionaux confiés à notre collectif.')]),
       g('grille-3', [
-        realisation('photo-robots-industriels', 'Robots industriels sur une ligne de production', 'Région Nouvelle-Aquitaine · depuis 2024', '', 'Usine du Futur 4', "<strong>Plus de 150 entreprises industrielles accompagnées</strong> par 30 experts coordonnés sur l'ensemble de la région, avec une cellule dédiée (chef de projet, PMO, spécialiste Éco-Finance) et des consultants labellisés AeroExcellence sur la filière aéronautique."),
-        realisation('photo-reunion-travail', "Atelier de travail autour d'un ordinateur", 'AMI RSE Région · 2026', 'vert', 'Actionnable', 'Parcours RSE retenu par la Région et référencé Néo Terra pour un an renouvelable, avec le syndicat Cinov Nouvelle-Aquitaine.'),
+        realisation('udf4-fage-ateliers-photo', 'Les consultants Usine du Futur 4 en atelier à Château Fage', 'Région Nouvelle-Aquitaine · depuis 2024', '', 'Usine du Futur 4', "<strong>Plus de 150 entreprises industrielles accompagnées</strong> par 30 experts coordonnés sur l'ensemble de la région, avec une cellule dédiée (chef de projet, PMO, spécialiste Éco-Finance) et des consultants labellisés AeroExcellence sur la filière aéronautique.", ['Découvrir le programme', U('/usine-du-futur/')]),
+        realisation('photo-signature-charte-rse-region', 'Signature de la charte d’engagement des partenaires de la RSE à la Région Nouvelle-Aquitaine', 'AMI RSE Région · 2026', 'vert', 'Actionnable', 'Parcours RSE retenu par la Région et référencé Néo Terra pour un an renouvelable, avec le syndicat Cinov Nouvelle-Aquitaine.', ['Découvrir le parcours', U('/rse-actionnable/')]),
         realisation('photo-ligne-agroalimentaire', "Ligne de conditionnement dans l'agroalimentaire", 'CMA · OCAPIAT–IFRIA', 'sarcelle', 'Négociation commerciale', "Marchés de formation triennaux remportés collectivement pour les artisans et l'agroalimentaire."),
       ]),
     ]), { tag: 'section', ancre: 'realisations' }),

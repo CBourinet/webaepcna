@@ -5,7 +5,7 @@ const path = require('path');
 const { groupe: g, para: p, bouton: b, boutons: bs } = require('./blocs');
 
 const BASE = process.argv[2] ?? '/site';
-const VERSION = '1.8.2';
+const VERSION = '1.9.0';
 const RACINE = path.join(__dirname, '..');
 const THEME = path.join(RACINE, 'aepcna');
 const U = chemin => `${BASE}${chemin}`;
@@ -56,6 +56,43 @@ const icones = [
   `.pied__linkedin a::before { background-image: ${logoUrl(LINKEDIN, '#FFFFFF')}; }`,
 ].join('\n');
 
+// ---------- Illustrations des bandeaux (traits clairs sur fond marine, touches ambre) ----------
+// Purement décoratives : servies en image de fond, jamais dans le contenu.
+const CYAN = '#9FDDE2', AMBRE = '#FFB547';
+const enDataUri = svg => `url("data:image/svg+xml,${encodeURIComponent(svg).replace(/%20/g, ' ').replace(/%3D/g, '=').replace(/%3A/g, ':').replace(/%2F/g, '/').replace(/%2C/g, ',').replace(/%27/g, "'")}")`;
+const svgIllu = corps => enDataUri(`<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 460 320' fill='none' stroke-linecap='round' stroke-linejoin='round'>${corps}</svg>`);
+const r1 = n => Math.round(n * 10) / 10;
+// Le motif du logo : trois personnes autour d'un centre.
+const trio = (cx, cy, d, rr, op) => [[0, -1], [-0.87, 0.5], [0.87, 0.5]].map(([x, y]) => `<circle cx='${r1(cx + x * d)}' cy='${r1(cy + y * d)}' r='${rr}' stroke='${CYAN}' stroke-opacity='${op}' stroke-width='3'/>`).join('');
+const ILLUS = {
+  anneaux: svgIllu(`<circle cx='330' cy='160' r='150' stroke='${CYAN}' stroke-opacity='.16' stroke-width='2'/><circle cx='330' cy='160' r='104' stroke='${CYAN}' stroke-opacity='.12' stroke-width='2' stroke-dasharray='2 10'/>${trio(330, 160, 52, 24, '.55')}<circle cx='330' cy='160' r='9' fill='${AMBRE}'/><circle cx='196' cy='72' r='5' fill='${AMBRE}' fill-opacity='.8'/><circle cx='430' cy='278' r='4' fill='${CYAN}' fill-opacity='.5'/>`),
+  collectif: (() => {
+    const cx = 310, cy = 160, R = 112, n = 7;
+    const pts = Array.from({ length: n }, (_, i) => { const a = -Math.PI / 2 + i * 2 * Math.PI / n; return [r1(cx + R * Math.cos(a)), r1(cy + R * Math.sin(a))]; });
+    const rayons = pts.map(([x, y]) => `<line x1='${cx}' y1='${cy}' x2='${x}' y2='${y}' stroke='${CYAN}' stroke-opacity='.3' stroke-width='2'/>`).join('');
+    const anneau = pts.map(([x, y], i) => { const [x2, y2] = pts[(i + 1) % n]; return `<line x1='${x}' y1='${y}' x2='${x2}' y2='${y2}' stroke='${CYAN}' stroke-opacity='.18' stroke-width='2'/>`; }).join('');
+    const noeuds = pts.map(([x, y]) => `<circle cx='${x}' cy='${y}' r='13' fill='#0F3D66' stroke='${CYAN}' stroke-opacity='.75' stroke-width='3'/><circle cx='${x}' cy='${y}' r='4' fill='${CYAN}' fill-opacity='.7'/>`).join('');
+    return svgIllu(`<circle cx='${cx}' cy='${cy}' r='150' stroke='${CYAN}' stroke-opacity='.1' stroke-width='2'/>${rayons}${anneau}${noeuds}<circle cx='${cx}' cy='${cy}' r='30' fill='#0F3D66' stroke='${AMBRE}' stroke-width='3.5'/><path d='M${cx - 11} ${cy}l7 7 15-15' stroke='${AMBRE}' stroke-width='3.5'/>`);
+  })(),
+  parcours: (() => {
+    const pts = Array.from({ length: 9 }, (_, i) => [r1(60 + i * 37), r1(230 - i * 15 - 34 * Math.sin(i * 0.9))]);
+    const chemin = 'M' + pts.map(([x, y]) => `${x} ${y}`).join(' L');
+    const jalons = pts.map(([x, y], i) => `<circle cx='${x}' cy='${y}' r='${i === 8 ? 0 : 7}' fill='#0F3D66' stroke='${i < 3 ? AMBRE : CYAN}' stroke-opacity='${i < 3 ? 1 : 0.7}' stroke-width='3'/>`).join('');
+    const [fx, fy] = pts[8];
+    return svgIllu(`<path d='${chemin}' stroke='${CYAN}' stroke-opacity='.45' stroke-width='3' stroke-dasharray='1 9'/>${jalons}<rect x='${fx - 6}' y='${fy - 58}' width='54' height='68' rx='6' fill='#0F3D66' stroke='${CYAN}' stroke-opacity='.8' stroke-width='3'/><path d='M${fx + 5} ${fy - 40}h32M${fx + 5} ${fy - 28}h32M${fx + 5} ${fy - 16}h20' stroke='${CYAN}' stroke-opacity='.6' stroke-width='3'/><circle cx='${fx + 46}' cy='${fy + 6}' r='15' fill='${AMBRE}'/><path d='M${fx + 39} ${fy + 6}l5 5 9-10' stroke='#0B2A47' stroke-width='3'/>`);
+  })(),
+  usine: (() => {
+    const dents = Array.from({ length: 8 }, (_, i) => { const a = i * Math.PI / 4; return `<line x1='${r1(232 + 24 * Math.cos(a))}' y1='${r1(212 + 24 * Math.sin(a))}' x2='${r1(232 + 32 * Math.cos(a))}' y2='${r1(212 + 32 * Math.sin(a))}' stroke='${CYAN}' stroke-opacity='.7' stroke-width='6'/>`; }).join('');
+    return svgIllu(`<path d='M150 262H440' stroke='${CYAN}' stroke-opacity='.35' stroke-width='3'/><path d='M290 262V176l36-26v26l36-26v26l36-26v112' stroke='${CYAN}' stroke-opacity='.7' stroke-width='3'/><path d='M398 150V96h16v54' stroke='${CYAN}' stroke-opacity='.55' stroke-width='3'/><circle cx='232' cy='212' r='24' stroke='${CYAN}' stroke-opacity='.7' stroke-width='3'/>${dents}<circle cx='232' cy='212' r='8' fill='${AMBRE}'/><path d='M160 140l50-24 40 14 64-46' stroke='${AMBRE}' stroke-width='3.5'/><path d='M296 82h20v20' stroke='${AMBRE}' stroke-width='3.5'/><circle cx='160' cy='140' r='5' fill='${AMBRE}'/>`);
+  })(),
+};
+const illustrations = [
+  '/* ---------- Illustrations des bandeaux (générées par theme/src/build.js) ---------- */',
+  `.bandeau-page::after { background-image: ${ILLUS.anneaux}; }`,
+  ...[['collectif', ['qui-sommes-nous', 'nos-consultants', 'adherer', 'contact']], ['parcours', ['rse-actionnable']], ['usine', ['usine-du-futur', 'solutions']]]
+    .map(([nom, pages]) => `${pages.map(sl => `.page-${sl} .bandeau-page::after`).join(', ')} { background-image: ${ILLUS[nom]}; }`),
+].join('\n');
+
 // ---------- style.css ----------
 const entete = `/*
 Theme Name: AEPC Nouvelle-Aquitaine
@@ -71,7 +108,7 @@ Text Domain: aepcna
 Tags: block-theme, full-site-editing, business
 */
 `;
-ecrire('style.css', entete + '\n' + fs.readFileSync(path.join(__dirname, 'base.css'), 'utf8') + '\n' + icones + '\n');
+ecrire('style.css', entete + '\n' + fs.readFileSync(path.join(__dirname, 'base.css'), 'utf8') + '\n' + icones + '\n\n' + fs.readFileSync(path.join(__dirname, 'dynamique.css'), 'utf8') + '\n' + illustrations + '\n');
 
 // ---------- theme.json ----------
 const police = f => ({ fontFamily: 'Figtree', fontStyle: 'normal', fontWeight: '400 800', fontDisplay: 'swap', src: [`file:./assets/fonts/${f}`] });
@@ -248,6 +285,7 @@ ${bs('hero__actions', [b('Retour à l’accueil', U('/'), '')])}</main>
 // ---------- functions.php, editor.css, app.js ----------
 fs.copyFileSync(path.join(__dirname, 'functions.php'), path.join(THEME, 'functions.php'));
 fs.copyFileSync(path.join(__dirname, 'editor.css'), path.join(THEME, 'assets/editor.css'));
+fs.copyFileSync(path.join(__dirname, 'anime.js'), path.join(THEME, 'assets/anime.js'));
 
 // ---------- contenu des pages ----------
 const pages = require('./pages')(BASE);
