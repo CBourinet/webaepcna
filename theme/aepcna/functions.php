@@ -88,9 +88,18 @@ add_action(
 			'category/non-classe',
 			'politique-de-confidentialite',
 			'politique-de-cookies-ue',
+			'hello-world',
+			'sample-page',
+			'page-d-exemple',
+			'actualites/hello-world',
 		);
 		if ( in_array( $chemin, $anciennes, true ) ) {
 			wp_safe_redirect( home_url( '/' ), 301 );
+			exit;
+		}
+		// Archives de l'ancien site (auteurs, catégories, dates) : la rubrique Actualités les remplace.
+		if ( preg_match( '#^(author|category|tag|\d{4})(/|$)#', $chemin ) ) {
+			wp_safe_redirect( home_url( '/actualites/' ), 301 );
 			exit;
 		}
 	}
