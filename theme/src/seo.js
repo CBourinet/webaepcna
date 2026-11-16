@@ -159,6 +159,7 @@ module.exports = function seo(BASE, { carte, chiffre, CONTACT }) {
     'L’AEPC Nouvelle-Aquitaine présente Actionnable au salon NéoBusiness 2026',
     "Les 25 et 26 novembre 2026, au Palais de la Bourse de Bordeaux, l'AEPC Nouvelle-Aquitaine présente Actionnable, son parcours RSE pour les PME référencé Néo Terra, au salon NéoBusiness organisé par ADI Nouvelle-Aquitaine.",
     [
+      img('logo-neobusiness', 'NéoBusiness en Nouvelle-Aquitaine, salon inversé des achats responsables', 'article__portrait', 'large'),
       p('', `${lien('NéoBusiness', 'https://www.neobusiness-na.fr/', true)} est le salon inversé des achats responsables de Nouvelle-Aquitaine : ce sont les donneurs d'ordre, privés et publics, qui reçoivent les fournisseurs de solutions durables de la région. Il est organisé par ADI Nouvelle-Aquitaine avec la Région et l'ADEME.`),
       t(2, '', 'Le programme'),
       liste('', [
@@ -257,7 +258,7 @@ module.exports = function seo(BASE, { carte, chiffre, CONTACT }) {
   ]), { tag: 'section' });
 
   const posts = [
-    { type: 'post', slug: 'actionnable-salon-neobusiness-2026-bordeaux', date: '2026-11-16 09:00:00', image: 'photo-signature-charte-rse-region',
+    { type: 'post', slug: 'actionnable-salon-neobusiness-2026-bordeaux', date: '2026-11-16 09:00:00', image: 'logo-neobusiness',
       title: 'L’AEPC Nouvelle-Aquitaine présente Actionnable au salon NéoBusiness 2026', content: articleNeo,
       seo_title: 'Actionnable au salon NéoBusiness 2026 à Bordeaux | AEPC NA',
       description: "Les 25 et 26 novembre 2026 au Palais de la Bourse de Bordeaux, l'AEPC Nouvelle-Aquitaine présente Actionnable, parcours RSE des PME, et réalise des diagnostics flash au salon NéoBusiness.",
