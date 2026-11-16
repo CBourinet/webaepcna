@@ -230,7 +230,7 @@ add_filter(
 				'@type'               => 'Event',
 				'@id'                 => $url . '#neobusiness-2026',
 				'name'                => 'NéoBusiness Nouvelle-Aquitaine 2026 : présentation du parcours RSE Actionnable',
-				'description'         => 'L\'AEPC Nouvelle-Aquitaine présente Actionnable, son parcours RSE pour les PME, au salon inversé des achats responsables NéoBusiness.',
+				'description'         => 'L\'AEPC Nouvelle-Aquitaine présente Actionnable, son parcours RSE pour les PME, et réalise des diagnostics flash au salon inversé des achats responsables NéoBusiness.',
 				'startDate'           => '2026-11-25T17:30:00+01:00',
 				'endDate'             => '2026-11-26T18:00:00+01:00',
 				'eventStatus'         => 'https://schema.org/EventScheduled',

@@ -166,6 +166,8 @@ module.exports = function seo(BASE, { carte, chiffre, CONTACT }) {
         '<strong>Jeudi 26 novembre, de 9 h à 18 h</strong> : salon inversé, rendez-vous d’affaires avec les acheteurs, puis remise du Trophée du Cristal des Achats.',
         '<strong>Lieu</strong> : Palais de la Bourse, place de la Bourse, Bordeaux (tram : Place de la Bourse).',
       ]),
+      t(2, '', 'Des diagnostics flash sur le salon'),
+      p('', "Sur le salon, l'équipe projet Actionnable réalisera des <strong>diagnostics flash</strong> : un échange court pour situer votre entreprise face à ses enjeux RSE et identifier les premières pistes d'action. Pour réserver votre créneau, écrivez à <a href=\"mailto:actionnable@aepcna.fr\">actionnable@aepcna.fr</a>."),
       t(2, '', 'Actionnable en bref'),
       liste('', [
         'Un parcours RSE pour les PME, en cohorte de 3 à 8 entreprises non concurrentes.',
@@ -175,7 +177,7 @@ module.exports = function seo(BASE, { carte, chiffre, CONTACT }) {
       ]),
       p('', `Pour rencontrer l'équipe projet pendant le salon, écrivez à <a href="mailto:actionnable@aepcna.fr">actionnable@aepcna.fr</a>. Tout le détail du parcours : ${lien('RSE Actionnable', U('/rse-actionnable/'))}.`),
     ],
-    ['Vous êtes une PME ?', 'Rencontrons-nous au salon NéoBusiness, les 25 et 26 novembre.', 'Prendre rendez-vous', 'mailto:actionnable@aepcna.fr']);
+    ['Vous êtes une PME ?', 'Réservez votre diagnostic flash au salon NéoBusiness, les 25 et 26 novembre.', 'Réserver un diagnostic flash', 'mailto:actionnable@aepcna.fr']);
 
   // ---------- Page Usine du Futur ----------
   const usineDuFutur = [
@@ -258,8 +260,8 @@ module.exports = function seo(BASE, { carte, chiffre, CONTACT }) {
     { type: 'post', slug: 'actionnable-salon-neobusiness-2026-bordeaux', date: '2026-11-16 09:00:00', image: 'photo-signature-charte-rse-region',
       title: 'L’AEPC Nouvelle-Aquitaine présente Actionnable au salon NéoBusiness 2026', content: articleNeo,
       seo_title: 'Actionnable au salon NéoBusiness 2026 à Bordeaux | AEPC NA',
-      description: "Les 25 et 26 novembre 2026 au Palais de la Bourse de Bordeaux, l'AEPC Nouvelle-Aquitaine présente Actionnable, parcours RSE des PME, au salon NéoBusiness.",
-      excerpt: "Les 25 et 26 novembre 2026, au Palais de la Bourse de Bordeaux, l'AEPC NA présente son parcours RSE Actionnable au salon NéoBusiness, le salon inversé des achats responsables." },
+      description: "Les 25 et 26 novembre 2026 au Palais de la Bourse de Bordeaux, l'AEPC Nouvelle-Aquitaine présente Actionnable, parcours RSE des PME, et réalise des diagnostics flash au salon NéoBusiness.",
+      excerpt: "Les 25 et 26 novembre 2026, au Palais de la Bourse de Bordeaux, l'AEPC NA présente son parcours RSE Actionnable au salon NéoBusiness et propose des diagnostics flash." },
     { type: 'post', slug: 'usine-du-futur-4-lancement-2026-2027-chateau-fage', date: '2026-09-15 18:00:00', image: 'udf4-fage-collectif',
       title: 'Usine du Futur 4 : une nouvelle année démarre à Château Fage', content: articleFage,
       seo_title: 'Usine du Futur 4 : lancement 2026-2027 à Château Fage | AEPC NA',

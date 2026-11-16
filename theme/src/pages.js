@@ -383,8 +383,8 @@ module.exports = function pages(BASE) {
     g('section qui-section', g('enveloppe pile qui', [
       g('entete-section entete-section--large', [
         p('surtitre', 'Notre mission'),
-        t(2, 'titre-section', 'Au service du territoire et de tous ses acteurs économiques.'),
-        p('chapeau', "L'AEPC Nouvelle-Aquitaine accompagne les entreprises, les filières et les acteurs publics de la région pour son développement : les aider à se transformer et à durer. L'AEPC est l'émanation économique de la CPC Nouvelle-Aquitaine. Ses membres l'ont créée pour répondre ensemble aux appels d'offres, sans passer par de grands cabinets nationaux : l'association leur apporte un cadre juridique, technique et outillé."),
+        t(2, 'titre-section', 'Au service du territoire et de tous ses acteurs économiques, pour les aider à s’adapter aux transformations.'),
+        p('chapeau', "L'AEPC Nouvelle-Aquitaine accompagne les entreprises, les filières et les acteurs publics de la région pour son développement. L'AEPC est l'émanation économique de la CPC Nouvelle-Aquitaine. Ses membres l'ont créée pour répondre ensemble aux appels d'offres, sans passer par de grands cabinets nationaux : l'association leur apporte un cadre juridique, technique et outillé."),
       ]),
       g('grille-3', [
         carte('Notre origine', 'La CPC Nouvelle-Aquitaine', "Depuis plus de 30 ans, la Chambre Professionnelle du Conseil est la première instance représentative des consultants indépendants de la région, membre de la FNCPC."),
@@ -644,9 +644,9 @@ module.exports = function pages(BASE) {
       g('', [
         p('surtitre', 'Rendez-vous · Salon NéoBusiness 2026'),
         t(3, 'encart-sombre__titre', 'Découvrez Actionnable au salon NéoBusiness, les 25 et 26 novembre 2026 à Bordeaux.'),
-        p('encart-sombre__texte', "L'AEPC Nouvelle-Aquitaine présente le parcours Actionnable au salon NéoBusiness, le salon inversé des achats responsables organisé par ADI Nouvelle-Aquitaine au Palais de la Bourse de Bordeaux. Venez échanger avec l'équipe projet."),
+        p('encart-sombre__texte', "L'AEPC Nouvelle-Aquitaine présente le parcours Actionnable au salon NéoBusiness, le salon inversé des achats responsables organisé par ADI Nouvelle-Aquitaine au Palais de la Bourse de Bordeaux. Sur place, l'équipe projet réalisera des <strong>diagnostics flash</strong> pour situer votre entreprise face à ses enjeux RSE."),
       ]),
-      bs('', [b('Prendre rendez-vous', ACTIONNABLE, 'bouton--blanc'), b('Le salon NéoBusiness', 'https://www.neobusiness-na.fr/', 'bouton--contour-blanc')]),
+      bs('', [b('Réserver un diagnostic flash', ACTIONNABLE, 'bouton--blanc'), b('Le salon NéoBusiness', 'https://www.neobusiness-na.fr/', 'bouton--contour-blanc')]),
     ])), { tag: 'section', ancre: 'neobusiness' }),
 
     g('section', g('enveloppe pile', [
