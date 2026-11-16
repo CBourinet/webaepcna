@@ -14,7 +14,7 @@ module.exports = function seo(BASE, { carte, chiffre, CONTACT }) {
   // ---------- Questions fréquentes ----------
   const FAQ = {
     accueil: [
-      ["Qu'est-ce que l'AEPC Nouvelle-Aquitaine ?", "L'Association Économique des Professionnels du Conseil de Nouvelle-Aquitaine (AEPC NA) est une association loi 1901 créée en 2023 par des consultants issus de la Chambre Professionnelle du Conseil de Nouvelle-Aquitaine. Elle réunit plus de 50 consultants indépendants et constitue, pour chaque projet de transformation, l'équipe d'experts adaptée, coordonnée par une équipe salariée."],
+      ["Qu'est-ce que l'AEPC Nouvelle-Aquitaine ?", "L'Association Économique des Professionnels du Conseil de Nouvelle-Aquitaine (AEPC NA) est une association loi 1901 créée en 2023 par des consultants issus de la Chambre Professionnelle du Conseil de Nouvelle-Aquitaine. Au service de son territoire, elle accompagne tous les acteurs économiques de la région pour son développement. Elle réunit plus de 50 consultants indépendants et constitue, pour chaque projet de transformation, l'équipe d'experts adaptée, coordonnée par une équipe salariée."],
       ["En quoi l'AEPC est-elle différente d'un cabinet de conseil ?", "On ne choisit pas l'AEPC pour un expert, mais pour la qualité d'un collectif : une équipe pluridisciplinaire composée pour votre projet, une gouvernance de mission unique, un interlocuteur unique et une coordination salariée qui s'engage sur les délais et la qualité. Association à but non lucratif, l'AEPC n'a pas d'actionnaire à rémunérer."],
       ['Sur quels sujets intervenez-vous ?', `Performance industrielle, Lean et ${lien('Usine du Futur', U('/usine-du-futur/'))}, ${lien('RSE avec le parcours Actionnable', U('/rse-actionnable/'))}, stratégie et transformation des organisations (business model, gouvernance), et programmes de formation mobilisant plusieurs formateurs.`],
       ['Où intervenez-vous ?', "Dans toute la Nouvelle-Aquitaine. Le siège est à Bordeaux et nos consultants sont présents dans les douze départements, au plus près des sites des entreprises."],
@@ -155,6 +155,28 @@ module.exports = function seo(BASE, { carte, chiffre, CONTACT }) {
     ],
     ['Vous êtes industriel ?', 'Préparez votre usine de demain avec un collectif d’experts.', 'Découvrir Usine du Futur', U('/usine-du-futur/')]);
 
+  const articleNeo = article('Salon NéoBusiness 2026', 'Événement · Bordeaux · 25 et 26 novembre 2026',
+    'L’AEPC Nouvelle-Aquitaine présente Actionnable au salon NéoBusiness 2026',
+    "Les 25 et 26 novembre 2026, au Palais de la Bourse de Bordeaux, l'AEPC Nouvelle-Aquitaine présente Actionnable, son parcours RSE pour les PME référencé Néo Terra, au salon NéoBusiness organisé par ADI Nouvelle-Aquitaine.",
+    [
+      p('', `${lien('NéoBusiness', 'https://www.neobusiness-na.fr/', true)} est le salon inversé des achats responsables de Nouvelle-Aquitaine : ce sont les donneurs d'ordre, privés et publics, qui reçoivent les fournisseurs de solutions durables de la région. Il est organisé par ADI Nouvelle-Aquitaine avec la Région et l'ADEME.`),
+      t(2, '', 'Le programme'),
+      liste('', [
+        '<strong>Mercredi 25 novembre, de 17 h 30 à 22 h</strong> : conférences NéoTopies et cocktail de networking.',
+        '<strong>Jeudi 26 novembre, de 9 h à 18 h</strong> : salon inversé, rendez-vous d’affaires avec les acheteurs, puis remise du Trophée du Cristal des Achats.',
+        '<strong>Lieu</strong> : Palais de la Bourse, place de la Bourse, Bordeaux (tram : Place de la Bourse).',
+      ]),
+      t(2, '', 'Actionnable en bref'),
+      liste('', [
+        'Un parcours RSE pour les PME, en cohorte de 3 à 8 entreprises non concurrentes.',
+        '6 jours de parcours consolidé et jusqu’à 3 jours à la carte, sur 6 mois, avec 25 consultants experts régionaux AEPC et Cinov.',
+        'Neuf livrables, jusqu’au rapport RSE de l’entreprise.',
+        'Offre RSE référencée Néo Terra par la Région Nouvelle-Aquitaine ; prochaine cohorte « Impulse » le 12 janvier 2027.',
+      ]),
+      p('', `Pour rencontrer l'équipe projet pendant le salon, écrivez à <a href="mailto:actionnable@aepcna.fr">actionnable@aepcna.fr</a>. Tout le détail du parcours : ${lien('RSE Actionnable', U('/rse-actionnable/'))}.`),
+    ],
+    ['Vous êtes une PME ?', 'Rencontrons-nous au salon NéoBusiness, les 25 et 26 novembre.', 'Prendre rendez-vous', 'mailto:actionnable@aepcna.fr']);
+
   // ---------- Page Usine du Futur ----------
   const usineDuFutur = [
     g('bandeau-page', g('enveloppe', [
@@ -233,6 +255,11 @@ module.exports = function seo(BASE, { carte, chiffre, CONTACT }) {
   ]), { tag: 'section' });
 
   const posts = [
+    { type: 'post', slug: 'actionnable-salon-neobusiness-2026-bordeaux', date: '2026-11-16 09:00:00', image: 'photo-signature-charte-rse-region',
+      title: 'L’AEPC Nouvelle-Aquitaine présente Actionnable au salon NéoBusiness 2026', content: articleNeo,
+      seo_title: 'Actionnable au salon NéoBusiness 2026 à Bordeaux | AEPC NA',
+      description: "Les 25 et 26 novembre 2026 au Palais de la Bourse de Bordeaux, l'AEPC Nouvelle-Aquitaine présente Actionnable, parcours RSE des PME, au salon NéoBusiness.",
+      excerpt: "Les 25 et 26 novembre 2026, au Palais de la Bourse de Bordeaux, l'AEPC NA présente son parcours RSE Actionnable au salon NéoBusiness, le salon inversé des achats responsables." },
     { type: 'post', slug: 'usine-du-futur-4-lancement-2026-2027-chateau-fage', date: '2026-09-15 18:00:00', image: 'udf4-fage-collectif',
       title: 'Usine du Futur 4 : une nouvelle année démarre à Château Fage', content: articleFage,
       seo_title: 'Usine du Futur 4 : lancement 2026-2027 à Château Fage | AEPC NA',

@@ -3,7 +3,7 @@ Theme Name: AEPC Nouvelle-Aquitaine
 Theme URI: https://aepcna.fr
 Author: AEPC Nouvelle-Aquitaine
 Description: Thème bloc sur mesure de l'Association Économique des Professionnels du Conseil de Nouvelle-Aquitaine (charte UDF4). Contenu 100 % éditable dans l'éditeur de blocs.
-Version: 1.9.1
+Version: 1.9.2
 Requires at least: 6.6
 Requires PHP: 8.0
 License: GPL-2.0-or-later
@@ -967,6 +967,14 @@ footer.wp-block-template-part { margin: 0; }
   background: linear-gradient(180deg, rgba(11, 42, 71, 0) 55%, rgba(11, 42, 71, .28) 100%);
   pointer-events: none;
 }
+
+/* Engagement territorial et encart événement */
+.territoire__engagement { margin-top: 18px; padding: 16px 20px; border-left: 3px solid var(--ambre); background: var(--fond); border-radius: 0 10px 10px 0; font-size: 16px; line-height: 1.6; color: var(--texte); }
+.territoire__engagement strong { color: var(--encre); }
+.encart-sombre__texte { color: var(--sur-sombre); font-size: 16px; line-height: 1.6; }
+.section--sans-bas { padding-bottom: 0; }
+.encart-sombre--large.salon .wp-block-buttons { flex-direction: column; align-items: stretch; }
+@media (max-width: 1024px) { .encart-sombre--large.salon .wp-block-buttons { flex-direction: row; align-items: center; } }
 
 /* ---------- 4. En-tête : une ombre dès que la page défile ---------- */
 header.wp-block-template-part { transition: box-shadow 200ms ease; }

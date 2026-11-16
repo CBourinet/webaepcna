@@ -186,6 +186,14 @@
   pointer-events: none;
 }
 
+/* Engagement territorial et encart événement */
+.territoire__engagement { margin-top: 18px; padding: 16px 20px; border-left: 3px solid var(--ambre); background: var(--fond); border-radius: 0 10px 10px 0; font-size: 16px; line-height: 1.6; color: var(--texte); }
+.territoire__engagement strong { color: var(--encre); }
+.encart-sombre__texte { color: var(--sur-sombre); font-size: 16px; line-height: 1.6; }
+.section--sans-bas { padding-bottom: 0; }
+.encart-sombre--large.salon .wp-block-buttons { flex-direction: column; align-items: stretch; }
+@media (max-width: 1024px) { .encart-sombre--large.salon .wp-block-buttons { flex-direction: row; align-items: center; } }
+
 /* ---------- 4. En-tête : une ombre dès que la page défile ---------- */
 header.wp-block-template-part { transition: box-shadow 200ms ease; }
 header.wp-block-template-part.est-defile { box-shadow: 0 10px 24px -18px rgba(11, 42, 71, .55); }

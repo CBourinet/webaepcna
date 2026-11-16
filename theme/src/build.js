@@ -5,7 +5,7 @@ const path = require('path');
 const { groupe: g, para: p, bouton: b, boutons: bs } = require('./blocs');
 
 const BASE = process.argv[2] ?? '/site';
-const VERSION = '1.9.1';
+const VERSION = '1.9.2';
 const RACINE = path.join(__dirname, '..');
 const THEME = path.join(RACINE, 'aepcna');
 const U = chemin => `${BASE}${chemin}`;
@@ -215,7 +215,7 @@ ecrire('parts/footer.html', [
     g('pied__colonnes', [
       g('pied__marque', [
         `<!-- wp:site-logo {"width":130,"shouldSyncIcon":false} /-->`,
-        p('pied__devise', 'Au service de la transformation des acteurs du territoire !'),
+        p('pied__devise', 'Au service de son territoire et de tous les acteurs économiques de la région.'),
         p('pied__desc', 'Association Économique des Professionnels du Conseil de Nouvelle-Aquitaine — association loi 1901.'),
         p('pied__linkedin', '<a href="https://www.linkedin.com/company/aepcna" target="_blank" rel="noreferrer noopener">Suivez-nous sur LinkedIn</a>'),
       ]),
@@ -300,7 +300,7 @@ ecrire('donnees/faq.json', JSON.stringify(pages.faq, null, 1));
 const SITE = 'https://aepcna.fr' + BASE;
 fs.writeFileSync(path.join(RACINE, '..', 'deploy', 'llms.txt'), `# AEPC Nouvelle-Aquitaine
 
-> L'Association Économique des Professionnels du Conseil de Nouvelle-Aquitaine (AEPC NA) est une association loi 1901, créée en 2023 à Bordeaux par des consultants issus de la Chambre Professionnelle du Conseil de Nouvelle-Aquitaine (CPC NA). Elle réunit plus de 50 consultants indépendants et constitue, pour chaque projet de transformation d'entreprise ou de filière, l'équipe d'experts adaptée, coordonnée par une équipe salariée (chef de projet, PMO, spécialistes). On ne choisit pas l'AEPC pour un expert, mais pour la qualité d'un collectif.
+> L'Association Économique des Professionnels du Conseil de Nouvelle-Aquitaine (AEPC NA) est une association loi 1901, créée en 2023 à Bordeaux par des consultants issus de la Chambre Professionnelle du Conseil de Nouvelle-Aquitaine (CPC NA). Au service de son territoire, elle accompagne tous les acteurs économiques de la région pour son développement. Elle réunit plus de 50 consultants indépendants et constitue, pour chaque projet de transformation d'entreprise ou de filière, l'équipe d'experts adaptée, coordonnée par une équipe salariée (chef de projet, PMO, spécialistes). On ne choisit pas l'AEPC pour un expert, mais pour la qualité d'un collectif.
 
 Faits clés :
 - Siège : 51-53 boulevard du Président Wilson, 33000 Bordeaux. Intervention dans les douze départements de Nouvelle-Aquitaine.

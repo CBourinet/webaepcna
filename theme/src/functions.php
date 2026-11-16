@@ -113,7 +113,7 @@ add_filter(
 	'wpseo_schema_organization',
 	function ( $data ) {
 		$data['alternateName'] = 'Association Économique des Professionnels du Conseil de Nouvelle-Aquitaine';
-		$data['description']   = "Collectif de plus de 50 consultants indépendants de Nouvelle-Aquitaine, issus de la CPC NA : l'AEPC constitue et pilote l'équipe d'experts adaptée à chaque projet de transformation.";
+		$data['description']   = "Au service de son territoire et de tous les acteurs économiques de la région pour son développement. Collectif de plus de 50 consultants indépendants de Nouvelle-Aquitaine, issus de la CPC NA : l'AEPC constitue et pilote l'équipe d'experts adaptée à chaque projet de transformation.";
 		$data['foundingDate']  = '2023';
 		$data['email']         = 'contactweb@aepcna.fr';
 		$data['telephone']     = '+33610501077';
@@ -225,6 +225,24 @@ add_filter(
 				'organizer'           => $orga,
 				'offers'              => array( '@type' => 'Offer', 'price' => '2227.50', 'priceCurrency' => 'EUR', 'url' => $url, 'availability' => 'https://schema.org/InStock' ),
 				'url'                 => $url,
+			);
+			$graph[] = array(
+				'@type'               => 'Event',
+				'@id'                 => $url . '#neobusiness-2026',
+				'name'                => 'NéoBusiness Nouvelle-Aquitaine 2026 : présentation du parcours RSE Actionnable',
+				'description'         => 'L\'AEPC Nouvelle-Aquitaine présente Actionnable, son parcours RSE pour les PME, au salon inversé des achats responsables NéoBusiness.',
+				'startDate'           => '2026-11-25T17:30:00+01:00',
+				'endDate'             => '2026-11-26T18:00:00+01:00',
+				'eventStatus'         => 'https://schema.org/EventScheduled',
+				'eventAttendanceMode' => 'https://schema.org/OfflineEventAttendanceMode',
+				'location'            => array(
+					'@type'   => 'Place',
+					'name'    => 'Palais de la Bourse',
+					'address' => array( '@type' => 'PostalAddress', 'addressLocality' => 'Bordeaux', 'postalCode' => '33000', 'addressCountry' => 'FR' ),
+				),
+				'organizer'           => array( '@type' => 'Organization', 'name' => 'ADI Nouvelle-Aquitaine', 'url' => 'https://www.adi-na.fr/' ),
+				'performer'           => $orga,
+				'url'                 => 'https://www.neobusiness-na.fr/',
 			);
 		}
 
